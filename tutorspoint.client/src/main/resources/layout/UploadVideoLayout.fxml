@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
+            fx:controller="com.mnnit.tutorspoint.UploadVideoLayoutController"
+            prefHeight="400.0" prefWidth="600.0"
+            stylesheets="@style/MainStyle.css">
+
+</AnchorPane>
