@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0" stylesheets="@style/MainStyle.css"
+            xmlns="http://javafx.com/javafx/8.0.112"
+            fx:controller="com.mnnit.tutorspoint.ManageAccountLayoutController">
+    <children>
+        <Label fx:id="username" layoutX="74.0" layoutY="64.0" prefHeight="27.0" prefWidth="149.0" text="Username:">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Label>
+        <Label fx:id="usernameValue" layoutX="340.0" layoutY="64.0" prefHeight="27.0" prefWidth="246.0">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Label>
+        <Button fx:id="changePassword" layoutX="149.0" layoutY="185.0" mnemonicParsing="false"
+                onAction="#changePasswordButtonOnAction" text="Change Password"/>
+    </children>
+</AnchorPane>

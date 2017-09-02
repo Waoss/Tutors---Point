@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="349.0" prefWidth="356.0"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="417.0" prefWidth="673.0" style="-fx-background-color: #fff;"
             styleClass="anchor-pane" stylesheets="@style/MainStyle.css"
-            style="-fx-background-color: #fff;"
             xmlns="http://javafx.com/javafx/8.0.112" fx:controller="com.mnnit.tutorspoint.UserDetailsLayoutController">
-
+    <children>
+        <TabPane prefHeight="417.0" prefWidth="673.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab fx:id="manageAccountTab" text="Manage Account">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+                    </content>
+                </Tab>
+                <Tab fx:id="watchVideosTab" text="Watch Videos">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+                    </content>
+                </Tab>
+                <Tab fx:id="uploadVideoTab" text="Upload Video">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
 </AnchorPane>

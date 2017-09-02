@@ -61,7 +61,7 @@ public final class LoginLayoutController implements Initializable {
                 .createUser();
         try {
             Stage stage = (Stage) loginButton.getParent().getScene().getWindow();
-            Scene scene = new Scene(loadUserDetailsLayout(user));
+            Scene scene = new Scene(loadUserDetailsLayout(user), 500, 500);
             onResizableStage(stage, stage1 -> {
                 stage1.setWidth(scene.getWidth());
                 stage1.setHeight(scene.getHeight());
@@ -108,6 +108,7 @@ public final class LoginLayoutController implements Initializable {
         AnchorPane anchorPane = fxmlLoader.load();
         UserDetailsLayoutController controller = fxmlLoader.getController();
         controller.setUser(user);
+        controller.loadTabContent();
         return anchorPane;
     }
 
