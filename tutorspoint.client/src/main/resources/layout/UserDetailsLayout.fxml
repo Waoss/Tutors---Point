@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="349.0" prefWidth="356.0"
+            styleClass="anchor-pane" stylesheets="@style/MainStyle.css"
+            style="-fx-background-color: #fff;"
+            xmlns="http://javafx.com/javafx/8.0.112" fx:controller="com.mnnit.tutorspoint.UserDetailsLayoutController">
+
+</AnchorPane>

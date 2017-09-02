@@ -1,0 +1,6 @@
+rootProject.name = 'softablitz'
+include 'tutorspoint.server'
+include 'tutorspoint.client'
+include 'tutorspoint.core'
+include 'tutorspoint.database'
+

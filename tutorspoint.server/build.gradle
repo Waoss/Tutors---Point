@@ -1,0 +1,17 @@
+group 'com.mnnit'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+repositories {
+    mavenCentral()
+}
+def catalinaLibraryLocation = (System.getenv()['CATALINA_HOME']) + '/lib'
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile fileTree(catalinaLibraryLocation)
+    compile rootProject
+    compile rootProject.project("tutorspoint.database")
+}
