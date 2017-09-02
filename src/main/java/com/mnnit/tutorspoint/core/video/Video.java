@@ -3,15 +3,17 @@ package com.mnnit.tutorspoint.core.video;
 import javafx.beans.property.*;
 import javafx.collections.ObservableList;
 
+import java.io.File;
+
 public class Video {
 
-    SimpleIntegerProperty id = new SimpleIntegerProperty();
-    SimpleStringProperty name = new SimpleStringProperty();
-    SimpleStringProperty uploaderUsername = new SimpleStringProperty();
-    SimpleStringProperty format = new SimpleStringProperty();
-    SimpleListProperty<Like> likes = new SimpleListProperty<>();
-    SimpleListProperty<Comment> comments = new SimpleListProperty<>();
-    SimpleObjectProperty<VideoCategory> category = new SimpleObjectProperty<>();
+    private SimpleIntegerProperty id = new SimpleIntegerProperty(- 1);
+    private SimpleStringProperty name = new SimpleStringProperty();
+    private SimpleStringProperty uploaderUsername = new SimpleStringProperty();
+    private SimpleStringProperty format = new SimpleStringProperty();
+    private SimpleListProperty<Like> likes = new SimpleListProperty<>();
+    private SimpleListProperty<Comment> comments = new SimpleListProperty<>();
+    private SimpleObjectProperty<VideoCategory> category = new SimpleObjectProperty<>();
 
     public int getId() {
         return id.get();
@@ -95,5 +97,13 @@ public class Video {
 
     public void setCategory(final VideoCategory category) {
         this.category.set(category);
+    }
+
+    public void upload(String url, File content) throws Exception {
+        VideoUploader videoUploader = new VideoUploader();
+        videoUploader.setVideo(this);
+        videoUploader.setFile(content);
+        videoUploader.setUrl(url);
+        videoUploader.sendRequest();
     }
 }
