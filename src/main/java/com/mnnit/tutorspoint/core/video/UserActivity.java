@@ -1,35 +1,36 @@
 package com.mnnit.tutorspoint.core.video;
 
-import com.mnnit.tutorspoint.core.User;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 import java.time.ZonedDateTime;
 
 public class UserActivity {
-    private SimpleObjectProperty<User> user = new SimpleObjectProperty<>(this, "user");
-    private SimpleObjectProperty<ZonedDateTime> dateTime = new SimpleObjectProperty<>(this, "dateTime");
 
-    public User getUser() {
-        return user.get();
+    private SimpleStringProperty username = new SimpleStringProperty("username");
+    private SimpleObjectProperty<ZonedDateTime> dateTime = new SimpleObjectProperty<>();
+
+    public String getUsername() {
+        return username.get();
     }
 
-    public void setUser(final User user) {
-        this.user.set(user);
+    public SimpleStringProperty usernameProperty() {
+        return username;
     }
 
-    public SimpleObjectProperty<User> userProperty() {
-        return user;
+    public void setUsername(final String username) {
+        this.username.set(username);
     }
 
     public ZonedDateTime getDateTime() {
         return dateTime.get();
     }
 
-    public void setDateTime(final ZonedDateTime dateTime) {
-        this.dateTime.set(dateTime);
-    }
-
     public SimpleObjectProperty<ZonedDateTime> dateTimeProperty() {
         return dateTime;
+    }
+
+    public void setDateTime(final ZonedDateTime dateTime) {
+        this.dateTime.set(dateTime);
     }
 }

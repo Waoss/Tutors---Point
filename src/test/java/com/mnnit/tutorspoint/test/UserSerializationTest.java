@@ -9,10 +9,7 @@ import static org.junit.Assert.assertEquals;
 
 public class UserSerializationTest {
 
-    Gson gson = new GsonBuilder()
-            .setPrettyPrinting()
-            .registerTypeAdapter(User.class, new UserTypeAdapter())
-            .create();
+    Gson gson = Globals.GSON;
 
     String serializedJson;
 

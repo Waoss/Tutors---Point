@@ -1,20 +1,20 @@
 package com.mnnit.tutorspoint.core.video;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
 public class Comment extends UserActivity {
-    private StringProperty message = new SimpleStringProperty(this, "message");
+
+    private SimpleStringProperty message = new SimpleStringProperty( "message");
 
     public String getMessage() {
         return message.get();
     }
 
-    public void setMessage(final String message) {
-        this.message.set(message);
+    public SimpleStringProperty messageProperty() {
+        return message;
     }
 
-    public StringProperty messageProperty() {
-        return message;
+    public void setMessage(final String message) {
+        this.message.set(message);
     }
 }
