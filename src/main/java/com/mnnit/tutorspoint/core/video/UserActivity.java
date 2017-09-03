@@ -3,12 +3,12 @@ package com.mnnit.tutorspoint.core.video;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 public class UserActivity {
 
     private SimpleStringProperty username = new SimpleStringProperty("username");
-    private SimpleObjectProperty<ZonedDateTime> dateTime = new SimpleObjectProperty<>();
+    private SimpleObjectProperty<LocalDateTime> dateTime = new SimpleObjectProperty<>();
 
     public String getUsername() {
         return username.get();
@@ -22,15 +22,15 @@ public class UserActivity {
         this.username.set(username);
     }
 
-    public ZonedDateTime getDateTime() {
+    public LocalDateTime getDateTime() {
         return dateTime.get();
     }
 
-    public SimpleObjectProperty<ZonedDateTime> dateTimeProperty() {
+    public SimpleObjectProperty<LocalDateTime> dateTimeProperty() {
         return dateTime;
     }
 
-    public void setDateTime(final ZonedDateTime dateTime) {
+    public void setDateTime(final LocalDateTime dateTime) {
         this.dateTime.set(dateTime);
     }
 }

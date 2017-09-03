@@ -15,8 +15,7 @@ public class VideoUploader {
     private SimpleStringProperty videoJson = new SimpleStringProperty(GSON.toJson(video));
     private SimpleStringProperty url = new SimpleStringProperty();
     private StringProperty charset = new ReadOnlyStringWrapper("utf-8");
-    private SimpleObjectProperty<URLConnection> urlConnection = new SimpleObjectProperty<>(
-            new URL(url.get()).openConnection());
+    private SimpleObjectProperty<URLConnection> urlConnection = new SimpleObjectProperty<>();
     private SimpleStringProperty boundary = new SimpleStringProperty(Long.toHexString(System.nanoTime()));
     private SimpleObjectProperty<File> file = new SimpleObjectProperty<>();
     private SimpleObjectProperty<PrintWriter> writer = new SimpleObjectProperty<>();
@@ -38,19 +37,22 @@ public class VideoUploader {
     }
 
     private void initRequest() throws IOException {
+        setUrlConnection(new URL(getUrl()).openConnection());
         getUrlConnection().setDoOutput(true);
         getUrlConnection().setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
-        writer.set(new PrintWriter(new OutputStreamWriter(getUrlConnection().getOutputStream(), charset.get()), true));
+        output.set(getUrlConnection().getOutputStream());
+        writer.set(new PrintWriter(new OutputStreamWriter(output.get(), charset.get()), true));
+        System.out.println(videoJson.get());
     }
 
     public void sendRequest() throws IOException {
         initRequest();
-        sendMetadata();
-        sendActualFile();
-    }
-
-    private void sendActualFile() throws IOException {
         PrintWriter writer = getWriter();
+        writer.append("--" + boundary).append(CRLF);
+        writer.append("Content-Disposition: form-data; name=\"metadata\"").append(CRLF);
+        writer.append("Content-Type: text/plain; charset=" + charset).append(CRLF);
+        writer.append(CRLF).append(getVideoJson()).append(CRLF).flush();
+        // Send binary file.
         writer.append("--" + boundary).append(CRLF);
         writer.append(
                 "Content-Disposition: form-data; name=\"binaryFile\"; filename=\"" + file.get().getName() + "\"").append(
@@ -64,24 +66,8 @@ public class VideoUploader {
 
         // End of multipart/form-data.
         writer.append("--" + boundary + "--").append(CRLF).flush();
-    }
-
-    private void sendMetadata() throws IOException {
-        sendBasicRequest("metadata", file.getName(), videoJson.get());
-    }
-
-    private void sendBasicRequest(final String metadata, final String fileName, final String content) throws
-            IOException {
-        PrintWriter writer = getWriter();
-        writer.append("--" + getBoundary()).append(CRLF);
-        writer.append(
-                "Content-Disposition: form-data; name=\"" + metadata + "\"; filename=\"" + fileName + "\"").append(
-                CRLF);
-        writer.append("Content-Type: text/plain; charset=" + charset.get()).append(CRLF);
-        writer.append(CRLF).flush();
-        writer.append(content).append(CRLF);
-        output.get().flush();
-        writer.append(CRLF).flush();
+        urlConnection.get().connect();
+        System.out.println((char) urlConnection.get().getInputStream().read());
     }
 
     public Video getVideo() {
