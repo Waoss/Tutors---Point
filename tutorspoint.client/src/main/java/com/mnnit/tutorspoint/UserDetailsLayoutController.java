@@ -1,6 +1,7 @@
 package com.mnnit.tutorspoint;
 
 import com.mnnit.tutorspoint.core.User;
+import com.mnnit.tutorspoint.core.UserType;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.*;
 import javafx.scene.control.*;
@@ -33,6 +34,7 @@ public class UserDetailsLayoutController implements Initializable {
     public void loadTabContent() {
         try {
             manageAccountTab.setContent(getManageAccountLayout());
+            uploadVideoTab.setContent(getUploadVideoLayout(getUser().getUserType()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -43,6 +45,19 @@ public class UserDetailsLayoutController implements Initializable {
         AnchorPane anchorPane = fxmlLoader.load();
         ManageAccountLayoutController controller = fxmlLoader.getController();
         controller.getUsernameValue().setText(getUser().getUsername());
+        return anchorPane;
+    }
+
+    private AnchorPane getUploadVideoLayout(UserType userType) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/UploadVideoLayout.fxml"));
+        AnchorPane anchorPane = fxmlLoader.load();
+        UploadVideoLayoutController controller = fxmlLoader.getController();
+        if (userType == UserType.STUDENT) {
+            controller.getMessage().setText("Sorry! As a student, you cannot upload videos!\n" +
+                    "However you can watch some cool videos under the \n'watch videos tab!'");
+        } else {
+
+        }
         return anchorPane;
     }
 
