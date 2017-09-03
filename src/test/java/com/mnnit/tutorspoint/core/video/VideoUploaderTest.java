@@ -18,6 +18,6 @@ public class VideoUploaderTest {
         video.setLikes(FXCollections.observableArrayList());
         video.setUsername("waqar");
         video.setDateTime(ZonedDateTime.now().toString());
-        video.upload("http://localhost:8000/upload", new File("E:\\cloc-1.64.exe"));
+        video.upload("http://localhost:8000/upload", new File("E:\\fade.mp4"));
     }
 }

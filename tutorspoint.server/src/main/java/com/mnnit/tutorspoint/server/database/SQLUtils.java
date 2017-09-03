@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.mnnit.tutorspoint.core.Globals;
 import com.mnnit.tutorspoint.core.User;
 import com.mnnit.tutorspoint.core.video.Video;
+import com.mnnit.tutorspoint.server.OverallContent;
 
 import java.sql.*;
 
@@ -32,9 +33,19 @@ public class SQLUtils {
         preparedStatement.setString(4, video.getDateTime());
         preparedStatement.setInt(5, video.getComments().size());
         preparedStatement.executeUpdate();
+        video.setId(getVideoidByVideo(video.getName()));
+        OverallContent.getInstance().getVideoList().add(video);
     }
 
-    public static int getVideoidByVideo(final Video video) throws SQLException {
-        
+    public static int getVideoidByVideo(final String videoName) throws SQLException {
+        final PreparedStatement preparedStatement = connection.prepareStatement(
+                SQLConstants.GET_VIDEO_ID_BY_VIDEO_NAME);
+        preparedStatement.setString(1, videoName);
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        int videoid = - 1;
+        while (resultSet.next()) {
+            videoid = resultSet.getInt("videoid");
+        }
+        return videoid;
     }
 }
