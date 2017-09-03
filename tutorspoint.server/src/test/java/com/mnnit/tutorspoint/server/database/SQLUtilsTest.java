@@ -1,14 +1,22 @@
 package com.mnnit.tutorspoint.server.database;
 
 import com.mnnit.tutorspoint.core.Globals;
-import com.mnnit.tutorspoint.core.video.Comment;
-import com.mnnit.tutorspoint.core.video.Video;
+import com.mnnit.tutorspoint.core.video.*;
 import org.junit.Test;
 
+import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.List;
 
 public class SQLUtilsTest {
+
+    @Test
+    public void insertLike() throws Exception {
+        Like like = new Like();
+        like.setDateTime(ZonedDateTime.now().toString());
+        like.setVideoId(24);
+        SQLUtils.insertLike(like);
+    }
 
     @Test
     public void insertComment() throws Exception {

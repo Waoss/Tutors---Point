@@ -9,4 +9,5 @@ public class SQLConstants {
     public static final String GET_VIDEO_ID_BY_VIDEO_NAME = "SELECT videoid\n" + "FROM videos\n" + "WHERE name = ?;";
     public static final String GET_VIDEOS_LIST = "SELECT *\n" + "FROM videos;";
     public static final String INSERT_COMMENT = "INSERT INTO comments (videoid, message, commenter, dateTime) VALUES (?, ?, ?, ?);";
+    public static final String INSERT_LIKE = "INSERT INTO Likes (videoId, dateTime) VALUES (?, ?);";
 }

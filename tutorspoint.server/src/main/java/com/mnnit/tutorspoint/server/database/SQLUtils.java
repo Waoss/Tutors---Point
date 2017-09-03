@@ -89,4 +89,11 @@ public class SQLUtils {
         preparedStatement.setString(4, comment.getDateTime());
         preparedStatement.executeUpdate();
     }
+
+    public static void insertLike(final Like like) throws SQLException {
+        final PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.INSERT_LIKE);
+        preparedStatement.setInt(1, like.getVideoId());
+        preparedStatement.setString(2, like.getDateTime());
+        preparedStatement.executeUpdate();
+    }
 }
