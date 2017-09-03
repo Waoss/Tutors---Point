@@ -11,6 +11,11 @@ import java.util.List;
 public class SQLUtilsTest {
 
     @Test
+    public void getCommentsByVideoId() throws Exception {
+        System.out.println(Globals.GSON.toJson(SQLUtils.getCommentsByVideoId(24)));
+    }
+
+    @Test
     public void getLikesByVideoId() throws Exception {
         System.out.println(Globals.GSON.toJson(SQLUtils.getLikesByVideoId(24)));
     }

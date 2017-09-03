@@ -30,7 +30,7 @@ public class SQLUtils {
     }
 
     public static void insertVideo(final Video video) throws SQLException {
-        final PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.INSERT_VIDEO);
+        final PreparedStatement preparedStatement = connection.prepareStatement(INSERT_VIDEO);
         preparedStatement.setString(1, video.getName());
         preparedStatement.setString(2, video.getUsername());
         preparedStatement.setString(3, video.getCategory().toString());
@@ -42,8 +42,7 @@ public class SQLUtils {
     }
 
     public static int getVideoidByVideo(final String videoName) throws SQLException {
-        final PreparedStatement preparedStatement = connection.prepareStatement(
-                SQLConstants.GET_VIDEO_ID_BY_VIDEO_NAME);
+        final PreparedStatement preparedStatement = connection.prepareStatement(GET_VIDEO_ID_BY_VIDEO_NAME);
         preparedStatement.setString(1, videoName);
         final ResultSet resultSet = preparedStatement.executeQuery();
         int videoid = - 1;
@@ -55,7 +54,7 @@ public class SQLUtils {
 
     public static List<Video> getVideoList() throws SQLException {
         Vector<Video> videos = new Vector<>();
-        final PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.GET_VIDEOS_LIST);
+        final PreparedStatement preparedStatement = connection.prepareStatement(GET_VIDEOS_LIST);
         final ResultSet resultSet = preparedStatement.executeQuery();
         Video video;
         while (resultSet.next()) {
@@ -66,7 +65,7 @@ public class SQLUtils {
     }
 
     public static Video getVideoById(final int id) throws SQLException {
-        final PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.GET_VIDEO_BY_ID);
+        final PreparedStatement preparedStatement = connection.prepareStatement(GET_VIDEO_BY_ID);
         preparedStatement.setInt(1, id);
         final ResultSet resultSet = preparedStatement.executeQuery();
         Video result = new Video();
@@ -112,5 +111,22 @@ public class SQLUtils {
             like = new Like();
         }
         return likes;
+    }
+
+    public static List<Comment> getCommentsByVideoId(final int id) throws SQLException {
+        Vector<Comment> comments = new Vector<>();
+        final PreparedStatement preparedStatement = connection.prepareStatement(GET_COMMENTS_BY_VIDEO_ID);
+        preparedStatement.setInt(1, id);
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        Comment comment = new Comment(null, null);
+        while (resultSet.next()) {
+            comment.setVideoId(id);
+            comment.setUsername(resultSet.getString("commenter"));
+            comment.setDateTime(resultSet.getString("dateTime"));
+            comment.setMessage(resultSet.getString("message"));
+            comments.add(comment);
+            comment = new Comment(null, null);
+        }
+        return comments;
     }
 }
