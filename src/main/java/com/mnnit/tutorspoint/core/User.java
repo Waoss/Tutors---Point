@@ -17,15 +17,16 @@ import javafx.beans.property.SimpleStringProperty;
  * @see UserBuilder
  */
 public class User {
-    private SimpleObjectProperty<UserType> userType = new SimpleObjectProperty<>(this, "userType");
+
+    private SimpleObjectProperty<UserType> userType = new SimpleObjectProperty<>();
     /**
      * The username of the user
      */
-    private SimpleStringProperty username = new SimpleStringProperty(this, "username");
+    private SimpleStringProperty username = new SimpleStringProperty();
     /**
      * The password of the user
      */
-    private SimpleStringProperty password = new SimpleStringProperty(this, "password");
+    private SimpleStringProperty password = new SimpleStringProperty();
 
     /**
      * Creates a new user by the given username and password
@@ -73,15 +74,21 @@ public class User {
 
     @Override
     public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         final User user = (User) o;
 
-        if (getUserType() != null ? !getUserType().equals(user.getUserType()) : user.getUserType() != null)
+        if (getUserType() != null ? ! getUserType().equals(user.getUserType()) : user.getUserType() != null) {
             return false;
-        if (getUsername() != null ? !getUsername().equals(user.getUsername()) : user.getUsername() != null)
+        }
+        if (getUsername() != null ? ! getUsername().equals(user.getUsername()) : user.getUsername() != null) {
             return false;
+        }
         return getPassword() != null ? getPassword().equals(user.getPassword()) : user.getPassword() == null;
     }
 
