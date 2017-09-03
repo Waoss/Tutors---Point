@@ -11,13 +11,13 @@ public class VideoUploaderTest {
     @Test
     public void sendRequest() throws Exception {
         Video video = new Video();
-        video.setName("ameer_pyaar");
-        video.setFormat("mp4");
+        video.setName("forbidden");
+        video.setFormat("opus");
         video.setCategory(new VideoCategory("Music"));
         video.setComments(FXCollections.observableArrayList(new Comment("LOL!", "foo")));
         video.setLikes(FXCollections.observableArrayList());
-        video.setUsername("UnoRespublicanas");
+        video.setUsername("martin girish");
         video.setDateTime(ZonedDateTime.now().toString());
-        video.upload("http://localhost:8000/upload", new File("E:\\Sungs\\ameer_pyaar.mp4"));
+        video.upload("http://localhost:9000/upload", new File("E:\\song videos\\forbidden.opus"));
     }
 }

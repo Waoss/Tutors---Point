@@ -51,6 +51,18 @@ public class SQLUtils {
         return videoid;
     }
 
+    public static List<Video> getVideoList() throws SQLException {
+        Vector<Video> videos = new Vector<>();
+        final PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.GET_VIDEOS_LIST);
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        Video video;
+        while (resultSet.next()) {
+            video = getVideoById(resultSet.getInt("videoid"));
+            videos.add(video);
+        }
+        return videos;
+    }
+
     public static Video getVideoById(final int id) throws SQLException {
         final PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.GET_VIDEO_BY_ID);
         preparedStatement.setInt(1, id);
@@ -67,18 +79,6 @@ public class SQLUtils {
             result.setComments();*/
         }
         return result;
-    }
-
-    public static List<Video> getVideoList() throws SQLException {
-        Vector<Video> videos = new Vector<>();
-        final PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.GET_VIDEOS_LIST);
-        final ResultSet resultSet = preparedStatement.executeQuery();
-        Video video;
-        while (resultSet.next()) {
-            video = getVideoById(resultSet.getInt("videoid"));
-            videos.add(video);
-        }
-        return videos;
     }
 
     public static void insertComment(final Comment comment) throws SQLException {
