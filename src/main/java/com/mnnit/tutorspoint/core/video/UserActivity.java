@@ -4,7 +4,7 @@ public class UserActivity {
 
     private String username;
     private String dateTime;
-    private int videoid;
+    private int videoId;
 
     public String getUsername() {
         return username;
@@ -22,11 +22,11 @@ public class UserActivity {
         this.dateTime = dateTime;
     }
 
-    public int getVideoid() {
-        return videoid;
+    public int getVideoId() {
+        return videoId;
     }
 
-    public void setVideoid(final int videoid) {
-        this.videoid = videoid;
+    public void setVideoId(final int videoId) {
+        this.videoId = videoId;
     }
 }

@@ -13,7 +13,7 @@ public class SQLUtilsTest {
     @Test
     public void insertComment() throws Exception {
         Comment comment = new Comment("rohan23chhabra", "Well done uno!");
-        comment.setVideoid(24);
+        comment.setVideoId(24);
         SQLUtils.insertComment(comment);
     }
 
