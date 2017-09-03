@@ -7,6 +7,7 @@ import com.mnnit.tutorspoint.core.video.Video;
 import com.mnnit.tutorspoint.server.OverallContent;
 
 import java.sql.*;
+import java.util.List;
 
 public class SQLUtils {
 
@@ -47,5 +48,13 @@ public class SQLUtils {
             videoid = resultSet.getInt("videoid");
         }
         return videoid;
+    }
+
+    public static Video getVideoById(final int id) throws SQLException {
+        
+    }
+
+    public static List<Video> getVideoList() throws SQLException {
+
     }
 }
