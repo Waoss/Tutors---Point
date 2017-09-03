@@ -1,4 +1,4 @@
-package com.mnnit.tutorspoint.database;
+package com.mnnit.tutorspoint.server.database;
 
 import java.sql.*;
 

@@ -13,5 +13,5 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile fileTree(catalinaLibraryLocation)
     compile rootProject
-    compile rootProject.project("tutorspoint.database")
+    compile rootProject.project(":tutorspoint.database")
 }

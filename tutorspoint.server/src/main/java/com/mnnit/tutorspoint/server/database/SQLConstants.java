@@ -1,4 +1,4 @@
-package com.mnnit.tutorspoint.database;
+package com.mnnit.tutorspoint.server.database;
 
 public class SQLConstants {
     public static final String INSERT_USER = "INSERT INTO users (username, password, usertype) VALUES (?, ?, ?);";
