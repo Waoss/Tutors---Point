@@ -4,10 +4,12 @@ import com.google.gson.Gson;
 import com.mnnit.tutorspoint.core.Globals;
 import com.mnnit.tutorspoint.core.User;
 import com.mnnit.tutorspoint.core.video.Video;
+import com.mnnit.tutorspoint.core.video.VideoCategory;
 import com.mnnit.tutorspoint.server.OverallContent;
 
 import java.sql.*;
 import java.util.List;
+import java.util.Vector;
 
 public class SQLUtils {
 
@@ -51,10 +53,32 @@ public class SQLUtils {
     }
 
     public static Video getVideoById(final int id) throws SQLException {
-        
+        final PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.GET_VIDEO_BY_ID);
+        preparedStatement.setInt(1, id);
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        Video result = new Video();
+        result.setId(id);
+        while (resultSet.next()) {
+            result.setName(resultSet.getString("name"));
+            result.setUsername(resultSet.getString("uploader"));
+            result.setCategory(new VideoCategory(resultSet.getString("category")));
+            result.setDateTime(resultSet.getString("uploadTime"));
+            //TODO: Implement likes and comments
+            /*result.setLikes();
+            result.setComments();*/
+        }
+        return result;
     }
 
     public static List<Video> getVideoList() throws SQLException {
-
+        Vector<Video> videos = new Vector<>();
+        final PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.GET_VIDEOS_LIST);
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        Video video;
+        while (resultSet.next()) {
+            video = getVideoById(resultSet.getInt("videoid"));
+            videos.add(video);
+        }
+        return videos;
     }
 }
