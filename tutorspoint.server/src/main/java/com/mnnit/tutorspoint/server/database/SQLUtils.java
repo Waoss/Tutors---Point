@@ -3,8 +3,7 @@ package com.mnnit.tutorspoint.server.database;
 import com.google.gson.Gson;
 import com.mnnit.tutorspoint.core.Globals;
 import com.mnnit.tutorspoint.core.User;
-import com.mnnit.tutorspoint.core.video.Video;
-import com.mnnit.tutorspoint.core.video.VideoCategory;
+import com.mnnit.tutorspoint.core.video.*;
 import com.mnnit.tutorspoint.server.OverallContent;
 
 import java.sql.*;
@@ -80,5 +79,9 @@ public class SQLUtils {
             videos.add(video);
         }
         return videos;
+    }
+
+    public static void insertComment(final Comment comment) throws SQLException {
+
     }
 }
