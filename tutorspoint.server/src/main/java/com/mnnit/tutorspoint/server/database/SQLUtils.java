@@ -10,6 +10,8 @@ import java.sql.*;
 import java.util.List;
 import java.util.Vector;
 
+import static com.mnnit.tutorspoint.server.database.SQLConstants.*;
+
 public class SQLUtils {
 
     private static final Gson GSON = Globals.GSON;
@@ -20,7 +22,7 @@ public class SQLUtils {
     }
 
     public static void insertUser(final User user) throws SQLException {
-        final PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.INSERT_USER);
+        final PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER);
         preparedStatement.setString(1, user.getUsername());
         preparedStatement.setString(2, user.getPassword());
         preparedStatement.setString(3, user.getUserType().toString());
@@ -82,7 +84,7 @@ public class SQLUtils {
     }
 
     public static void insertComment(final Comment comment) throws SQLException {
-        final PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.INSERT_COMMENT);
+        final PreparedStatement preparedStatement = connection.prepareStatement(INSERT_COMMENT);
         preparedStatement.setInt(1, comment.getVideoId());
         preparedStatement.setString(2, comment.getMessage());
         preparedStatement.setString(3, comment.getUsername());
@@ -91,9 +93,24 @@ public class SQLUtils {
     }
 
     public static void insertLike(final Like like) throws SQLException {
-        final PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.INSERT_LIKE);
+        final PreparedStatement preparedStatement = connection.prepareStatement(INSERT_LIKE);
         preparedStatement.setInt(1, like.getVideoId());
         preparedStatement.setString(2, like.getDateTime());
         preparedStatement.executeUpdate();
+    }
+
+    public static List<Like> getLikesByVideoId(final int videoId) throws SQLException {
+        Vector<Like> likes = new Vector<>();
+        final PreparedStatement preparedStatement = connection.prepareStatement(GET_LIKES_BY_VIDEO_ID);
+        preparedStatement.setInt(1, videoId);
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        Like like = new Like();
+        while (resultSet.next()) {
+            like.setVideoId(videoId);
+            like.setDateTime(resultSet.getString("dateTime"));
+            likes.add(like);
+            like = new Like();
+        }
+        return likes;
     }
 }

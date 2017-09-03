@@ -11,6 +11,11 @@ import java.util.List;
 public class SQLUtilsTest {
 
     @Test
+    public void getLikesByVideoId() throws Exception {
+        System.out.println(Globals.GSON.toJson(SQLUtils.getLikesByVideoId(24)));
+    }
+
+    @Test
     public void insertLike() throws Exception {
         Like like = new Like();
         like.setDateTime(ZonedDateTime.now().toString());
