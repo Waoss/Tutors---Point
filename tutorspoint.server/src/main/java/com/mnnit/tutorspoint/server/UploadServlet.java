@@ -2,6 +2,7 @@ package com.mnnit.tutorspoint.server;
 
 import com.mnnit.tutorspoint.core.Globals;
 import com.mnnit.tutorspoint.core.video.Video;
+import com.mnnit.tutorspoint.server.database.SQLUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -9,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 
 @WebServlet(name = "UploadServlet", urlPatterns = {"/upload"})
 @MultipartConfig(maxFileSize = 1024 * 1024 * 100, maxRequestSize = 1000000000)// 100 mb
@@ -19,6 +21,11 @@ public class UploadServlet extends HttpServlet {
             IOException {
         Part metadataPart = request.getPart("metadata");
         Video video = Globals.GSON.fromJson(new InputStreamReader(metadataPart.getInputStream()), Video.class);
+        try {
+            SQLUtils.insertVideo(video);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -3,11 +3,10 @@ package com.mnnit.tutorspoint.core.video;
 import java.io.File;
 import java.util.List;
 
-public class Video {
+public class Video extends UserActivity {
 
     private int id = - 1;
     private String name;
-    private String uploaderUsername;
     private String format;
     private List<Like> likes;
     private List<Comment> comments;
@@ -35,14 +34,6 @@ public class Video {
 
     public void setName(final String name) {
         this.name = name;
-    }
-
-    public String getUploaderUsername() {
-        return uploaderUsername;
-    }
-
-    public void setUploaderUsername(final String uploaderUsername) {
-        this.uploaderUsername = uploaderUsername;
     }
 
     public String getFormat() {

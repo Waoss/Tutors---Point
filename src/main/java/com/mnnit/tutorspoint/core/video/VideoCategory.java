@@ -29,4 +29,9 @@ public class VideoCategory {
     public void setChildren(final TreeMap<String, VideoCategory> children) {
         this.children = children;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

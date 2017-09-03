@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import org.junit.Test;
 
 import java.io.File;
+import java.time.ZonedDateTime;
 
 public class VideoUploaderTest {
 
@@ -15,7 +16,8 @@ public class VideoUploaderTest {
         video.setCategory(new VideoCategory("Data-Structures"));
         video.setComments(FXCollections.observableArrayList(new Comment("LOL!", "foo")));
         video.setLikes(FXCollections.observableArrayList());
-        video.setUploaderUsername("waqar");
+        video.setUsername("waqar");
+        video.setDateTime(ZonedDateTime.now().toString());
         video.upload("http://localhost:8000/upload", new File("E:\\cloc-1.64.exe"));
     }
 }
