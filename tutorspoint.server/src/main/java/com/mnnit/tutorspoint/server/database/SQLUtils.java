@@ -82,6 +82,11 @@ public class SQLUtils {
     }
 
     public static void insertComment(final Comment comment) throws SQLException {
-
+        final PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.INSERT_COMMENT);
+        preparedStatement.setInt(1, comment.getVideoid());
+        preparedStatement.setString(2, comment.getMessage());
+        preparedStatement.setString(3, comment.getUsername());
+        preparedStatement.setString(4, comment.getDateTime());
+        preparedStatement.executeUpdate();
     }
 }
