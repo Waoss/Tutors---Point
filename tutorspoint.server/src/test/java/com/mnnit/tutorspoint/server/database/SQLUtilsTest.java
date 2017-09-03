@@ -1,6 +1,7 @@
 package com.mnnit.tutorspoint.server.database;
 
 import com.mnnit.tutorspoint.core.Globals;
+import com.mnnit.tutorspoint.core.video.Comment;
 import com.mnnit.tutorspoint.core.video.Video;
 import org.junit.Test;
 
@@ -8,6 +9,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SQLUtilsTest {
+
+    @Test
+    public void insertComment() throws Exception {
+        Comment comment = new Comment("rohan23chhabra", "Well done uno!");
+        comment.setVideoid(24);
+        SQLUtils.insertComment(comment);
+    }
 
     @Test
     public void getVideoById() throws Exception {

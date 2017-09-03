@@ -1,14 +1,10 @@
 package com.mnnit.tutorspoint.core.video;
 
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-
-import java.time.LocalDateTime;
-
 public class UserActivity {
 
     private String username;
     private String dateTime;
+    private int videoid;
 
     public String getUsername() {
         return username;
@@ -24,5 +20,13 @@ public class UserActivity {
 
     public void setDateTime(final String dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public int getVideoid() {
+        return videoid;
+    }
+
+    public void setVideoid(final int videoid) {
+        this.videoid = videoid;
     }
 }
