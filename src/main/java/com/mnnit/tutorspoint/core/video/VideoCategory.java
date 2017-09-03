@@ -13,4 +13,20 @@ public class VideoCategory {
     public VideoCategory(final String name) {
         this.name = name;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(final String name) {
+        this.name = name;
+    }
+
+    public TreeMap<String, VideoCategory> getChildren() {
+        return children;
+    }
+
+    public void setChildren(final TreeMap<String, VideoCategory> children) {
+        this.children = children;
+    }
 }

@@ -7,30 +7,22 @@ import java.time.LocalDateTime;
 
 public class UserActivity {
 
-    private SimpleStringProperty username = new SimpleStringProperty("username");
-    private SimpleObjectProperty<LocalDateTime> dateTime = new SimpleObjectProperty<>();
+    private String username;
+    private String dateTime;
 
     public String getUsername() {
-        return username.get();
-    }
-
-    public SimpleStringProperty usernameProperty() {
         return username;
     }
 
     public void setUsername(final String username) {
-        this.username.set(username);
+        this.username = username;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime.get();
-    }
-
-    public SimpleObjectProperty<LocalDateTime> dateTimeProperty() {
+    public String getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(final LocalDateTime dateTime) {
-        this.dateTime.set(dateTime);
+    public void setDateTime(final String dateTime) {
+        this.dateTime = dateTime;
     }
 }
