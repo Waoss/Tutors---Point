@@ -42,7 +42,9 @@ public final class MainLayoutController implements Initializable {
      *
      * @param type
      *         The type of the user because the controller needs to know what type of user has logged in.
+     *
      * @return The loaded Parent.
+     *
      * @throws IOException
      *         If the resource is not found.
      */
@@ -54,7 +56,9 @@ public final class MainLayoutController implements Initializable {
      * {@inheritDoc}
      *
      * @param type
+     *
      * @return
+     *
      * @throws IOException
      */
     private AnchorPane getLoginLayout(UserType type) throws IOException {

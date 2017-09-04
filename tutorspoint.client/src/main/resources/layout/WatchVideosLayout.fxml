@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
-            xmlns="http://javafx.com/javafx"
-            fx:controller="com.mnnit.tutorspoint.WatchVideosLayoutController"
-            prefHeight="400.0" prefWidth="600.0"
-            stylesheets="@style/MainStyle.css">
 
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="490.0" prefWidth="600.0" stylesheets="@style/MainStyle.css"
+            xmlns="http://javafx.com/javafx/8.0.121" fx:controller="com.mnnit.tutorspoint.WatchVideosLayoutController">
+    <children>
+        <ListView fx:id="videoList" prefHeight="490.0" prefWidth="600.0"/>
+    </children>
 </AnchorPane>

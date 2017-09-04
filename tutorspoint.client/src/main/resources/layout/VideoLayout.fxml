@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.media.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="500.0" prefWidth="700.0"
+            xmlns="http://javafx.com/javafx/8.0.121" fx:controller="com.mnnit.tutorspoint.VideoLayoutController">
+    <children>
+        <MediaView fx:id="mediaView" fitHeight="400.0" fitWidth="600.0" layoutY="7.0"/>
+        <Label fx:id="videoNameLabel" layoutX="14.0" layoutY="416.0" prefHeight="59.0" prefWidth="219.0"
+               text="\${videoName}"/>
+        <Label fx:id="likesLabel" layoutX="503.0" layoutY="437.0" text="\${likes}"/>
+    </children>
+</AnchorPane>

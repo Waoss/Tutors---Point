@@ -1,18 +1,21 @@
 package com.mnnit.tutorspoint;
 
-import com.mnnit.tutorspoint.core.User;
-import com.mnnit.tutorspoint.core.UserType;
+import com.mnnit.tutorspoint.core.*;
+import com.mnnit.tutorspoint.core.video.Video;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.net.URLConnection;
+import java.util.*;
 import java.util.logging.Logger;
 
 public class UserDetailsLayoutController implements Initializable {
+
     public static final Logger LOGGER = Logger.getLogger(UserDetailsLayoutController.class.getName());
     @FXML
     public Tab manageAccountTab;
@@ -35,6 +38,7 @@ public class UserDetailsLayoutController implements Initializable {
         try {
             manageAccountTab.setContent(getManageAccountLayout());
             uploadVideoTab.setContent(getUploadVideoLayout(getUser().getUserType()));
+            watchVideosTab.setContent(getWatchVideoLayout());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -53,11 +57,21 @@ public class UserDetailsLayoutController implements Initializable {
         AnchorPane anchorPane = fxmlLoader.load();
         UploadVideoLayoutController controller = fxmlLoader.getController();
         if (userType == UserType.STUDENT) {
-            controller.getMessage().setText("Sorry! As a student, you cannot upload videos!\n" +
-                    "However you can watch some cool videos under the \n'watch videos tab!'");
+            controller.getMessage().setText(
+                    "Sorry! As a student, you cannot upload videos!\n" + "However you can watch some cool videos under the \n'watch videos' tab!");
         } else {
 
         }
+        return anchorPane;
+    }
+
+    private AnchorPane getWatchVideoLayout() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/WatchVideosLayout.fxml"));
+        AnchorPane anchorPane = fxmlLoader.load();
+        WatchVideosLayoutController controller = fxmlLoader.getController();
+        //Fixme: Create generic URL
+        controller.setRetriever(() -> getVideos("http://localhost:8000/getVideosList"));
+        controller.lateInitialize();
         return anchorPane;
     }
 
@@ -67,5 +81,20 @@ public class UserDetailsLayoutController implements Initializable {
 
     public void setUser(final User user) {
         this.user.set(user);
+    }
+
+    List<Video> getVideos(final String url) {
+        try {
+            final URLConnection urlConnection = getURLConnection(url);
+            final List<Video> videos = Arrays.asList(
+                    Globals.GSON.fromJson(new InputStreamReader(urlConnection.getInputStream()), Video[].class));
+            return videos;
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    private URLConnection getURLConnection(final String url) throws IOException {
+        return new URL(url).openConnection();
     }
 }
