@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.mnnit.tutorspoint.core.Globals;
 import com.mnnit.tutorspoint.core.User;
 import com.mnnit.tutorspoint.core.video.*;
-import com.mnnit.tutorspoint.server.OverallContent;
 
 import java.sql.*;
 import java.util.List;
@@ -33,12 +32,11 @@ public class SQLUtils {
         final PreparedStatement preparedStatement = connection.prepareStatement(INSERT_VIDEO);
         preparedStatement.setString(1, video.getName());
         preparedStatement.setString(2, video.getUsername());
-        preparedStatement.setString(3, video.getCategory().toString());
+        preparedStatement.setString(3, video.getCategory());
         preparedStatement.setString(4, video.getDateTime());
         preparedStatement.setInt(5, video.getComments().size());
         preparedStatement.executeUpdate();
         video.setVideoId(getVideoIdByName(video.getName()));
-        OverallContent.getInstance().getVideoList().add(video);
     }
 
     public static int getVideoIdByName(final String videoName) throws SQLException {

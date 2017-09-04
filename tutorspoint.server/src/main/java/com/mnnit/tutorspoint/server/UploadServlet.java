@@ -31,5 +31,6 @@ public class UploadServlet extends HttpServlet {
         File file = new File(realPath, video.getVideoId() + ".vid");
         file.createNewFile();
         IOUtils.copy(binaryFilePart.getInputStream(), new FileOutputStream(file));
+        response.getWriter().print("0");
     }
 }

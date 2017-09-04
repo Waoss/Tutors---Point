@@ -16,14 +16,14 @@ public class VideoUploaderTest extends Application {
 
     @Test
     public void sendRequest() throws Exception {
-        video.setName("Fade");
+        video.setName("ameer_pyaar");
         video.setFormat("mp4");
         video.setCategory("Music");
         video.setComments(FXCollections.observableArrayList(new Comment("rajni", "lol")));
         video.setLikes(FXCollections.observableArrayList());
         video.setUsername("AlanWalker");
         video.setDateTime(ZonedDateTime.now().toString());
-        video.upload("http://localhost:8000/upload", new File("E:\\fade.mp4"));
+        video.upload("http://localhost:8000/upload", new File("E:\\Sungs\\ameer_pyaar.mp4"));
     }
 
     @Override

@@ -57,10 +57,12 @@ public class UserDetailsLayoutController implements Initializable {
         AnchorPane anchorPane = fxmlLoader.load();
         UploadVideoLayoutController controller = fxmlLoader.getController();
         if (userType == UserType.STUDENT) {
-            controller.getMessage().setText(
+            controller.getMessageLabel().setText(
                     "Sorry! As a student, you cannot upload videos!\n" + "However you can watch some cool videos under the \n'watch videos' tab!");
         } else {
-
+            controller.getMessageLabel().setText("Here you can upload videos");
+            controller.uploadFileButton.setVisible(true);
+            controller.videoCategoryTextField.setVisible(true);
         }
         return anchorPane;
     }
