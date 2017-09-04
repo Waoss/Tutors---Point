@@ -3,11 +3,11 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="417.0" prefWidth="673.0" style="-fx-background-color: #fff;"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="800" prefWidth="1000" style="-fx-background-color: #fff;"
             styleClass="anchor-pane" stylesheets="@style/MainStyle.css"
             xmlns="http://javafx.com/javafx/8.0.112" fx:controller="com.mnnit.tutorspoint.UserDetailsLayoutController">
     <children>
-        <TabPane prefHeight="417.0" prefWidth="673.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane prefHeight="800" prefWidth="1000" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab fx:id="manageAccountTab" text="Manage Account">
                     <content>

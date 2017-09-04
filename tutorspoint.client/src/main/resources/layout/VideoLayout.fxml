@@ -7,8 +7,14 @@
             xmlns="http://javafx.com/javafx/8.0.121" fx:controller="com.mnnit.tutorspoint.VideoLayoutController">
     <children>
         <MediaView fx:id="mediaView" fitHeight="400.0" fitWidth="600.0" layoutY="7.0"/>
-        <Label fx:id="videoNameLabel" layoutX="14.0" layoutY="416.0" prefHeight="59.0" prefWidth="219.0"
+        <Label fx:id="videoNameLabel" layoutX="14.0" layoutY="399.0" prefHeight="59.0" prefWidth="219.0"
                text="\${videoName}"/>
-        <Label fx:id="likesLabel" layoutX="503.0" layoutY="437.0" text="\${likes}"/>
+        <Label fx:id="likesLabel" layoutX="497.0" layoutY="420.0" text="\${likes}"/>
+        <Button fx:id="playButton" onAction="#playButtonOnAction" layoutX="274.0" layoutY="408.0"
+                mnemonicParsing="false" text="Play"/>
+        <Button fx:id="pauseButton" onAction="#pauseButtonOnAction" layoutX="326.0" layoutY="408.0"
+                mnemonicParsing="false" text="Pause"/>
+        <Button fx:id="stopButton" onAction="#stopButtonOnAction" layoutX="222.0" layoutY="408.0"
+                mnemonicParsing="false" text="Stop"/>
     </children>
 </AnchorPane>

@@ -3,6 +3,7 @@ package com.mnnit.tutorspoint;
 import com.mnnit.tutorspoint.core.video.Video;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.media.*;
@@ -15,6 +16,9 @@ public class VideoLayoutController implements Initializable {
     public MediaView mediaView;
     public Label videoNameLabel;
     public Label likesLabel;
+    public Button playButton;
+    public Button pauseButton;
+    public Button stopButton;
     /**
      * Represents the url of the server from where the video can be retrieved.
      * For example, "http://localhost:8000/",so that + 33(assumed video ID) would give "http://localhost:8000/33.vid".
@@ -32,6 +36,8 @@ public class VideoLayoutController implements Initializable {
             url.append(newValue.getVideoId());
             url.append(".vid");
             setUrl(url.toString());
+            videoNameLabel.setText(newValue.getName());
+            likesLabel.setText(String.valueOf(newValue.getLikes().size()));
         });
     }
 
@@ -57,5 +63,17 @@ public class VideoLayoutController implements Initializable {
 
     public SimpleObjectProperty<Video> videoProperty() {
         return video;
+    }
+
+    public void playButtonOnAction(ActionEvent actionEvent) {
+        mediaView.getMediaPlayer().play();
+    }
+
+    public void pauseButtonOnAction(ActionEvent actionEvent) {
+        mediaView.getMediaPlayer().pause();
+    }
+
+    public void stopButtonOnAction(ActionEvent actionEvent) {
+        mediaView.getMediaPlayer().stop();
     }
 }

@@ -2,9 +2,6 @@ package com.mnnit.tutorspoint;
 
 import javafx.scene.control.*;
 
-/**
- * Created by Rohan on 02-09-2017.
- */
 public class UploadVideoLayoutController {
     public Label message;
 

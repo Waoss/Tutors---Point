@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="349.0" prefWidth="356.0" styleClass="anchor-pane"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="800.0" styleClass="anchor-pane"
             stylesheets="@style/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.112"
             fx:controller="com.mnnit.tutorspoint.LoginLayoutController">
     <children>
