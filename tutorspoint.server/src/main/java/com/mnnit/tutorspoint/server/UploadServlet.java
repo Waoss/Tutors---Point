@@ -28,7 +28,7 @@ public class UploadServlet extends HttpServlet {
         }
         Part binaryFilePart = request.getPart("binaryFile");
         final String realPath = getServletContext().getRealPath("");
-        File file = new File(realPath, video.getId() + ".vid");
+        File file = new File(realPath, video.getVideoId() + ".vid");
         file.createNewFile();
         IOUtils.copy(binaryFilePart.getInputStream(), new FileOutputStream(file));
     }

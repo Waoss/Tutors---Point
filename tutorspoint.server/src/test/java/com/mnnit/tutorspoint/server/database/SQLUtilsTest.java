@@ -24,14 +24,14 @@ public class SQLUtilsTest {
     public void insertLike() throws Exception {
         Like like = new Like();
         like.setDateTime(ZonedDateTime.now().toString());
-        like.setVideoId(24);
+        like.setVideoId(25);
         SQLUtils.insertLike(like);
     }
 
     @Test
     public void insertComment() throws Exception {
         Comment comment = new Comment("rohan23chhabra", "Well done uno!");
-        comment.setVideoId(24);
+        comment.setVideoId(25);
         SQLUtils.insertComment(comment);
     }
 

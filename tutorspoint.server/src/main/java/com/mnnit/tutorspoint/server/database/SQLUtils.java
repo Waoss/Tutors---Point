@@ -37,11 +37,11 @@ public class SQLUtils {
         preparedStatement.setString(4, video.getDateTime());
         preparedStatement.setInt(5, video.getComments().size());
         preparedStatement.executeUpdate();
-        video.setId(getVideoidByVideo(video.getName()));
+        video.setVideoId(getVideoIdByName(video.getName()));
         OverallContent.getInstance().getVideoList().add(video);
     }
 
-    public static int getVideoidByVideo(final String videoName) throws SQLException {
+    public static int getVideoIdByName(final String videoName) throws SQLException {
         final PreparedStatement preparedStatement = connection.prepareStatement(GET_VIDEO_ID_BY_VIDEO_NAME);
         preparedStatement.setString(1, videoName);
         final ResultSet resultSet = preparedStatement.executeQuery();
@@ -69,15 +69,14 @@ public class SQLUtils {
         preparedStatement.setInt(1, id);
         final ResultSet resultSet = preparedStatement.executeQuery();
         Video result = new Video();
-        result.setId(id);
+        result.setVideoId(id);
         while (resultSet.next()) {
             result.setName(resultSet.getString("name"));
             result.setUsername(resultSet.getString("uploader"));
-            result.setCategory(new VideoCategory(resultSet.getString("category")));
+            result.setCategory(resultSet.getString("category"));
             result.setDateTime(resultSet.getString("uploadTime"));
-            //TODO: Implement likes and comments
-            /*result.setLikes();
-            result.setComments();*/
+            result.setLikes(getLikesByVideoId(id));
+            result.setComments(getCommentsByVideoId(id));
         }
         return result;
     }

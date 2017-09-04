@@ -5,12 +5,11 @@ import java.util.List;
 
 public class Video extends UserActivity {
 
-    private int id = - 1;
     private String name;
     private String format;
     private List<Like> likes;
     private List<Comment> comments;
-    private VideoCategory category;
+    private String category;
 
     public void upload(String url, File content) throws Exception {
         VideoUploader videoUploader = new VideoUploader();
@@ -18,14 +17,6 @@ public class Video extends UserActivity {
         videoUploader.setFile(content);
         videoUploader.setUrl(url);
         videoUploader.sendRequest();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(final int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -60,11 +51,11 @@ public class Video extends UserActivity {
         this.comments = comments;
     }
 
-    public VideoCategory getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(final VideoCategory category) {
+    public void setCategory(final String category) {
         this.category = category;
     }
 }
