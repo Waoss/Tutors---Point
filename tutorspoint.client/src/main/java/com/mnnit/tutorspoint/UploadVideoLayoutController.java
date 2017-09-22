@@ -33,6 +33,7 @@ public class UploadVideoLayoutController {
         video.setVideoId(- 1);
         video.setDateTime(ZonedDateTime.now().toString());
         video.setCategory(videoCategoryTextField.getText());
+        video.setUsername(System.getProperty("com.mnnit.tutorspoint.client.username"));
         //FIXME:Generic server URL
         video.upload(System.getProperty("com.mnnit.tutorspoint.server.url") + "/upload", file);
     }

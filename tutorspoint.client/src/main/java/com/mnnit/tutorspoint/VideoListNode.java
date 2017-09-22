@@ -6,6 +6,10 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
+/**
+ * This class is unused shit.
+ */
+@Deprecated
 public class VideoListNode extends Region {
     private SimpleObjectProperty<Video> video = new SimpleObjectProperty<>(this, "video");
     private SimpleObjectProperty<Label> nameLabel = new SimpleObjectProperty<>(this, "nameLabel",
