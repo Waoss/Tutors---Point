@@ -19,6 +19,7 @@ public class VideoLayoutController implements Initializable {
     public Button playButton;
     public Button pauseButton;
     public Button stopButton;
+    public Slider slider;
     /**
      * Represents the url of the server from where the video can be retrieved.
      * For example, "http://localhost:8000/",so that + 33(assumed video ID) would give "http://localhost:8000/33.vid".
@@ -39,6 +40,8 @@ public class VideoLayoutController implements Initializable {
             videoNameLabel.setText(newValue.getName());
             likesLabel.setText(String.valueOf(newValue.getLikes().size()));
         });
+        slider.valueProperty().addListener((observable, oldValue, newValue) -> mediaView.getMediaPlayer()
+                .seek(mediaView.getMediaPlayer().getMedia().getDuration().multiply(newValue.doubleValue() / 100)));
     }
 
     public String getUrl() {

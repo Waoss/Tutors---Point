@@ -24,3 +24,6 @@ CREATE TABLE Videos (
   uploadTime VARCHAR NOT NULL,
   likes      INTEGER NOT NULL
 );
+INSERT INTO Videos VALUES (1, 'Fade', 'AlanWalker', 'Music', '2017-09-04T17:55:20.564+05:30[Asia/Calcutta]', 1);
+INSERT INTO Videos VALUES (2, 'Fade', 'AlanWalker', 'Music', '2017-09-04T18:00:38.412+05:30[Asia/Calcutta]', 1);
+INSERT INTO Videos VALUES (3, 'ameer_pyaar', 'AlanWalker', 'Music', '2017-09-04T18:10:49.445+05:30[Asia/Calcutta]', 1);

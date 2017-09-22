@@ -35,6 +35,8 @@ public class User {
      *         The username
      * @param password
      *         The password
+     * @param userType
+     *         The usertype
      */
     public User(String username, String password, UserType userType) {
         this.username.set(username);
