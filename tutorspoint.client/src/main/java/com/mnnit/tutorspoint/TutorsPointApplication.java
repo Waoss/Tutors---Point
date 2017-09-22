@@ -3,9 +3,13 @@ package com.mnnit.tutorspoint;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
-import javafx.stage.Stage;
+import javafx.stage.*;
 
 public class TutorsPointApplication extends Application {
+
+    static {
+        System.setProperty("com.mnnit.tutorspoint.server.url", "http://localhost:8000");
+    }
 
     /**
      * The start method which starts the javafx application<br>
@@ -13,7 +17,6 @@ public class TutorsPointApplication extends Application {
      *
      * @param primaryStage
      *         The primary stage is supplied to every javafx application by the javafx runtime.
-     *
      * @throws Exception
      *         Throwing of {@link Exception} is a part of the signature of the start method.
      */

@@ -67,22 +67,19 @@ public class UserDetailsLayoutController implements Initializable {
         return anchorPane;
     }
 
+    public User getUser() {
+        return user.get();
+    }
+
     private AnchorPane getWatchVideoLayout() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/WatchVideosLayout.fxml"));
         AnchorPane anchorPane = fxmlLoader.load();
         WatchVideosLayoutController controller = fxmlLoader.getController();
         //Fixme: Create generic URL
-        controller.setRetriever(() -> getVideos("http://localhost:8000/getVideosList"));
+        controller.setRetriever(
+                () -> getVideos(System.getProperty("com.mnnit.tutorspoint.server.url") + "/getVideosList"));
         controller.lateInitialize();
         return anchorPane;
-    }
-
-    public User getUser() {
-        return user.get();
-    }
-
-    public void setUser(final User user) {
-        this.user.set(user);
     }
 
     List<Video> getVideos(final String url) {
@@ -98,5 +95,9 @@ public class UserDetailsLayoutController implements Initializable {
 
     private URLConnection getURLConnection(final String url) throws IOException {
         return new URL(url).openConnection();
+    }
+
+    public void setUser(final User user) {
+        this.user.set(user);
     }
 }

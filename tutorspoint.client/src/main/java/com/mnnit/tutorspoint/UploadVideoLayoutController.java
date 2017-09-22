@@ -3,7 +3,7 @@ package com.mnnit.tutorspoint;
 import com.mnnit.tutorspoint.core.video.Video;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
-import javafx.stage.FileChooser;
+import javafx.stage.*;
 
 import java.io.File;
 import java.time.ZonedDateTime;
@@ -34,6 +34,6 @@ public class UploadVideoLayoutController {
         video.setDateTime(ZonedDateTime.now().toString());
         video.setCategory(videoCategoryTextField.getText());
         //FIXME:Generic server URL
-        video.upload("http://localhost:8000/upload", file);
+        video.upload(System.getProperty("com.mnnit.tutorspoint.server.url") + "/upload", file);
     }
 }

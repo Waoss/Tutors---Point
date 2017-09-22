@@ -30,6 +30,24 @@ public class WatchVideosLayoutController implements Initializable {
         videoList.setItems(videoListContent.get());
     }
 
+    private List<AnchorPane> getAnchorPanesForVideos(List<Video> videos) {
+        final Vector<AnchorPane> result = new Vector<>();
+        videos.forEach(video -> {
+            try {
+                final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/VideoLayout.fxml"));
+                final AnchorPane anchorPane = fxmlLoader.load();
+                result.add(anchorPane);
+                final VideoLayoutController controller = fxmlLoader.getController();
+                //Fixme:Generic Server URL
+                controller.setUrl(System.getProperty("com.mnnit.tutorspoint.server.url") + "/");
+                controller.setVideo(video);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        return result;
+    }
+
     public VideoRetriever getRetriever() {
         return retriever.get();
     }
@@ -52,23 +70,5 @@ public class WatchVideosLayoutController implements Initializable {
 
     public SimpleListProperty<AnchorPane> videoListContentProperty() {
         return videoListContent;
-    }
-
-    private List<AnchorPane> getAnchorPanesForVideos(List<Video> videos) {
-        final Vector<AnchorPane> result = new Vector<>();
-        videos.forEach(video -> {
-            try {
-                final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/VideoLayout.fxml"));
-                final AnchorPane anchorPane = fxmlLoader.load();
-                result.add(anchorPane);
-                final VideoLayoutController controller = fxmlLoader.getController();
-                //Fixme:Generic Server URL
-                controller.setUrl("http://localhost:8000/");
-                controller.setVideo(video);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        return result;
     }
 }

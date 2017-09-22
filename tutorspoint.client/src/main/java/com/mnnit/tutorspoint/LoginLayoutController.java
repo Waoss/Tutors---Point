@@ -7,7 +7,7 @@ import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
+import javafx.stage.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -53,18 +53,28 @@ public final class LoginLayoutController implements Initializable {
     }
 
     /**
-     * This method is used when we want a stage that is not resizable to work as if it were.
-     * If the parameterized stage is not resizable then it is made resizable but after the execution of the
-     * consumer, the stage is not set to be resizeable.
+     * This method is called when the {@link #loginButton} is clicked.
      *
-     * @param stage
-     * @param consumer
+     * @param actionEvent
+     *         The event object every event handler gets
      */
-    public static void onResizableStage(Stage stage, Consumer<Stage> consumer) {
-        if (! stage.isResizable()) {
-            stage.setResizable(true);
+    @FXML
+    public void loginButtonOnAction(ActionEvent actionEvent) {
+        User user = new UserBuilder().setUsername(usernameTextField.getText()).setPassword(
+                passwordTextField.getText()).setUserType(getUserType()).createUser();
+        System.setProperty("com.mnnit.tutorspoint.client.username", user.getUsername());
+        try {
+            Stage stage = (Stage) loginButton.getParent().getScene().getWindow();
+            Scene scene = new Scene(loadUserDetailsLayout(user), 500, 500);
+            onResizableStage(stage, stage1 -> {
+                stage1.setWidth(scene.getWidth());
+                stage1.setHeight(scene.getHeight());
+            });
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        consumer.accept(stage);
+        LOGGER.info(String.format("User %s logged in with type %s", user.getUsername(), user.getUserType()));
     }
 
     /**
@@ -87,39 +97,13 @@ public final class LoginLayoutController implements Initializable {
     }
 
     /**
-     * This method is called when the {@link #loginButton} is clicked.
-     *
-     * @param actionEvent
-     *         The event object every event handler gets
-     */
-    @FXML
-    public void loginButtonOnAction(ActionEvent actionEvent) {
-        User user = new UserBuilder().setUsername(usernameTextField.getText()).setPassword(
-                passwordTextField.getText()).setUserType(getUserType()).createUser();
-        try {
-            Stage stage = (Stage) loginButton.getParent().getScene().getWindow();
-            Scene scene = new Scene(loadUserDetailsLayout(user), 500, 500);
-            onResizableStage(stage, stage1 -> {
-                stage1.setWidth(scene.getWidth());
-                stage1.setHeight(scene.getHeight());
-            });
-            stage.setScene(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        LOGGER.info(String.format("User %s logged in with type %s", user.getUsername(), user.getUserType()));
-    }
-
-    /**
      * Loads a Parent of the user details layout as defined in the fxml.
      * Also sets the user property of the controller {@link UserDetailsLayoutController#user} so the controller
      * knows what user has logged in and also gets all meta data for the user for later use.
      *
      * @param user
      *         The user
-     *
      * @return The layout
-     *
      * @throws IOException
      *         If the resources could not be loaded
      */
@@ -130,6 +114,21 @@ public final class LoginLayoutController implements Initializable {
         controller.setUser(user);
         controller.loadTabContent();
         return anchorPane;
+    }
+
+    /**
+     * This method is used when we want a stage that is not resizable to work as if it were.
+     * If the parameterized stage is not resizable then it is made resizable but after the execution of the
+     * consumer, the stage is not set to be resizeable.
+     *
+     * @param stage
+     * @param consumer
+     */
+    public static void onResizableStage(Stage stage, Consumer<Stage> consumer) {
+        if (!stage.isResizable()) {
+            stage.setResizable(true);
+        }
+        consumer.accept(stage);
     }
 
     /**
