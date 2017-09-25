@@ -12,4 +12,5 @@ public class SQLConstants {
     public static final String INSERT_LIKE = "INSERT INTO Likes (videoId, dateTime) VALUES (?, ?);";
     public static final String GET_LIKES_BY_VIDEO_ID = "SELECT *\n" + "FROM Likes\n" + "WHERE videoId = ?;";
     public static final String GET_COMMENTS_BY_VIDEO_ID = "SELECT *\n" + "FROM Comments\n" + "WHERE videoId = ?;";
+    public static final String GET_VIDEOS_BY_CATEGORY = "SELECT * FROM Videos WHERE category=?;";
 }

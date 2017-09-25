@@ -77,7 +77,8 @@ public class UserDetailsLayoutController implements Initializable {
         WatchVideosLayoutController controller = fxmlLoader.getController();
         //Fixme: Create generic URL
         controller.setRetriever(
-                () -> getVideos(System.getProperty("com.mnnit.tutorspoint.server.url") + "/getVideosList"));
+                () -> UserDetailsLayoutController.this
+                        .getVideos(System.getProperty("com.mnnit.tutorspoint.server.url") + "/getVideosList"));
         controller.lateInitialize();
         return anchorPane;
     }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.media.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="500.0" prefWidth="700.0"
@@ -11,11 +12,17 @@
                text="\${videoName}"/>
         <Label fx:id="likesLabel" layoutX="497.0" layoutY="420.0" text="\${likes}"/>
         <Button fx:id="playButton" layoutX="274.0" layoutY="408.0" mnemonicParsing="false"
-                onAction="#playButtonOnAction" text="Play"/>
+                onAction="#playButtonOnAction">
+            <graphic>
+                <ImageView>
+                    <Image url="images/icons/images.png"></Image>
+                </ImageView>
+            </graphic>
+        </Button>
         <Button fx:id="pauseButton" layoutX="326.0" layoutY="408.0" mnemonicParsing="false"
-                onAction="#pauseButtonOnAction" text="Pause"/>
+                onAction="#pauseButtonOnAction"/>
         <Button fx:id="stopButton" layoutX="222.0" layoutY="408.0" mnemonicParsing="false"
-                onAction="#stopButtonOnAction" text="Stop"/>
+                onAction="#stopButtonOnAction"/>
         <Slider fx:id="slider" layoutX="54.0" layoutY="355.0" prefHeight="25.0" prefWidth="566.0"/>
     </children>
 </AnchorPane>
