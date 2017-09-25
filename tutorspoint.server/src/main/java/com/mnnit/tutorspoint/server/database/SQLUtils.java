@@ -146,5 +146,14 @@ public class SQLUtils {
         return result;
     }
 
-
+    public static List<String> getCategoriesByParent(final String parent) throws SQLException {
+        Vector<String> result = new Vector<>();
+        final PreparedStatement preparedStatement = connection.prepareStatement(GET_CATEGORIES_BY_PARENT);
+        preparedStatement.setString(1, parent);
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            result.add(resultSet.getString("name"));
+        }
+        return result;
+    }
 }
