@@ -127,6 +127,9 @@ public class SQLUtils {
     }
 
     public static List<Video> getVideosByCategory(final String category) throws SQLException {
+        if (category == null) {
+            return Collections.emptyList();
+        }
         Vector<Video> result = new Vector<>();
         final PreparedStatement preparedStatement = connection.prepareStatement(GET_VIDEOS_BY_CATEGORY);
         preparedStatement.setString(1, category);
@@ -142,6 +145,13 @@ public class SQLUtils {
             video.setComments(getCommentsByVideoId(video.getVideoId()));
             result.add(video);
         }
+        getCategoriesByParent(category).forEach(e -> {
+            try {
+                result.addAll(getVideosByCategory(e));
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        });
         return result;
     }
 
