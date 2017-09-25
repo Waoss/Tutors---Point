@@ -6,8 +6,7 @@ import com.mnnit.tutorspoint.core.User;
 import com.mnnit.tutorspoint.core.video.*;
 
 import java.sql.*;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
 import static com.mnnit.tutorspoint.server.database.SQLConstants.*;
 
@@ -147,12 +146,20 @@ public class SQLUtils {
     }
 
     public static List<String> getCategoriesByParent(final String parent) throws SQLException {
+        if (parent == null) {
+            return Collections.emptyList();
+        }
         Vector<String> result = new Vector<>();
         final PreparedStatement preparedStatement = connection.prepareStatement(GET_CATEGORIES_BY_PARENT);
         preparedStatement.setString(1, parent);
         final ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            result.add(resultSet.getString("name"));
+            String category = resultSet.getString("name");
+            result.add(category);
+            List<String> children = getCategoriesByParent(category);
+            if (!children.isEmpty()) {
+                result.addAll(children);
+            }
         }
         return result;
     }
