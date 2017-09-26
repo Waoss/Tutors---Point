@@ -13,9 +13,7 @@ public class SQLConstants {
     public static final String GET_LIKES_BY_VIDEO_ID = "SELECT *\n" + "FROM Likes\n" + "WHERE videoId = ?;";
     public static final String GET_COMMENTS_BY_VIDEO_ID = "SELECT *\n" + "FROM Comments\n" + "WHERE videoId = ?;";
     public static final String GET_VIDEOS_BY_CATEGORY = "SELECT * FROM Videos WHERE category=?;";
-    public static final String GET_CATEGORIES_BY_PARENT = "SELECT *\n" +
-            "FROM Categories\n" +
-            "WHERE parent = ?;";
+    public static final String GET_CATEGORIES_BY_PARENT = "SELECT *\nFROM Categories\nWHERE parent = ?;";
     public static final String GET_TAGS_BY_VIDEO_ID = "SELECT * FROM Tags WHERE videoId=?;";
     public static final String INSERT_TAG = "INSERT INTO Tags (name, videoId) VALUES (?, ?);";
 }

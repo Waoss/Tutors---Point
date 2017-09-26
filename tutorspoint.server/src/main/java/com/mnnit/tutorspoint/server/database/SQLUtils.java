@@ -1,8 +1,6 @@
 package com.mnnit.tutorspoint.server.database;
 
-import com.google.gson.Gson;
-import com.mnnit.tutorspoint.core.Globals;
-import com.mnnit.tutorspoint.core.User;
+import com.mnnit.tutorspoint.core.*;
 import com.mnnit.tutorspoint.core.video.*;
 
 import java.sql.*;
@@ -12,7 +10,6 @@ import static com.mnnit.tutorspoint.server.database.SQLConstants.*;
 
 public class SQLUtils {
 
-    private static final Gson GSON = Globals.GSON;
     private static final Connection connection = Database.getConnection();
 
     private SQLUtils() {
@@ -187,6 +184,20 @@ public class SQLUtils {
             if (!children.isEmpty()) {
                 result.addAll(children);
             }
+        }
+        return result;
+    }
+
+    public static List<User> getUsersList() throws SQLException {
+        final Vector<User> result = new Vector<>();
+        final PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Users;");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            UserBuilder userBuilder = new UserBuilder();
+            userBuilder.setUsername(resultSet.getString("username"));
+            userBuilder.setPassword(resultSet.getString("password"));
+            userBuilder.setUserType(UserType.valueOf(resultSet.getString("userype")));
+            result.add(userBuilder.createUser());
         }
         return result;
     }
