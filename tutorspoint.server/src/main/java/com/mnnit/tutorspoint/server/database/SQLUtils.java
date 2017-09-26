@@ -134,6 +134,13 @@ public class SQLUtils {
         preparedStatement.executeUpdate();
     }
 
+    public static void insertTag(final Tag tag) throws SQLException {
+        final PreparedStatement preparedStatement = connection.prepareStatement(INSERT_TAG);
+        preparedStatement.setString(1, tag.getName());
+        preparedStatement.setInt(2, tag.getVideoId());
+        preparedStatement.executeUpdate();
+    }
+
     public static void insertLike(final Like like) throws SQLException {
         final PreparedStatement preparedStatement = connection.prepareStatement(INSERT_LIKE);
         preparedStatement.setInt(1, like.getVideoId());

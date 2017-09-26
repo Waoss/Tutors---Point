@@ -4,6 +4,14 @@ public class Tag {
     private String name;
     private int videoId;
 
+    public Tag(final String name, final int videoId) {
+        this.name = name;
+        this.videoId = videoId;
+    }
+
+    public Tag() {
+    }
+
     public String getName() {
         return name;
     }
