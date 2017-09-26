@@ -74,6 +74,7 @@ public class SQLUtils {
             result.setDateTime(resultSet.getString("uploadTime"));
             result.setLikes(getLikesByVideoId(id));
             result.setComments(getCommentsByVideoId(id));
+            result.setTags(getTagsByVideoId(id));
         }
         return result;
     }
@@ -110,6 +111,20 @@ public class SQLUtils {
         return comments;
     }
 
+    public static List<Tag> getTagsByVideoId(final int videoId) throws SQLException {
+        Vector<Tag> result = new Vector<>();
+        final PreparedStatement preparedStatement = connection.prepareStatement(GET_TAGS_BY_VIDEO_ID);
+        preparedStatement.setInt(1, videoId);
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Tag tag = new Tag();
+            tag.setName(resultSet.getString("name"));
+            tag.setVideoId(resultSet.getInt("videoId"));
+            result.add(tag);
+        }
+        return result;
+    }
+
     public static void insertComment(final Comment comment) throws SQLException {
         final PreparedStatement preparedStatement = connection.prepareStatement(INSERT_COMMENT);
         preparedStatement.setInt(1, comment.getVideoId());
@@ -135,14 +150,7 @@ public class SQLUtils {
         preparedStatement.setString(1, category);
         final ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            Video video = new Video();
-            video.setVideoId(resultSet.getInt("videoId"));
-            video.setUsername(resultSet.getString("uploader"));
-            video.setName(resultSet.getString("name"));
-            video.setDateTime(resultSet.getString("uploadTime"));
-            video.setLikes(getLikesByVideoId(video.getVideoId()));
-            video.setCategory(category);
-            video.setComments(getCommentsByVideoId(video.getVideoId()));
+            Video video = getVideoById(resultSet.getInt("videoId"));
             result.add(video);
         }
         getCategoriesByParent(category).forEach(e -> {

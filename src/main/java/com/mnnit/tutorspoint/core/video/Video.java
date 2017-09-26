@@ -9,6 +9,7 @@ public class Video extends UserActivity {
     private String format;
     private List<Like> likes;
     private List<Comment> comments;
+    private List<Tag> tags;
     private String category;
 
     public void upload(String url, File content) throws Exception {
@@ -57,5 +58,13 @@ public class Video extends UserActivity {
 
     public void setCategory(final String category) {
         this.category = category;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(final List<Tag> tags) {
+        this.tags = tags;
     }
 }

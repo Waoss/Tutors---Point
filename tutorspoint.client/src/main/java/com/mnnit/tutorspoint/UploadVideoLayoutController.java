@@ -30,6 +30,7 @@ public class UploadVideoLayoutController {
         video.setName(file.getName());
         video.setComments(Collections.emptyList());
         video.setLikes(Collections.emptyList());
+        video.setTags(Collections.emptyList());
         video.setVideoId(- 1);
         video.setDateTime(ZonedDateTime.now().toString());
         video.setCategory(videoCategoryTextField.getText());
