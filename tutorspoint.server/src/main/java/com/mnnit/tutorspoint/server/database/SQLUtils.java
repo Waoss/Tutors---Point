@@ -34,6 +34,7 @@ public class SQLUtils {
         preparedStatement.setString(3, video.getCategory());
         preparedStatement.setString(4, video.getDateTime());
         preparedStatement.setInt(5, video.getComments().size());
+        preparedStatement.setString(6, video.getFormat());
         preparedStatement.executeUpdate();
         video.setVideoId(getVideoIdByName(video.getName()));
     }
@@ -75,6 +76,7 @@ public class SQLUtils {
             result.setLikes(getLikesByVideoId(id));
             result.setComments(getCommentsByVideoId(id));
             result.setTags(getTagsByVideoId(id));
+            result.setFormat(resultSet.getString("format"));
         }
         return result;
     }

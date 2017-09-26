@@ -3,7 +3,7 @@ package com.mnnit.tutorspoint.server.database;
 public class SQLConstants {
 
     public static final String INSERT_USER = "INSERT INTO Users (username, password, userype) VALUES (?, ?, ?);";
-    public static final String INSERT_VIDEO = "INSERT INTO Videos (name, uploader, category, uploadTime, likes) VALUES (?,?,?,?,?);";
+    public static final String INSERT_VIDEO = "INSERT INTO Videos (name, uploader, category, uploadTime, likes, format) VALUES (?,?,?,?,?,?);";
     public static final String GET_VIDEO_BY_ID = "SELECT * FROM Videos WHERE videoId = ?;";
     public static final String GET_USER_BY_USERNAME = "SELECT * FROM Users WHERE username = ?;";
     public static final String GET_VIDEO_ID_BY_VIDEO_NAME = "SELECT videoId\n" + "FROM Videos\n" + "WHERE name = ?;";
