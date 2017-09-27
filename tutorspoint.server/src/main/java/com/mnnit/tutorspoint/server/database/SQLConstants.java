@@ -16,4 +16,5 @@ public class SQLConstants {
     public static final String GET_CATEGORIES_BY_PARENT = "SELECT *\nFROM Categories\nWHERE parent = ?;";
     public static final String GET_TAGS_BY_VIDEO_ID = "SELECT * FROM Tags WHERE videoId=?;";
     public static final String INSERT_TAG = "INSERT INTO Tags (name, videoId) VALUES (?, ?);";
+    public static final String INSERT_SUBSCRIPTION = "INSERT INTO Subscriptions (subscriber, subscribedTo) VALUES (?, ?);";
 }

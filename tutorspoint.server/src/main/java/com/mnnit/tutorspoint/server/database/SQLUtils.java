@@ -2,6 +2,7 @@ package com.mnnit.tutorspoint.server.database;
 
 import com.mnnit.tutorspoint.core.*;
 import com.mnnit.tutorspoint.core.video.*;
+import com.mnnit.tutorspoint.server.Subscription;
 
 import java.sql.*;
 import java.util.*;
@@ -200,5 +201,12 @@ public class SQLUtils {
             result.add(userBuilder.createUser());
         }
         return result;
+    }
+
+    public static void insertSubscription(final Subscription subscription) throws SQLException {
+        final PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SUBSCRIPTION);
+        preparedStatement.setString(1, subscription.getSubscriber());
+        preparedStatement.setString(2, subscription.getSubscribedTo());
+        preparedStatement.executeUpdate();
     }
 }
