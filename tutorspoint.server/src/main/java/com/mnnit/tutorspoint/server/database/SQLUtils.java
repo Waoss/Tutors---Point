@@ -2,6 +2,7 @@ package com.mnnit.tutorspoint.server.database;
 
 import com.mnnit.tutorspoint.core.*;
 import com.mnnit.tutorspoint.core.video.*;
+import com.mnnit.tutorspoint.server.Notification;
 import com.mnnit.tutorspoint.server.Subscription;
 
 import java.sql.*;
@@ -220,8 +221,46 @@ public class SQLUtils {
             final Subscription subscription = new Subscription();
             subscription.setSubscriber(resultSet.getString("subscriber"));
             subscription.setSubscribedTo(resultSet.getString("subscribedTo"));
+            subscription.setId(resultSet.getInt("subscriptionId"));
             result.add(subscription);
         }
         return result;
+    }
+
+    public static void insertNotification(final Notification notification) throws SQLException {
+        final PreparedStatement preparedStatement = connection
+                .prepareStatement("INSERT INTO Notifications (subscriptionId, message, isSent) VALUES (?, ?, ?);");
+        preparedStatement.setInt(1, notification.getSubscription().getId());
+        preparedStatement.setString(2, notification.getMessage());
+        preparedStatement.setBoolean(3, notification.isSent());
+        preparedStatement.executeUpdate();
+    }
+
+    public static Notification getNotificationBySubscriptionId(final int id) throws SQLException {
+        final PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT * FROM Notifications WHERE subscriptionId = ?");
+        preparedStatement.setInt(1, id);
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        final Notification notification = new Notification();
+        while (resultSet.next()) {
+            notification.setSubscription(getSubscriptionById(id));
+            notification.setMessage(resultSet.getString("message"));
+            notification.setSent(resultSet.getBoolean("isSent"));
+        }
+        return notification;
+    }
+
+    public static Subscription getSubscriptionById(final int id) throws SQLException {
+        final PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT * FROM Subscriptions WHERE subscriptionId = ?;");
+        preparedStatement.setInt(1, id);
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        Subscription subscription = new Subscription();
+        while (resultSet.next()) {
+            subscription.setId(id);
+            subscription.setSubscriber(resultSet.getString("subscriber"));
+            subscription.setSubscribedTo(resultSet.getString("subscribedTo"));
+        }
+        return subscription;
     }
 }

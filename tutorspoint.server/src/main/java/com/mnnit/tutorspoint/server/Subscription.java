@@ -3,6 +3,7 @@ package com.mnnit.tutorspoint.server;
 public class Subscription implements Comparable<Subscription> {
     private String subscriber;
     private String subscribedTo;
+    private int id;
 
     public Subscription(final String subscriber, final String subscribedTo) {
         this.subscriber = subscriber;
@@ -59,5 +60,13 @@ public class Subscription implements Comparable<Subscription> {
 
     public void setSubscribedTo(final String subscribedTo) {
         this.subscribedTo = subscribedTo;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(final int id) {
+        this.id = id;
     }
 }
