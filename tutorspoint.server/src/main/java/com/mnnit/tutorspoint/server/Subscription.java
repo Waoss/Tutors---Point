@@ -9,6 +9,9 @@ public class Subscription implements Comparable<Subscription> {
         this.subscribedTo = subscribedTo;
     }
 
+    public Subscription() {
+    }
+
     @Override
     public int compareTo(final Subscription that) {
         return subscriber.compareTo(that.subscriber) + subscribedTo.compareTo(that.subscribedTo);
@@ -34,6 +37,14 @@ public class Subscription implements Comparable<Subscription> {
                 that.getSubscribedTo() == null;
     }
 
+    @Override
+    public String toString() {
+        return "Subscription{" +
+                "subscriber='" + subscriber + '\'' +
+                ", subscribedTo='" + subscribedTo + '\'' +
+                '}';
+    }
+
     public String getSubscriber() {
         return subscriber;
     }
@@ -48,13 +59,5 @@ public class Subscription implements Comparable<Subscription> {
 
     public void setSubscribedTo(final String subscribedTo) {
         this.subscribedTo = subscribedTo;
-    }
-
-    @Override
-    public String toString() {
-        return "Subscription{" +
-                "subscriber='" + subscriber + '\'' +
-                ", subscribedTo='" + subscribedTo + '\'' +
-                '}';
     }
 }

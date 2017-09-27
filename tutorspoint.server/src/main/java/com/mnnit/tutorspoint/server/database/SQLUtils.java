@@ -209,4 +209,19 @@ public class SQLUtils {
         preparedStatement.setString(2, subscription.getSubscribedTo());
         preparedStatement.executeUpdate();
     }
+
+    public static List<Subscription> getSubscriptionList() throws SQLException {
+        final Vector<Subscription> result = new Vector<>();
+        final PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT *\n" +
+                        "FROM Subscriptions;");
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            final Subscription subscription = new Subscription();
+            subscription.setSubscriber(resultSet.getString("subscriber"));
+            subscription.setSubscribedTo(resultSet.getString("subscribedTo"));
+            result.add(subscription);
+        }
+        return result;
+    }
 }
