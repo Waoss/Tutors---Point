@@ -28,4 +28,13 @@ public class Notification {
     public void setSent(final boolean sent) {
         isSent = sent;
     }
+
+    @Override
+    public String toString() {
+        return "Notification{" +
+                ", subscription=" + subscription +
+                ", message='" + message + '\'' +
+                ", isSent=" + isSent +
+                '}';
+    }
 }

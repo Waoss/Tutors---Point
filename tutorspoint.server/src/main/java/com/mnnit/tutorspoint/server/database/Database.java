@@ -1,5 +1,6 @@
 package com.mnnit.tutorspoint.server.database;
 
+
 import java.sql.*;
 
 public class Database {
@@ -18,4 +19,5 @@ public class Database {
     public static Connection getConnection() {
         return connection;
     }
+
 }

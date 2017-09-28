@@ -4,6 +4,7 @@ import com.mnnit.tutorspoint.core.*;
 import com.mnnit.tutorspoint.core.video.*;
 import com.mnnit.tutorspoint.server.Notification;
 import com.mnnit.tutorspoint.server.Subscription;
+import com.mnnit.tutorspoint.server.todo.Todo;
 
 import java.sql.*;
 import java.util.*;
@@ -262,5 +263,13 @@ public class SQLUtils {
             subscription.setSubscribedTo(resultSet.getString("subscribedTo"));
         }
         return subscription;
+    }
+
+    public static void insertTodo(final Todo todo) throws SQLException {
+        final PreparedStatement preparedStatement = connection
+                .prepareStatement("INSERT INTO Todos (student, message) VALUES (?, ?);");
+        preparedStatement.setString(1, todo.getStudent());
+        preparedStatement.setString(2, todo.getMessage());
+        preparedStatement.executeUpdate();
     }
 }
