@@ -1,4 +1,4 @@
-package com.mnnit.tutorspoint.server.todo;
+package com.mnnit.tutorspoint.core.todo;
 
 public class Todo {
     private String student;

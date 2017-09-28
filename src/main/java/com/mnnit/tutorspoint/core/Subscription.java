@@ -1,4 +1,4 @@
-package com.mnnit.tutorspoint.server;
+package com.mnnit.tutorspoint.core;
 
 public class Subscription implements Comparable<Subscription> {
     private String subscriber;

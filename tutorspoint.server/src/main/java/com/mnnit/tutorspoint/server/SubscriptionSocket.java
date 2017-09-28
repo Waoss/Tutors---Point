@@ -1,6 +1,7 @@
 package com.mnnit.tutorspoint.server;
 
 import com.mnnit.tutorspoint.core.Globals;
+import com.mnnit.tutorspoint.core.Subscription;
 
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;

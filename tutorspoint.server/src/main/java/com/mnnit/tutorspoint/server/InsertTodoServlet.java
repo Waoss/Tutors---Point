@@ -1,7 +1,7 @@
 package com.mnnit.tutorspoint.server;
 
+import com.mnnit.tutorspoint.core.todo.Todo;
 import com.mnnit.tutorspoint.server.database.SQLUtils;
-import com.mnnit.tutorspoint.server.todo.Todo;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,4 +1,4 @@
-package com.mnnit.tutorspoint.server;
+package com.mnnit.tutorspoint.core;
 
 public class Notification {
     private Subscription subscription;

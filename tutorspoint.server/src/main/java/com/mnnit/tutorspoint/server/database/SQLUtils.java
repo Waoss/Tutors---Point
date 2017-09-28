@@ -1,10 +1,8 @@
 package com.mnnit.tutorspoint.server.database;
 
 import com.mnnit.tutorspoint.core.*;
+import com.mnnit.tutorspoint.core.todo.Todo;
 import com.mnnit.tutorspoint.core.video.*;
-import com.mnnit.tutorspoint.server.Notification;
-import com.mnnit.tutorspoint.server.Subscription;
-import com.mnnit.tutorspoint.server.todo.Todo;
 
 import java.sql.*;
 import java.util.*;
