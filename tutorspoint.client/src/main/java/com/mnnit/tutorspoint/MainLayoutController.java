@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
  * {@link LoginLayoutController} class.
  * </p>
  */
+@FXMLController
 public final class MainLayoutController implements Initializable {
 
     public Tab studentLoginTab;

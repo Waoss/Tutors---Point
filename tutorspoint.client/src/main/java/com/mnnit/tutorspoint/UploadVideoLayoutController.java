@@ -9,6 +9,7 @@ import java.io.File;
 import java.time.ZonedDateTime;
 import java.util.Collections;
 
+@FXMLController
 public class UploadVideoLayoutController {
 
     public Label messageLabel;

@@ -6,7 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
-
+@FXMLController
 public class SearchVideoTabLayoutController {
     public ListView videoList;
     public Button search;

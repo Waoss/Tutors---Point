@@ -11,6 +11,7 @@ import javafx.scene.layout.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+@FXMLController
 public class WatchVideosLayoutController implements Initializable {
 
     public ListView videoList;

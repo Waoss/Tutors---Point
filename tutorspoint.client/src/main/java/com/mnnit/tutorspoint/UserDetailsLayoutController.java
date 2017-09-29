@@ -14,6 +14,7 @@ import java.net.URLConnection;
 import java.util.*;
 import java.util.logging.Logger;
 
+@FXMLController
 public class UserDetailsLayoutController implements Initializable {
 
     public static final Logger LOGGER = Logger.getLogger(UserDetailsLayoutController.class.getName());

@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+@FXMLController
 public class ManageAccountLayoutController implements Initializable {
     public Label username;
     public Label usernameValue;

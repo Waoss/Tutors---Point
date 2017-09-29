@@ -19,6 +19,7 @@ import java.util.logging.Logger;
  * The controller of the LoginLayout.
  * <p>The login layout consists of a basic login UI with two text fields and a login button</p>
  */
+@FXMLController
 public final class LoginLayoutController implements Initializable {
 
     public static final Logger LOGGER = Logger.getLogger(LoginLayoutController.class.getName());
