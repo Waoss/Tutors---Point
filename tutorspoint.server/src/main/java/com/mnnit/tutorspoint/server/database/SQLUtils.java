@@ -270,4 +270,32 @@ public class SQLUtils {
         preparedStatement.setString(2, todo.getMessage());
         preparedStatement.executeUpdate();
     }
+
+    public static List<Todo> getTodosList() throws SQLException {
+        final Vector<Todo> result = new Vector<>();
+        final PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Todos");
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Todo todo = new Todo();
+            todo.setStudent(resultSet.getString("student"));
+            todo.setMessage(resultSet.getString("message"));
+            result.add(todo);
+        }
+        return result;
+    }
+
+    public static List<Todo> getTodosByUser(final String user) throws SQLException {
+        final Vector<Todo> result = new Vector<>();
+        final PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT * FROM Todos WHERE student = ?");
+        preparedStatement.setString(1, user);
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Todo todo = new Todo();
+            todo.setMessage(resultSet.getString("message"));
+            todo.setStudent(user);
+            result.add(todo);
+        }
+        return result;
+    }
 }
