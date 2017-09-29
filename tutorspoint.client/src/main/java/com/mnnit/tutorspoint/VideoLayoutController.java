@@ -23,9 +23,8 @@ public class VideoLayoutController implements Initializable {
     public Button playButton;
     public Button pauseButton;
     public Button stopButton;
-    public TextField timeLabel;
+    public Label timeLabel;
     public Slider slider;
-    private MediaPlayer mediaPlayer;
     /**
      * Represents the url of the server from where the video can be retrieved.
      * For example, "http://localhost:8000/",so that + 33(assumed video ID) would give "http://localhost:8000/33.vid".
@@ -101,14 +100,26 @@ public class VideoLayoutController implements Initializable {
             mediaView.getMediaPlayer().totalDurationProperty()
                     .addListener((observableValue, oldDuration, newDuration) -> {
                         slider.setMax(newDuration.toSeconds());
+                        slider.setPrefWidth(newDuration.toSeconds());
                     });
             mediaView.getMediaPlayer().currentTimeProperty().addListener(((observable, oldValue, newValue) -> {
+                Duration currentTime = mediaView.getMediaPlayer().getCurrentTime();
                 if (!slider.isValueChanging()) {
                     slider.setValue(newValue.toSeconds());
                 }
+                timeLabel.setText(
+                        format(currentTime.toMillis()) + " / " +
+                                format(mediaView.getMediaPlayer().getMedia().getDuration().toMillis()));
             }));
             hasInitializedMediaPlayerToBindWithSlider = true;
         }
+    }
+
+    private String format(final double milliseconds) {
+        int seconds = (int) (milliseconds / 1000) % 60;
+        int minutes = (int) ((milliseconds / (1000 * 60)) % 60);
+        int hours = (int) ((milliseconds / (1000 * 60 * 60)) % 24);
+        return hours + " : " + minutes + " : " + seconds;
     }
 
     public void pauseButtonOnAction(ActionEvent actionEvent) {
