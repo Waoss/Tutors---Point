@@ -1,6 +1,9 @@
 package com.mnnit.tutorspoint;
 
+import com.mnnit.tutorspoint.core.todo.Todo;
+import com.mnnit.tutorspoint.core.video.Tag;
 import com.mnnit.tutorspoint.core.video.Video;
+import com.mnnit.tutorspoint.net.AddTagTask;
 import com.mnnit.tutorspoint.net.AddToWatchTask;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -10,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.media.*;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -142,14 +146,15 @@ public class VideoLayoutController implements Initializable {
             throws InterruptedException {
         AddToWatchTask addToWatchTask = null;
         try {
-            addToWatchTask = new AddToWatchTask(
-                    new URL(System.getProperty("com.mnnit.tutorspoint.server.url") + "/insertTodo?student=" +
-                            System.getProperty("com.mnnit.tutorspoint.client.username") + "&message=Watch%20video%20" +
-                            video.get().getVideoId()));
+            addToWatchTask = new AddToWatchTask(new Todo(System.getProperty("com.mnnit.tutorspoint.client.username"),
+                    "Watch-Video-" + video.get().getVideoId()));
         } catch (MalformedURLException e) {
             LOGGER.log(Level.SEVERE, "The URL was malformed: this may be due to wrong server", e);
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Some I/O error occurred", e);
         }
         LOGGER.info("Trying to send request to server for todo");
+        LOGGER.info("Sending http request at\n" + addToWatchTask.getUrl().toString());
         new Thread(addToWatchTask).start();
         while (addToWatchTask.isRunning()) {
             try {
@@ -160,7 +165,7 @@ public class VideoLayoutController implements Initializable {
             }
         }
         try {
-            if (addToWatchTask.get().equals("0")) {
+            if (addToWatchTask.get()) {
                 LOGGER.info("The request could be sent and the todo was added.");
                 new Alert(Alert.AlertType.INFORMATION, "Your todo was added successfully").showAndWait();
             } else {
@@ -174,7 +179,34 @@ public class VideoLayoutController implements Initializable {
     }
 
 
-    public void addTagOnAction(ActionEvent actionEvent) {
+    public void addTagOnAction(ActionEvent actionEvent) throws Throwable {
+        final TextInputDialog textInputDialog = new TextInputDialog();
+        textInputDialog.setTitle("Input Tags");
+        textInputDialog.setHeaderText(null);
+        textInputDialog.setContentText("Enter a tag for the video");
+        final Tag tag = new Tag();
+        textInputDialog.showAndWait().ifPresent(tag::setName);
+        if (tag.getName() == null) {
+            new Alert(Alert.AlertType.ERROR, "Please enter a suitable name for the tag!").showAndWait();
+            textInputDialog.showAndWait().ifPresent(tag::setName);
+        }
+
+        tag.setVideoId(video.get().getVideoId());
+        AddTagTask addTagTask = new AddTagTask(tag);
+        LOGGER.info("Sending request @ URL\n" + addTagTask.getUrl());
+        new Thread(addTagTask).start();
+        while (addTagTask.isRunning()) {
+            wait();
+            LOGGER.info("Waiting for the AddTagTask to complete execution");
+        }
+
+        if (addTagTask.get()) {
+            LOGGER.info("Tags were inserted for the video");
+            new Alert(Alert.AlertType.INFORMATION, "Tags inserted").showAndWait();
+        } else {
+            LOGGER.log(Level.SEVERE, "Could not connect to server or some error occurred");
+            new Alert(Alert.AlertType.ERROR, "Some Error occurred!!").showAndWait();
+        }
 
     }
 }
