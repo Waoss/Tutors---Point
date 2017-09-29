@@ -11,11 +11,9 @@ import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 
 public class VideoLayoutController implements Initializable {
 
-    public static final Logger LOGGER = Logger.getLogger(VideoLayoutController.class.getName());
     private static final double MIN_CHANGE = 0.5;
     public MediaView mediaView;
     public Label videoNameLabel;

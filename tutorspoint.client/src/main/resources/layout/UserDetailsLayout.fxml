@@ -6,25 +6,27 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="800" prefWidth="1000" style="-fx-background-color: #fff;"
             styleClass="anchor-pane" stylesheets="@style/MainStyle.css"
             xmlns="http://javafx.com/javafx/8.0.112" fx:controller="com.mnnit.tutorspoint.UserDetailsLayoutController">
-    <children>
-        <TabPane prefHeight="800" prefWidth="1000" tabClosingPolicy="UNAVAILABLE">
-            <tabs>
-                <Tab fx:id="manageAccountTab" text="Manage Account">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
-                    </content>
-                </Tab>
-                <Tab fx:id="watchVideosTab" text="Watch Videos">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
-                    </content>
-                </Tab>
-                <Tab fx:id="uploadVideoTab" text="Upload Video">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
-                    </content>
-                </Tab>
-            </tabs>
-        </TabPane>
-    </children>
+    <TabPane prefHeight="800" prefWidth="1000" tabClosingPolicy="UNAVAILABLE">
+        <Tab fx:id="manageAccountTab" text="Manage Account">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+        </Tab>
+        <Tab fx:id="watchVideosTab" text="Watch Videos">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+        </Tab>
+        <Tab fx:id="uploadVideoTab" text="Upload Video">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+        </Tab>
+        <Tab fx:id="searchVideoTab" text="Search Video">
+            <AnchorPane minWidth="0.0" minHeight="0.0" prefWidth="200.0" prefHeight="180.0"/>
+        </Tab>
+        <Tab fx:id="subscribeTab" text="Subscribe">
+            <AnchorPane minWidth="0.0" minHeight="0.0" prefWidth="200.0" prefHeight="180.0"/>
+        </Tab>
+        <Tab fx:id="courseViewTab" text="View Courses">
+            <AnchorPane minWidth="0.0" minHeight="0.0" prefWidth="200.0" prefHeight="180.0"/>
+        </Tab>
+        <Tab fx:id="toWatchTab" text="To-Watch">
+            <AnchorPane minWidth="0.0" minHeight="0.0" prefWidth="200.0" prefHeight="180.0"/>
+        </Tab>
+    </TabPane>
 </AnchorPane>

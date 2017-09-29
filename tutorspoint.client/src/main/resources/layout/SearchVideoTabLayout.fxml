@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" stylesheets="@style/MainStyle.css" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/8.0.112"
+            fx:controller="com.mnnit.tutorspoint.SearchVideoTabLayoutController">
+    <children>
+        <TextField fx:id="videoName" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="888.0"
+                   promptText="The name of the video to search"/>
+        <ListView fx:id="videoList" layoutX="8.0" layoutY="103.0" prefHeight="497.0" prefWidth="1202.0"/>
+        <TextField fx:id="uploaderName" layoutX="14.0" layoutY="51.0" prefHeight="25.0" prefWidth="888.0"
+                   promptText="The name of the uploader of a video"/>
+        <Button fx:id="search" layoutX="406.0" layoutY="124.0" mnemonicParsing="false" onAction="#onSearchClicked"
+                text="Search"/>
+    </children>
+</AnchorPane>

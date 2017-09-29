@@ -21,6 +21,10 @@ public class UserDetailsLayoutController implements Initializable {
     public Tab manageAccountTab;
     public Tab watchVideosTab;
     public Tab uploadVideoTab;
+    public Tab searchVideoTab;
+    public Tab subscribeTab;
+    public Tab courseViewTab;
+    public Tab toWatchTab;
     private SimpleObjectProperty<User> user = new SimpleObjectProperty<>(this, "user");
 
     public final SimpleObjectProperty<User> userProperty() {
@@ -39,6 +43,7 @@ public class UserDetailsLayoutController implements Initializable {
             manageAccountTab.setContent(getManageAccountLayout());
             uploadVideoTab.setContent(getUploadVideoLayout(getUser().getUserType()));
             watchVideosTab.setContent(getWatchVideoLayout());
+            searchVideoTab.setContent(getSearchVideoTabLayout());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -58,7 +63,8 @@ public class UserDetailsLayoutController implements Initializable {
         UploadVideoLayoutController controller = fxmlLoader.getController();
         if (userType == UserType.STUDENT) {
             controller.getMessageLabel().setText(
-                    "Sorry! As a student, you cannot upload videos!\n" + "However you can watch some cool videos under the \n'watch videos' tab!");
+                    "Sorry! As a student, you cannot upload videos!\n" +
+                            "However you can watch some cool videos under the \n'watch videos' tab!");
         } else {
             controller.getMessageLabel().setText("Here you can upload videos");
             controller.uploadFileButton.setVisible(true);
@@ -81,6 +87,11 @@ public class UserDetailsLayoutController implements Initializable {
                         .getVideos(System.getProperty("com.mnnit.tutorspoint.server.url") + "/getVideosList"));
         controller.lateInitialize();
         return anchorPane;
+    }
+
+    private AnchorPane getSearchVideoTabLayout() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/SearchVideoTabLayout.fxml"));
+        return fxmlLoader.load();
     }
 
     List<Video> getVideos(final String url) {
