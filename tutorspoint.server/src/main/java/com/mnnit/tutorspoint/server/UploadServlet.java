@@ -11,10 +11,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.*;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 @WebServlet(name = "UploadServlet", urlPatterns = {"/upload"})
 @MultipartConfig(maxFileSize = 1024 * 1024 * 100, maxRequestSize = 1000000000)// 100 mb
 public class UploadServlet extends HttpServlet {
+    public static final Logger LOGGER = Logger.getLogger(UploadServlet.class.getName());
 
     @Override
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException,
@@ -26,10 +28,13 @@ public class UploadServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        LOGGER.info("Uploaded video with following metadata; as received from client \n" + Globals.GSON.toJson(video));
         Part binaryFilePart = request.getPart("binaryFile");
+        LOGGER.info("Got the actual binary part");
         final String realPath = getServletContext().getRealPath("");
         File file = new File(realPath, video.getVideoId() + ".vid");
         file.createNewFile();
+        LOGGER.info("The new video is at " + file.toURI().toString());
         IOUtils.copy(binaryFilePart.getInputStream(), new FileOutputStream(file));
         response.getWriter().print("0");
     }

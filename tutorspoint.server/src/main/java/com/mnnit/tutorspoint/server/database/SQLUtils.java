@@ -12,7 +12,6 @@ import static com.mnnit.tutorspoint.server.database.SQLConstants.*;
 public class SQLUtils {
 
     private static final Connection connection = Database.getConnection();
-
     private SQLUtils() {
         //no instance
     }
