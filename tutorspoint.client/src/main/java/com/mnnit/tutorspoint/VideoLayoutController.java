@@ -1,7 +1,7 @@
 package com.mnnit.tutorspoint;
 
 import com.mnnit.tutorspoint.core.video.Video;
-import com.mnnit.tutorspoint.net.VideoSearchTask;
+import com.mnnit.tutorspoint.net.AddToWatchTask;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
@@ -30,6 +30,7 @@ public class VideoLayoutController implements Initializable {
     public Label timeLabel;
     public Slider slider;
     public Button toWatch;
+    public Button addTag;
     /**
      * Represents the url of the server from where the video can be retrieved.
      * For example, "http://localhost:8000/",so that + 33(assumed video ID) would give "http://localhost:8000/33.vid".
@@ -139,9 +140,9 @@ public class VideoLayoutController implements Initializable {
 
     public void toWatchOnAction(ActionEvent actionEvent)
             throws InterruptedException {
-        VideoSearchTask videoSearchTask = null;
+        AddToWatchTask addToWatchTask = null;
         try {
-            videoSearchTask = new VideoSearchTask(
+            addToWatchTask = new AddToWatchTask(
                     new URL(System.getProperty("com.mnnit.tutorspoint.server.url") + "/insertTodo?student=" +
                             System.getProperty("com.mnnit.tutorspoint.client.username") + "&message=Watch%20video%20" +
                             video.get().getVideoId()));
@@ -149,8 +150,8 @@ public class VideoLayoutController implements Initializable {
             LOGGER.log(Level.SEVERE, "The URL was malformed: this may be due to wrong server", e);
         }
         LOGGER.info("Trying to send request to server for todo");
-        new Thread(videoSearchTask).start();
-        while (videoSearchTask.isRunning()) {
+        new Thread(addToWatchTask).start();
+        while (addToWatchTask.isRunning()) {
             try {
                 LOGGER.info("Waiting for request to be sent");
                 wait();
@@ -159,7 +160,7 @@ public class VideoLayoutController implements Initializable {
             }
         }
         try {
-            if (videoSearchTask.get().equals("0")) {
+            if (addToWatchTask.get().equals("0")) {
                 LOGGER.info("The request could be sent and the todo was added.");
                 new Alert(Alert.AlertType.INFORMATION, "Your todo was added successfully").showAndWait();
             } else {
@@ -172,4 +173,8 @@ public class VideoLayoutController implements Initializable {
         }
     }
 
+
+    public void addTagOnAction(ActionEvent actionEvent) {
+
+    }
 }

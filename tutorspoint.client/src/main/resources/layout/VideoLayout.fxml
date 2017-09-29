@@ -19,4 +19,6 @@
     <Slider fx:id="slider" layoutX="8.0" layoutY="382.0" prefHeight="14.0" prefWidth="950.0"/>
     <Button fx:id="toWatch" layoutX="248.0" layoutY="480.0" mnemonicParsing="false" onAction="#toWatchOnAction"
             text="To-Watch"/>
+    <Button fx:id="addTag" layoutX="328.0" layoutY="480.0" mnemonicParsing="false" onAction="#addTagOnAction"
+            text="Add tag"/>
 </AnchorPane>
