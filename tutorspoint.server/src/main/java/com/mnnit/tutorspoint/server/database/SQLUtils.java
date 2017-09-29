@@ -298,4 +298,12 @@ public class SQLUtils {
         }
         return result;
     }
+
+    public static void insertInProgress(final InProgress inProgress) throws SQLException {
+        final PreparedStatement preparedStatement = connection
+                .prepareStatement("INSERT INTO InProgress (student, category) VALUES (?, ?);");
+        preparedStatement.setString(1, inProgress.getStudent());
+        preparedStatement.setString(2, inProgress.getCategory().getName());
+        preparedStatement.executeUpdate();
+    }
 }
