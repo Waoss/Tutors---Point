@@ -13,13 +13,12 @@ import java.sql.SQLException;
 public class InsertTagServlet extends HttpServlet {
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html");
         try {
             SQLUtils.insertTag(
                     new Tag(request.getParameter("name"), Integer.parseInt(request.getParameter("videoId"))));
         } catch (SQLException e) {
             e.printStackTrace(response.getWriter());
         }
-        response.getWriter().print("<b>Success!!!</b>");
+        response.getWriter().print("0");
     }
 }

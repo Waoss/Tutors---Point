@@ -1,34 +1,16 @@
 package com.mnnit.tutorspoint.net;
 
-import java.net.*;
+import com.mnnit.tutorspoint.core.video.Tag;
 
-/**
- * Created by Rohan on 29-09-2017.
- */
-public class AddTagTask extends HttpURLTask<String> {
+import java.io.IOException;
+import java.net.URL;
 
-    @Override
-    public URL getURL() {
-        return null;
-    }
+public class AddTagTask extends NoResponseTask {
 
-    @Override
-    public void setURL(final URL url) {
 
-    }
-
-    @Override
-    public HttpURLConnection getHttpURLConnection() {
-        return null;
-    }
-
-    @Override
-    public void setRequestMethod(final String method) throws ProtocolException {
-
-    }
-
-    @Override
-    protected String call() throws Exception {
-        return null;
+    public AddTagTask(final Tag tag) throws IOException {
+        super(new URL(
+                System.getProperty("com.mnnit.tutorspoint.server.url") + "/insertTag?name=" + tag.getName() +
+                        "&videoId=" + tag.getVideoId()));
     }
 }
