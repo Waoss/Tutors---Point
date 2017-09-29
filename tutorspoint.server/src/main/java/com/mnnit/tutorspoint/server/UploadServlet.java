@@ -32,5 +32,6 @@ public class UploadServlet extends HttpServlet {
         file.createNewFile();
         IOUtils.copy(binaryFilePart.getInputStream(), new FileOutputStream(file));
         response.getWriter().print("0");
+
     }
 }

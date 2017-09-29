@@ -306,4 +306,20 @@ public class SQLUtils {
         preparedStatement.setString(2, inProgress.getCategory().getName());
         preparedStatement.executeUpdate();
     }
+
+    public static List<InProgress> getInProgressByUser(final String user) throws SQLException {
+        final PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT * FROM InProgress WHERE student=?;");
+        preparedStatement.setString(1, user);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        Vector<InProgress> result = new Vector<>();
+        while (resultSet.next()) {
+            result.add(
+                    new InProgress(new VideoCategory(resultSet.getString("category")), resultSet.getString("student")));
+        }
+
+        return result;
+    }
+
+
 }
