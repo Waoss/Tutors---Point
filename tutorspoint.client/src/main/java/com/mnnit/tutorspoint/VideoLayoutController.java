@@ -7,19 +7,25 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.media.*;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 public class VideoLayoutController implements Initializable {
 
+    public static final Logger LOGGER = Logger.getLogger(VideoLayoutController.class.getName());
+    private static final double MIN_CHANGE = 0.5;
     public MediaView mediaView;
     public Label videoNameLabel;
     public Label likesLabel;
     public Button playButton;
     public Button pauseButton;
     public Button stopButton;
+    public TextField timeLabel;
     public Slider slider;
+    private MediaPlayer mediaPlayer;
     /**
      * Represents the url of the server from where the video can be retrieved.
      * For example, "http://localhost:8000/",so that + 33(assumed video ID) would give "http://localhost:8000/33.vid".
@@ -27,11 +33,14 @@ public class VideoLayoutController implements Initializable {
      */
     private SimpleStringProperty url = new SimpleStringProperty(this, "url");
     private SimpleObjectProperty<Video> video = new SimpleObjectProperty<>(this, "video");
+    private boolean hasInitializedMediaPlayerToBindWithSlider = false;
 
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
         url.addListener(
                 (observable, oldValue, newValue) -> mediaView.setMediaPlayer(new MediaPlayer(new Media(newValue))));
+
+
         video.addListener((observable, oldValue, newValue) -> {
             final StringBuffer url = new StringBuffer(getUrl());
             url.append(newValue.getVideoId());
@@ -40,8 +49,8 @@ public class VideoLayoutController implements Initializable {
             videoNameLabel.setText(newValue.getName());
             likesLabel.setText(String.valueOf(newValue.getLikes().size()));
         });
-        slider.valueProperty().addListener((observable, oldValue, newValue) -> mediaView.getMediaPlayer()
-                .seek(mediaView.getMediaPlayer().getMedia().getDuration().multiply(newValue.doubleValue() / 100)));
+
+
     }
 
     public String getUrl() {
@@ -69,14 +78,46 @@ public class VideoLayoutController implements Initializable {
     }
 
     public void playButtonOnAction(ActionEvent actionEvent) {
+        initializeMediaPlayer();
         mediaView.getMediaPlayer().play();
     }
 
+    private void initializeMediaPlayer() {
+        if (!hasInitializedMediaPlayerToBindWithSlider) {
+            slider.valueChangingProperty().addListener((observableValue, wasChanging, isChanging) -> {
+                if (!isChanging) {
+                    mediaView.getMediaPlayer().seek(Duration.seconds(slider.getValue()));
+                }
+            });
+
+            slider.valueProperty().addListener((observableValue, oldValue, newValue) -> {
+                if (!slider.isValueChanging()) {
+                    double currentTime = mediaView.getMediaPlayer().getCurrentTime().toSeconds();
+                    if (Math.abs(currentTime - newValue.doubleValue()) > MIN_CHANGE) {
+                        mediaView.getMediaPlayer().seek(Duration.seconds(newValue.doubleValue()));
+                    }
+                }
+            });
+            mediaView.getMediaPlayer().totalDurationProperty()
+                    .addListener((observableValue, oldDuration, newDuration) -> {
+                        slider.setMax(newDuration.toSeconds());
+                    });
+            mediaView.getMediaPlayer().currentTimeProperty().addListener(((observable, oldValue, newValue) -> {
+                if (!slider.isValueChanging()) {
+                    slider.setValue(newValue.toSeconds());
+                }
+            }));
+            hasInitializedMediaPlayerToBindWithSlider = true;
+        }
+    }
+
     public void pauseButtonOnAction(ActionEvent actionEvent) {
+        initializeMediaPlayer();
         mediaView.getMediaPlayer().pause();
     }
 
     public void stopButtonOnAction(ActionEvent actionEvent) {
+        initializeMediaPlayer();
         mediaView.getMediaPlayer().stop();
     }
 }

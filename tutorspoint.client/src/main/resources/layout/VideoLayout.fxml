@@ -16,6 +16,7 @@
                 onAction="#pauseButtonOnAction"/>
         <Button fx:id="stopButton" layoutX="222.0" layoutY="408.0" mnemonicParsing="false"
                 onAction="#stopButtonOnAction"/>
-        <Slider fx:id="slider" layoutX="54.0" layoutY="355.0" prefHeight="25.0" prefWidth="566.0"/>
+        <TextField fx:id="timeLabel" layoutX="49.0" layoutY="396.0"/>
+        <Slider fx:id="slider" layoutX="230.0" layoutY="382.0" prefHeight="14.0" prefWidth="425.0"/>
     </children>
 </AnchorPane>
