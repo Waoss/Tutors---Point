@@ -321,5 +321,19 @@ public class SQLUtils {
         return result;
     }
 
-
+    public static List<Subscription> getSubscriptionsForTeacher(final String teacherName) throws SQLException {
+        Vector<Subscription> result = new Vector<>();
+        final PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT * FROM Subscriptions WHERE subscribedTo = ?;");
+        preparedStatement.setString(1, teacherName);
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            final Subscription subscription = new Subscription();
+            subscription.setId(resultSet.getInt("subscriptionId"));
+            subscription.setSubscriber(resultSet.getString("subscriber"));
+            subscription.setSubscribedTo(teacherName);
+            result.add(subscription);
+        }
+        return result;
+    }
 }
