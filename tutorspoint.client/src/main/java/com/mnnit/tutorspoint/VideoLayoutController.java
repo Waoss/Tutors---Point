@@ -154,7 +154,7 @@ public class VideoLayoutController implements Initializable {
             LOGGER.log(Level.SEVERE, "Some I/O error occurred", e);
         }
         LOGGER.info("Trying to send request to server for todo");
-        LOGGER.info("Sending http request at\n" + addToWatchTask.getUrl().toString());
+        LOGGER.info("Sending http request @ URL = \n" + addToWatchTask.getUrl().toString());
         new Thread(addToWatchTask).start();
         while (addToWatchTask.isRunning()) {
             try {
@@ -193,7 +193,7 @@ public class VideoLayoutController implements Initializable {
 
         tag.setVideoId(video.get().getVideoId());
         AddTagTask addTagTask = new AddTagTask(tag);
-        LOGGER.info("Sending request @ URL\n" + addTagTask.getUrl());
+        LOGGER.info("Sending request @ URL = \n" + addTagTask.getUrl());
         new Thread(addTagTask).start();
         while (addTagTask.isRunning()) {
             wait();

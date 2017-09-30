@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="700.0" prefWidth="1200.0"
             stylesheets="@style/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.121"
             fx:controller="com.mnnit.tutorspoint.UploadVideoLayoutController">
     <children>

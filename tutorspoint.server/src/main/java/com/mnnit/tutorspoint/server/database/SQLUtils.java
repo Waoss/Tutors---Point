@@ -12,6 +12,7 @@ import static com.mnnit.tutorspoint.server.database.SQLConstants.*;
 public class SQLUtils {
 
     private static final Connection connection = Database.getConnection();
+
     private SQLUtils() {
         //no instance
     }
@@ -333,6 +334,20 @@ public class SQLUtils {
             subscription.setSubscribedTo(teacherName);
             result.add(subscription);
         }
+        return result;
+    }
+
+    public static List<Video> getVideosByTag(final Tag tag) throws Throwable {
+        Vector<Video> result = new Vector<>();
+        final PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT videoId FROM Tags WHERE name=?");
+        preparedStatement.setString(1, tag.getName());
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Video video = getVideoById(resultSet.getInt("videoId"));
+            result.add(video);
+        }
+
         return result;
     }
 }

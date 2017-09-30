@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet(name = "findVideosByCategory", urlPatterns = "/getVideosByCategory")
-public class FindVideoByCategoryServlet extends HttpServlet {
+public class GetVideoByCategoryServlet extends HttpServlet {
     @Override
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {

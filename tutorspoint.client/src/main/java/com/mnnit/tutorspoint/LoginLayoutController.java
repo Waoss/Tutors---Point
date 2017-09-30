@@ -66,11 +66,12 @@ public final class LoginLayoutController implements Initializable {
         System.setProperty("com.mnnit.tutorspoint.client.username", user.getUsername());
         try {
             Stage stage = (Stage) loginButton.getParent().getScene().getWindow();
-            Scene scene = new Scene(loadUserDetailsLayout(user), 500, 500);
+            Scene scene = new Scene(loadUserDetailsLayout(user));
             onResizableStage(stage, stage1 -> {
-                stage1.setWidth(scene.getWidth());
-                stage1.setHeight(scene.getHeight());
+                stage1.setWidth(scene.getRoot().prefWidth(0));
+                stage1.setHeight(scene.getRoot().prefHeight(0));
             });
+            stage.setMaximized(true);
             stage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();
