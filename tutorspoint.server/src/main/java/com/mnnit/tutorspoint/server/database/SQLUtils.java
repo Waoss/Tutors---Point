@@ -369,4 +369,17 @@ public class SQLUtils {
 
         Files.delete(Paths.get(videoPath + videoId + ".vid"));
     }
+
+    public static List<Video> getVideosByUploader(final String uploader) throws Throwable {
+        Vector<Video> result = new Vector<>();
+        final PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT videoId FROM Videos WHERE uploader = ?");
+        preparedStatement.setString(1, uploader);
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Video video = getVideoById(resultSet.getInt("videoId"));
+            result.add(video);
+        }
+        return result;
+    }
 }
