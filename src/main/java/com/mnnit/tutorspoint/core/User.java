@@ -26,7 +26,7 @@ public class User {
     /**
      * The password of the user
      */
-    private SimpleStringProperty password = new SimpleStringProperty();
+    private transient SimpleStringProperty password = new SimpleStringProperty();
 
     /**
      * Creates a new user by the given username and password
@@ -85,10 +85,10 @@ public class User {
 
         final User user = (User) o;
 
-        if (getUserType() != null ? ! getUserType().equals(user.getUserType()) : user.getUserType() != null) {
+        if (getUserType() != null ? !getUserType().equals(user.getUserType()) : user.getUserType() != null) {
             return false;
         }
-        if (getUsername() != null ? ! getUsername().equals(user.getUsername()) : user.getUsername() != null) {
+        if (getUsername() != null ? !getUsername().equals(user.getUsername()) : user.getUsername() != null) {
             return false;
         }
         return getPassword() != null ? getPassword().equals(user.getPassword()) : user.getPassword() == null;

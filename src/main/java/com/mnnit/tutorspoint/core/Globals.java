@@ -1,9 +1,9 @@
 package com.mnnit.tutorspoint.core;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import org.hildan.fxgson.FxGson;
 
 public class Globals {
 
-    public static final Gson GSON = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
+    public static final Gson GSON = FxGson.fullBuilder().serializeNulls().setPrettyPrinting().create();
 }
