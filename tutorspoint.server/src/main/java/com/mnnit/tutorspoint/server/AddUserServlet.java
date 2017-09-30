@@ -27,6 +27,7 @@ public class AddUserServlet extends HttpServlet {
                             .digest((insecurePassword + user.getUsername() + user.getUserType().toString())
                                     .getBytes("utf-16"))));
             SQLUtils.insertUser(user);
+            response.getWriter().print(0);
         } catch (SQLException | NoSuchAlgorithmException e) {
             e.printStackTrace(response.getWriter());
         }

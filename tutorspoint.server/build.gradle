@@ -13,4 +13,5 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile fileTree(catalinaLibraryLocation)
     compile rootProject
+    compile group: 'org.apache.derby', name: 'derbyclient', version: '10.13.1.1'
 }

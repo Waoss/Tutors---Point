@@ -90,6 +90,7 @@ public class SQLUtils {
         while (resultSet.next()) {
             like.setVideoId(videoId);
             like.setDateTime(resultSet.getString("dateTime"));
+            like.setUsername(resultSet.getString("username"));
             likes.add(like);
             like = new Like();
         }
