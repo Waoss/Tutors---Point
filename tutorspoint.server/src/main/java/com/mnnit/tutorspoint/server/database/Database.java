@@ -1,17 +1,21 @@
 package com.mnnit.tutorspoint.server.database;
 
 
-import java.sql.*;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class Database {
     private static Connection connection;
 
     static {
         try {
-            Class.forName("org.sqlite.JDBC");
-            connection = DriverManager
-                    .getConnection("jdbc:sqlite:D:/TutorsPoint/data/tutorspoint.db");
-        } catch (SQLException | ClassNotFoundException e) {
+            final DataSource dataSource = (DataSource) new InitialContext().lookup("java:/comp/env/jdbc/derby");
+            connection = dataSource.getConnection();
+            connection.createStatement().execute("SET SCHEMA MAIN");
+        } catch (SQLException | NamingException e) {
             e.printStackTrace();
         }
     }

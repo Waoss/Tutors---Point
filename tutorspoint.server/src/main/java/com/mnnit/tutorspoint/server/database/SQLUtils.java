@@ -194,7 +194,7 @@ public class SQLUtils {
 
     public static List<User> getUsersList() throws SQLException {
         final Vector<User> result = new Vector<>();
-        final PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Users;");
+        final PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Users");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             UserBuilder userBuilder = new UserBuilder();
@@ -231,7 +231,7 @@ public class SQLUtils {
 
     public static void insertNotification(final Notification notification) throws SQLException {
         final PreparedStatement preparedStatement = connection
-                .prepareStatement("INSERT INTO Notifications (subscriptionId, message, isSent) VALUES (?, ?, ?);");
+                .prepareStatement("INSERT INTO Notifications (subscriptionId, message, isSent) VALUES (?, ?, ?)");
         preparedStatement.setInt(1, notification.getSubscription().getId());
         preparedStatement.setString(2, notification.getMessage());
         preparedStatement.setBoolean(3, notification.isSent());
@@ -254,7 +254,7 @@ public class SQLUtils {
 
     public static Subscription getSubscriptionById(final int id) throws SQLException {
         final PreparedStatement preparedStatement = connection
-                .prepareStatement("SELECT * FROM Subscriptions WHERE subscriptionId = ?;");
+                .prepareStatement("SELECT * FROM Subscriptions WHERE subscriptionId = ?");
         preparedStatement.setInt(1, id);
         final ResultSet resultSet = preparedStatement.executeQuery();
         Subscription subscription = new Subscription();
@@ -268,7 +268,7 @@ public class SQLUtils {
 
     public static void insertTodo(final Todo todo) throws SQLException {
         final PreparedStatement preparedStatement = connection
-                .prepareStatement("INSERT INTO Todos (student, message) VALUES (?, ?);");
+                .prepareStatement("INSERT INTO Todos (student, message) VALUES (?, ?)");
         preparedStatement.setString(1, todo.getStudent());
         preparedStatement.setString(2, todo.getMessage());
         preparedStatement.executeUpdate();
@@ -304,7 +304,7 @@ public class SQLUtils {
 
     public static void insertInProgress(final InProgress inProgress) throws SQLException {
         final PreparedStatement preparedStatement = connection
-                .prepareStatement("INSERT INTO InProgress (student, category) VALUES (?, ?);");
+                .prepareStatement("INSERT INTO InProgress (student, category) VALUES (?, ?)");
         preparedStatement.setString(1, inProgress.getStudent());
         preparedStatement.setString(2, inProgress.getCategory().getName());
         preparedStatement.executeUpdate();
@@ -312,7 +312,7 @@ public class SQLUtils {
 
     public static List<InProgress> getInProgressByUser(final String user) throws SQLException {
         final PreparedStatement preparedStatement = connection
-                .prepareStatement("SELECT * FROM InProgress WHERE student=?;");
+                .prepareStatement("SELECT * FROM InProgress WHERE student=?");
         preparedStatement.setString(1, user);
         ResultSet resultSet = preparedStatement.executeQuery();
         Vector<InProgress> result = new Vector<>();
@@ -327,7 +327,7 @@ public class SQLUtils {
     public static List<Subscription> getSubscriptionsForTeacher(final String teacherName) throws SQLException {
         Vector<Subscription> result = new Vector<>();
         final PreparedStatement preparedStatement = connection
-                .prepareStatement("SELECT * FROM Subscriptions WHERE subscribedTo = ?;");
+                .prepareStatement("SELECT * FROM Subscriptions WHERE subscribedTo = ?");
         preparedStatement.setString(1, teacherName);
         final ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
