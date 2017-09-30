@@ -3,8 +3,8 @@ package com.mnnit.tutorspoint;
 import com.mnnit.tutorspoint.core.todo.Todo;
 import com.mnnit.tutorspoint.core.video.Tag;
 import com.mnnit.tutorspoint.core.video.Video;
-import com.mnnit.tutorspoint.net.AddTagTask;
-import com.mnnit.tutorspoint.net.AddToWatchTask;
+import com.mnnit.tutorspoint.net.*;
+import com.mnnit.tutorspoint.util.ExceptionDialog;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
@@ -35,6 +35,7 @@ public class VideoLayoutController implements Initializable {
     public Slider slider;
     public Button toWatch;
     public Button addTag;
+    public Button deleteVideo;
     /**
      * Represents the url of the server from where the video can be retrieved.
      * For example, "http://localhost:8000/",so that + 33(assumed video ID) would give "http://localhost:8000/33.vid".
@@ -72,14 +73,6 @@ public class VideoLayoutController implements Initializable {
 
     public SimpleStringProperty urlProperty() {
         return url;
-    }
-
-    public Video getVideo() {
-        return video.get();
-    }
-
-    public void setVideo(final Video video) {
-        this.video.set(video);
     }
 
     public SimpleObjectProperty<Video> videoProperty() {
@@ -178,7 +171,6 @@ public class VideoLayoutController implements Initializable {
         }
     }
 
-
     public void addTagOnAction(ActionEvent actionEvent) throws Throwable {
         final TextInputDialog textInputDialog = new TextInputDialog();
         textInputDialog.setTitle("Input Tags");
@@ -208,5 +200,41 @@ public class VideoLayoutController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Some Error occurred!!").showAndWait();
         }
 
+    }
+
+    public void deleteVideoOnAction(ActionEvent actionEvent) {
+        new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this video?").showAndWait()
+                .ifPresent(buttonType -> {
+                    if (buttonType == ButtonType.OK) {
+                        new Alert(Alert.AlertType.INFORMATION, "Deleting " + getVideo().getName()).showAndWait();
+                        try {
+                            final DeleteVideoTask deleteVideoTask = new DeleteVideoTask(getVideo().getVideoId());
+                            new Thread(deleteVideoTask).start();
+                            while (deleteVideoTask.isRunning()) {
+                                LOGGER.info("Waiting for deletion.");
+                                LOGGER.warning(
+                                        "Execution reaching here means that it is taking too much time for the other thread to send request to server." +
+                                                "This might be due to a bad internet connection");
+                            }
+                            if (deleteVideoTask.get()) {
+                                new Alert(Alert.AlertType.INFORMATION, "Video deleted successfully").showAndWait();
+                            } else {
+                                new Alert(Alert.AlertType.ERROR, "Internal server error").showAndWait();
+                            }
+                        } catch (IOException | InterruptedException | ExecutionException e) {
+                            LOGGER.log(Level.SEVERE, "Some error occured", e);
+                            new ExceptionDialog(e).showAndWait();
+                        }
+                    }
+                });
+
+    }
+
+    public Video getVideo() {
+        return video.get();
+    }
+
+    public void setVideo(final Video video) {
+        this.video.set(video);
     }
 }

@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.media.*?>
+<?import javafx.scene.shape.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="700.0" prefWidth="1200.0"
             xmlns="http://javafx.com/javafx/8.0.112" fx:controller="com.mnnit.tutorspoint.VideoLayoutController">
     <MediaView fx:id="mediaView" fitHeight="400.0" fitWidth="600.0" layoutY="7.0"/>
@@ -10,15 +11,20 @@
            text="\${videoName}"/>
     <Label fx:id="likesLabel" layoutX="497.0" layoutY="420.0" text="\${likes}"/>
     <Button fx:id="playButton" layoutX="134.0" layoutY="480.0" mnemonicParsing="false" onAction="#playButtonOnAction"
-            text="Play"/>
-    <Button fx:id="pauseButton" layoutX="194.0" layoutY="480.0" mnemonicParsing="false" onAction="#pauseButtonOnAction"
-            text="Pause"/>
-    <Button fx:id="stopButton" layoutX="80.0" layoutY="480.0" mnemonicParsing="false" onAction="#stopButtonOnAction"
-            text="Stop"/>
+            text="&gt;"/>
+    <Button fx:id="pauseButton" layoutX="194.0" layoutY="480.0" mnemonicParsing="false"
+            onAction="#pauseButtonOnAction"/>
+    <Button fx:id="stopButton" layoutX="80.0" layoutY="480.0" mnemonicParsing="false" onAction="#stopButtonOnAction">
+        <graphic>
+            <Rectangle fill="white" height="10" width="10"/>
+        </graphic>
+    </Button>
     <Label fx:id="timeLabel" layoutX="49.0" layoutY="396.0"/>
     <Slider fx:id="slider" layoutX="8.0" layoutY="382.0" prefHeight="14.0" prefWidth="950.0"/>
     <Button fx:id="toWatch" layoutX="248.0" layoutY="480.0" mnemonicParsing="false" onAction="#toWatchOnAction"
             text="To-Watch"/>
     <Button fx:id="addTag" layoutX="328.0" layoutY="480.0" mnemonicParsing="false" onAction="#addTagOnAction"
             text="Add tag"/>
+    <Button fx:id="deleteVideo" layoutX="404.0" layoutY="480.0" mnemonicParsing="false" onAction="#deleteVideoOnAction"
+            text="Delete"/>
 </AnchorPane>

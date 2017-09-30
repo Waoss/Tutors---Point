@@ -4,6 +4,8 @@ import com.mnnit.tutorspoint.core.*;
 import com.mnnit.tutorspoint.core.todo.Todo;
 import com.mnnit.tutorspoint.core.video.*;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.util.*;
 
@@ -349,5 +351,22 @@ public class SQLUtils {
         }
 
         return result;
+    }
+
+    public static void deleteVideo(final int videoId, final String videoPath) throws Throwable {
+        final PreparedStatement[] preparedStatements = new PreparedStatement[]{
+                connection.prepareStatement("DELETE FROM Videos WHERE videoId=?"),
+                connection.prepareStatement("DELETE FROM Tags WHERE videoId=?"),
+                connection.prepareStatement("DELETE FROM Likes WHERE videoId=?"),
+                connection.prepareStatement("DELETE FROM Comments WHERE videoId=?")
+        };
+
+        for (int i = 0; i < preparedStatements.length; i++) {
+            PreparedStatement preparedStatement = preparedStatements[i];
+            preparedStatement.setInt(1, videoId);
+            preparedStatement.executeUpdate();
+        }
+
+        Files.delete(Paths.get(videoPath + videoId + ".vid"));
     }
 }
