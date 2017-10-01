@@ -1,13 +1,16 @@
 package com.mnnit.tutorspoint;
 
+import com.mnnit.tutorspoint.control.CommentTableView;
 import com.mnnit.tutorspoint.core.todo.Todo;
 import com.mnnit.tutorspoint.core.video.*;
 import com.mnnit.tutorspoint.net.*;
 import com.mnnit.tutorspoint.util.ExceptionDialog;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.media.*;
 import javafx.util.Duration;
@@ -38,6 +41,7 @@ public class VideoLayoutController implements Initializable {
     public Button deleteVideo;
     public Button like;
     public Button commentButton;
+    public Button showComments;
     /**
      * Represents the url of the server from where the video can be retrieved.
      * For example, "http://localhost:8000/",so that + 33(assumed video ID) would give "http://localhost:8000/33.vid".
@@ -284,5 +288,28 @@ public class VideoLayoutController implements Initializable {
                 throwable.printStackTrace();
             }
         });
+    }
+
+    public void showCommentsOnAction(ActionEvent actionEvent) throws Throwable {
+        ShowCommentsTask showCommentsTask = new ShowCommentsTask(video.get().getVideoId());
+        new Thread(showCommentsTask).start();
+
+        while (showCommentsTask.isRunning()) {
+            wait();
+            LOGGER.info("Waiting for server to fetch comments");
+        }
+        Dialog dialog = new Dialog();
+        dialog.setTitle("Comments on - " + video.get().getName());
+        Comment[] comments = showCommentsTask.get();
+        CommentTableView commentTableView = new CommentTableView(FXCollections.observableArrayList(comments));
+        dialog.getDialogPane().setContent(commentTableView);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+        Node node = dialog.getDialogPane().lookupButton(ButtonType.CLOSE);
+        node.managedProperty().bind(node.visibleProperty());
+        node.setVisible(true);
+        dialog.setHeight(commentTableView.getHeight());
+        dialog.setWidth(commentTableView.getWidth());
+        dialog.setResizable(true);
+        dialog.show();
     }
 }
