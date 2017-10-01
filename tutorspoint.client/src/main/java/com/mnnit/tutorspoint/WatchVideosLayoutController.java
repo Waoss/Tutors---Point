@@ -51,7 +51,7 @@ public class WatchVideosLayoutController implements Initializable {
 
     public void reloadOnAction(ActionEvent actionEvent) throws Throwable {
         setRetriever(() -> {
-            GetVideoListTask getVideoListTask = null;
+            GetVideoListTask getVideoListTask;
             try {
                 getVideoListTask = new GetVideoListTask();
                 LOGGER.info("Reload button called");
@@ -75,7 +75,7 @@ public class WatchVideosLayoutController implements Initializable {
 
     public void lateInitialize() {
         try {
-            videoListContent.get().setAll((VideoUtils.getAnchorPanesForVideos(getRetriever().retrieve()));
+            videoListContent.get().setAll(VideoUtils.getAnchorPanesForVideos(getRetriever().retrieve()));
             videoList.setItems(videoListContent.get());
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Error occurred ", e);

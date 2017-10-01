@@ -1,8 +1,6 @@
 package com.mnnit.tutorspoint;
 
-import com.mnnit.tutorspoint.core.Globals;
 import com.mnnit.tutorspoint.core.video.Video;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.stage.*;
@@ -42,20 +40,22 @@ public class UploadVideoLayoutController {
         video.setCategory(videoCategoryTextField.getText());
         video.setUsername(System.getProperty("com.mnnit.tutorspoint.client.username"));
         video.setFormat(file.getName().substring(file.getName().lastIndexOf(".") + 1));
+        video.upload(System.getProperty("com.mnnit.tutorspoint.server.url") + "/upload", file);
         //FIXME:Generic server URL
-        final Task<Void> uploadTask = new Task<Void>() {
+        /*final Task<Void> uploadTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
                 LOGGER.info("Uploading video = " + Globals.GSON.toJson(video));
-                video.upload(System.getProperty("com.mnnit.tutorspoint.server.url") + "/upload", file);
+
                 return null;
             }
         };
         new Thread(uploadTask).start();
         while (uploadTask.isRunning()) {
+            wait();
             LOGGER.info("The video is uploading.");
         }
-        LOGGER.info("Video uploaded");
+        LOGGER.info("Video uploaded");*/
         new Alert(Alert.AlertType.INFORMATION, "The video was uploaded successfully").showAndWait();
     }
 }
