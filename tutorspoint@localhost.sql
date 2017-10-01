@@ -1,0 +1,90 @@
+-- ============================
+
+-- This file was created using Derby's dblook utility.
+-- Timestamp: 2017-10-01 11:26:17.764
+-- Source database is: tutorspoint
+-- Connection URL is: jdbc:derby://localhost:1527/tutorspoint
+-- appendLogs: false
+
+-- ----------------------------------------------
+-- DDL Statements for schemas
+-- ----------------------------------------------
+
+CREATE SCHEMA "MAIN";
+
+-- ----------------------------------------------
+-- DDL Statements for tables
+-- ----------------------------------------------
+
+CREATE TABLE "MAIN"."LIKES" (
+  "USERNAME" VARCHAR(32500),
+  "VIDEOID"  INTEGER        NOT NULL,
+  "DATETIME" VARCHAR(32500) NOT NULL
+);
+
+CREATE TABLE "MAIN"."INPROGRESS" (
+  "STUDENT"  VARCHAR(32500) NOT NULL,
+  "CATEGORY" VARCHAR(32500) NOT NULL
+);
+
+CREATE TABLE "MAIN"."CATEGORIES" (
+  "NAME"   VARCHAR(32500) NOT NULL,
+  "PARENT" VARCHAR(32500)
+);
+
+CREATE TABLE "MAIN"."COMMENTS" (
+  "VIDEOID"   INTEGER        NOT NULL,
+  "MESSAGE"   VARCHAR(32500) NOT NULL,
+  "COMMENTER" VARCHAR(32500) NOT NULL,
+  "DATETIME"  VARCHAR(32500) NOT NULL
+);
+
+CREATE TABLE "MAIN"."NOTIFICATIONS" (
+  "SUBSCRIPTIONID" INTEGER,
+  "MESSAGE"        VARCHAR(32500),
+  "ISSENT"         BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE "MAIN"."VIDEOS" (
+  "VIDEOID"    INTEGER        NOT NULL GENERATED ALWAYS AS IDENTITY ( START WITH 1, INCREMENT BY 1),
+  "NAME"       VARCHAR(32500) NOT NULL,
+  "UPLOADER"   VARCHAR(32500) NOT NULL,
+  "CATEGORY"   VARCHAR(32500) NOT NULL,
+  "UPLOADTIME" VARCHAR(32500) NOT NULL,
+  "LIKES"      INTEGER        NOT NULL,
+  "FORMAT"     VARCHAR(32500)
+);
+
+CREATE TABLE "MAIN"."SUBSCRIPTIONS" (
+  "SUBSCRIBER"     VARCHAR(32500) NOT NULL,
+  "SUBSCRIBEDTO"   VARCHAR(32500) NOT NULL,
+  "SUBSCRIPTIONID" INTEGER        NOT NULL GENERATED ALWAYS AS IDENTITY ( START WITH 1, INCREMENT BY 1)
+);
+
+CREATE TABLE "MAIN"."TAGS" (
+  "NAME"    VARCHAR(32500) NOT NULL,
+  "VIDEOID" INTEGER        NOT NULL
+);
+
+CREATE TABLE "MAIN"."TODOS" (
+  "STUDENT" VARCHAR(32500) NOT NULL,
+  "MESSAGE" VARCHAR(32500) NOT NULL
+);
+
+CREATE TABLE "MAIN"."USERS" (
+  "USERNAME" VARCHAR(32500) NOT NULL,
+  "PASSWORD" VARCHAR(32500) NOT NULL,
+  "USERYPE"  VARCHAR(32500) NOT NULL
+);
+
+-- ----------------------------------------------
+-- DDL Statements for keys
+-- ----------------------------------------------
+
+-- PRIMARY/UNIQUE
+ALTER TABLE "MAIN"."VIDEOS"
+  ADD CONSTRAINT "SQL171001003339290" PRIMARY KEY ("VIDEOID");
+
+ALTER TABLE "MAIN"."SUBSCRIPTIONS"
+  ADD CONSTRAINT "SQL171001003338870" PRIMARY KEY ("SUBSCRIPTIONID");
+
