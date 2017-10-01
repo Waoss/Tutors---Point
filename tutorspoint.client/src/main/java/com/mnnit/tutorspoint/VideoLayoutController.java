@@ -37,6 +37,7 @@ public class VideoLayoutController implements Initializable {
     public Button addTag;
     public Button deleteVideo;
     public Button like;
+    public Button commentButton;
     /**
      * Represents the url of the server from where the video can be retrieved.
      * For example, "http://localhost:8000/",so that + 33(assumed video ID) would give "http://localhost:8000/33.vid".
@@ -256,5 +257,32 @@ public class VideoLayoutController implements Initializable {
             LOGGER.log(Level.SEVERE, "Some error occurred");
             new Alert(Alert.AlertType.ERROR, "Some error occurred while liking the video").showAndWait();
         }
+    }
+
+    public void commentButtonOnAction(ActionEvent actionEvent) {
+        TextInputDialog textInputDialog = new TextInputDialog("");
+        textInputDialog.setContentText("Please enter the comment");
+        textInputDialog.setHeaderText("Comment");
+        textInputDialog.setTitle("Comment");
+        textInputDialog.showAndWait().ifPresent(text -> {
+            try {
+                Comment comment = new Comment(System.getProperty("com.mnnit.tutorspoint.client.username"), text);
+                comment.setVideoId(getVideo().getVideoId());
+                final InsertCommentTask insertCommentTask = new InsertCommentTask(comment);
+                Thread thread = new Thread(insertCommentTask);
+                thread.start();
+                while (insertCommentTask.isRunning()) {
+                    wait();
+                }
+                thread.interrupt();
+                if (insertCommentTask.get()) {
+                    new Alert(Alert.AlertType.INFORMATION, "Your comment was added").showAndWait();
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Some error occured").showAndWait();
+                }
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
+        });
     }
 }

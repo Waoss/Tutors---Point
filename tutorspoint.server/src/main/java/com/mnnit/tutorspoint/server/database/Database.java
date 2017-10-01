@@ -12,7 +12,7 @@ public class Database {
 
     static {
         try {
-            final DataSource dataSource = (DataSource) new InitialContext().lookup("java:/comp/env/jdbc/derbyEmbedded");
+            final DataSource dataSource = (DataSource) new InitialContext().lookup("java:/comp/env/jdbc/derby");
             connection = dataSource.getConnection();
             connection.createStatement().execute("SET SCHEMA MAIN");
         } catch (SQLException | NamingException e) {
