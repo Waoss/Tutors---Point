@@ -9,7 +9,7 @@ public class SQLConstants {
     public static final String GET_VIDEO_ID_BY_VIDEO_NAME = "SELECT videoId\n" + "FROM Videos\n" + "WHERE name = ?";
     public static final String GET_VIDEOS_LIST = "SELECT *\n" + "FROM Videos";
     public static final String INSERT_COMMENT = "INSERT INTO Comments (videoId, message, commenter, dateTime) VALUES (?, ?, ?, ?)";
-    public static final String INSERT_LIKE = "INSERT INTO Likes (videoId, dateTime) VALUES (?, ?)";
+    public static final String INSERT_LIKE = "INSERT INTO Likes (videoId, dateTime, username) VALUES (?, ?, ?)";
     public static final String GET_LIKES_BY_VIDEO_ID = "SELECT *\n" + "FROM Likes\n" + "WHERE videoId = ?";
     public static final String GET_COMMENTS_BY_VIDEO_ID = "SELECT *\n" + "FROM Comments\n" + "WHERE videoId = ?";
     public static final String GET_VIDEOS_BY_CATEGORY = "SELECT * FROM Videos WHERE category=?";

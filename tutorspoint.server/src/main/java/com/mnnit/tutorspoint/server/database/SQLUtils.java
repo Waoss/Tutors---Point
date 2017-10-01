@@ -148,6 +148,7 @@ public class SQLUtils {
         final PreparedStatement preparedStatement = connection.prepareStatement(INSERT_LIKE);
         preparedStatement.setInt(1, like.getVideoId());
         preparedStatement.setString(2, like.getDateTime());
+        preparedStatement.setString(3, like.getUsername());
         preparedStatement.executeUpdate();
     }
 

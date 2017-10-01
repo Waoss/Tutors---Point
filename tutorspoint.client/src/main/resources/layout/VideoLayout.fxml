@@ -27,4 +27,5 @@
             text="Add tag"/>
     <Button fx:id="deleteVideo" layoutX="404.0" layoutY="480.0" mnemonicParsing="false" onAction="#deleteVideoOnAction"
             text="Delete"/>
+    <Button fx:id="like" layoutX="471.0" layoutY="480.0" mnemonicParsing="false" onAction="#likeOnAction" text="Like"/>
 </AnchorPane>

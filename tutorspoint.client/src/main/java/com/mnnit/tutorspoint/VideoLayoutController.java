@@ -1,8 +1,7 @@
 package com.mnnit.tutorspoint;
 
 import com.mnnit.tutorspoint.core.todo.Todo;
-import com.mnnit.tutorspoint.core.video.Tag;
-import com.mnnit.tutorspoint.core.video.Video;
+import com.mnnit.tutorspoint.core.video.*;
 import com.mnnit.tutorspoint.net.*;
 import com.mnnit.tutorspoint.util.ExceptionDialog;
 import javafx.beans.property.SimpleObjectProperty;
@@ -16,6 +15,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.ZonedDateTime;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
@@ -36,6 +36,7 @@ public class VideoLayoutController implements Initializable {
     public Button toWatch;
     public Button addTag;
     public Button deleteVideo;
+    public Button like;
     /**
      * Represents the url of the server from where the video can be retrieved.
      * For example, "http://localhost:8000/",so that + 33(assumed video ID) would give "http://localhost:8000/33.vid".
@@ -147,7 +148,6 @@ public class VideoLayoutController implements Initializable {
             LOGGER.log(Level.SEVERE, "Some I/O error occurred", e);
         }
         LOGGER.info("Trying to send request to server for todo");
-        LOGGER.info("Sending http request @ URL = \n" + addToWatchTask.getUrl().toString());
         new Thread(addToWatchTask).start();
         while (addToWatchTask.isRunning()) {
             try {
@@ -185,7 +185,6 @@ public class VideoLayoutController implements Initializable {
 
         tag.setVideoId(video.get().getVideoId());
         AddTagTask addTagTask = new AddTagTask(tag);
-        LOGGER.info("Sending request @ URL = \n" + addTagTask.getUrl());
         new Thread(addTagTask).start();
         while (addTagTask.isRunning()) {
             wait();
@@ -236,5 +235,26 @@ public class VideoLayoutController implements Initializable {
 
     public void setVideo(final Video video) {
         this.video.set(video);
+    }
+
+    public void likeOnAction(ActionEvent actionEvent) throws Throwable {
+        final Like like = new Like();
+        like.setUsername(System.getProperty("com.mnnit.tutorspoint.client.username"));
+        like.setDateTime(ZonedDateTime.now().toString());
+        like.setVideoId(video.get().getVideoId());
+        InsertLikeTask insertLikeTask = new InsertLikeTask(like);
+        new Thread(insertLikeTask).start();
+        while (insertLikeTask.isRunning()) {
+            wait();
+            LOGGER.info("Waiting for the server to respond");
+        }
+
+        if (insertLikeTask.get()) {
+            LOGGER.info("Video liked");
+            new Alert(Alert.AlertType.INFORMATION, "Video Liked").showAndWait();
+        } else {
+            LOGGER.log(Level.SEVERE, "Some error occurred");
+            new Alert(Alert.AlertType.ERROR, "Some error occurred while liking the video").showAndWait();
+        }
     }
 }

@@ -29,4 +29,13 @@ public class UserActivity {
     public void setVideoId(final int videoId) {
         this.videoId = videoId;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() +
+                "username='" + username + '\'' +
+                ", dateTime='" + dateTime + '\'' +
+                ", videoId=" + videoId +
+                '}';
+    }
 }
