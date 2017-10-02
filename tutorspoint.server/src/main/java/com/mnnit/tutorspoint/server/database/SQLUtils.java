@@ -385,4 +385,18 @@ public class SQLUtils {
         }
         return result;
     }
+
+    public static double getAverageRating() throws Throwable {
+        final PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT CATEGORIES.RATING FROM CATEGORIES");
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        double result = 0.0;
+        int cnt = 0;
+        while (resultSet.next()) {
+            result += resultSet.getInt("rating");
+            cnt++;
+        }
+        result /= cnt;
+        return result;
+    }
 }
