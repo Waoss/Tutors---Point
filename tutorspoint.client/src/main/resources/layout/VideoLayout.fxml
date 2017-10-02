@@ -34,4 +34,6 @@
             onAction="#showCommentsOnAction" text="Show Comments"/>
     <Button fx:id="showTags" layoutX="729.0" layoutY="480.0" mnemonicParsing="false" onAction="#showTagsOnAction"
             text="Show Tags"/>
+    <Button fx:id="subscribeButton" layoutX="828.0" layoutY="480.0" mnemonicParsing="false"
+            onAction="#subscribeOnAction" text="Subscribe to Uploader"/>
 </AnchorPane>

@@ -10,14 +10,15 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.media.*;
+import javafx.stage.*;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.*;
 import java.time.ZonedDateTime;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
@@ -43,6 +44,7 @@ public class VideoLayoutController implements Initializable {
     public Button commentButton;
     public Button showComments;
     public Button showTags;
+    public Button subscribeButton;
     /**
      * Represents the url of the server from where the video can be retrieved.
      * For example, "http://localhost:8000/",so that + 33(assumed video ID) would give "http://localhost:8000/33.vid".
@@ -340,5 +342,45 @@ public class VideoLayoutController implements Initializable {
         node.setVisible(true);
         dialog.setResizable(true);
         dialog.show();
+    }
+
+    public void subscribeOnAction(ActionEvent actionEvent) throws Throwable {
+        String subscriber = System.getProperty("com.mnnit.tutorspoint.client.username");
+        BooleanResponseTask subscribeTask = new BooleanResponseTask(
+                new URL(System.getProperty("com.mnnit.tutorspoint.server.url")
+                        + "/insertSubscription?subscriber=" +
+                        subscriber + "&subscribedTo=" + URLEncoder.encode(video.get().getUsername(), "utf-8")));
+
+        new Thread(subscribeTask).start();
+        while (subscribeTask.isRunning()) {
+            wait();
+        }
+
+        if (subscribeTask.get()) {
+            new Alert(Alert.AlertType.INFORMATION, "Subscription successful").showAndWait();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Something went wrong").showAndWait();
+        }
+    }
+
+    private void showPopup(final String message) {
+        final Popup popup = createPopup(message);
+        popup.setOnShown(windowEvent -> {
+            Rectangle2D screenVisualBounds = Screen.getPrimary().getVisualBounds();
+            popup.setX(screenVisualBounds.getMaxX() / 2 - popup.getX() / 2);
+            popup.setY(screenVisualBounds.getMaxY() / 2 - popup.getY() / 2);
+        });
+        popup.show(mediaView.getParent().getScene().getWindow());
+    }
+
+    private Popup createPopup(final String message) {
+        final Popup popup = new Popup();
+        popup.setAutoFix(true);
+        popup.setAutoHide(true);
+        popup.setHideOnEscape(true);
+        Label label = new Label(message);
+        label.setOnMouseReleased(mouseEvent -> popup.hide());
+        popup.getContent().add(label);
+        return popup;
     }
 }

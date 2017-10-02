@@ -79,6 +79,8 @@ public final class LoginLayoutController implements Initializable {
             e.printStackTrace();
         }
         LOGGER.info(String.format("User %s logged in with type %s", user.getUsername(), user.getUserType()));
+
+
     }
 
     /**
