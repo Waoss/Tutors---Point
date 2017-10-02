@@ -37,6 +37,15 @@ public class SQLUtils {
         preparedStatement.setString(6, video.getFormat());
         preparedStatement.executeUpdate();
         video.setVideoId(getVideoIdByName(video.getName()));
+
+        List<Subscription> subscriptionList = getSubscriptionsForTeacher(video.getUsername());
+        subscriptionList.forEach(subscription -> {
+            try {
+                insertNotification(new Notification(subscription, "New Video from - " + video.getUsername(), false));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public static int getVideoIdByName(final String videoName) throws SQLException {
@@ -48,6 +57,31 @@ public class SQLUtils {
             videoid = resultSet.getInt("videoid");
         }
         return videoid;
+    }
+
+    public static List<Subscription> getSubscriptionsForTeacher(final String teacherName) throws SQLException {
+        Vector<Subscription> result = new Vector<>();
+        final PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT * FROM Subscriptions WHERE subscribedTo = ?");
+        preparedStatement.setString(1, teacherName);
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            final Subscription subscription = new Subscription();
+            subscription.setId(resultSet.getInt("subscriptionId"));
+            subscription.setSubscriber(resultSet.getString("subscriber"));
+            subscription.setSubscribedTo(teacherName);
+            result.add(subscription);
+        }
+        return result;
+    }
+
+    public static void insertNotification(final Notification notification) throws SQLException {
+        final PreparedStatement preparedStatement = connection
+                .prepareStatement("INSERT INTO Notifications (subscriptionId, message, isSent) VALUES (?, ?, ?)");
+        preparedStatement.setInt(1, notification.getSubscription().getId());
+        preparedStatement.setString(2, notification.getMessage());
+        preparedStatement.setBoolean(3, notification.isSent());
+        preparedStatement.executeUpdate();
     }
 
     public static List<Video> getVideoList() throws SQLException {
@@ -232,15 +266,6 @@ public class SQLUtils {
         return result;
     }
 
-    public static void insertNotification(final Notification notification) throws SQLException {
-        final PreparedStatement preparedStatement = connection
-                .prepareStatement("INSERT INTO Notifications (subscriptionId, message, isSent) VALUES (?, ?, ?)");
-        preparedStatement.setInt(1, notification.getSubscription().getId());
-        preparedStatement.setString(2, notification.getMessage());
-        preparedStatement.setBoolean(3, notification.isSent());
-        preparedStatement.executeUpdate();
-    }
-
     public static Notification getNotificationBySubscriptionId(final int id) throws SQLException {
         final PreparedStatement preparedStatement = connection
                 .prepareStatement("SELECT * FROM Notifications WHERE subscriptionId = ?");
@@ -338,22 +363,6 @@ public class SQLUtils {
             videoCategory.setRating(resultSet.getInt("rating"));
         }
         return videoCategory;
-    }
-
-    public static List<Subscription> getSubscriptionsForTeacher(final String teacherName) throws SQLException {
-        Vector<Subscription> result = new Vector<>();
-        final PreparedStatement preparedStatement = connection
-                .prepareStatement("SELECT * FROM Subscriptions WHERE subscribedTo = ?");
-        preparedStatement.setString(1, teacherName);
-        final ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            final Subscription subscription = new Subscription();
-            subscription.setId(resultSet.getInt("subscriptionId"));
-            subscription.setSubscriber(resultSet.getString("subscriber"));
-            subscription.setSubscribedTo(teacherName);
-            result.add(subscription);
-        }
-        return result;
     }
 
     public static List<Video> getVideosByTag(final Tag tag) throws Throwable {

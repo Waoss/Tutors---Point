@@ -5,6 +5,15 @@ public class Notification {
     private String message;
     private boolean isSent;
 
+    public Notification() {
+    }
+
+    public Notification(final Subscription subscription, final String message, final boolean isSent) {
+        this.subscription = subscription;
+        this.message = message;
+        this.isSent = isSent;
+    }
+
     public Subscription getSubscription() {
         return subscription;
     }
