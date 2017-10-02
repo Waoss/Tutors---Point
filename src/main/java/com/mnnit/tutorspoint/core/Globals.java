@@ -5,5 +5,5 @@ import com.google.gson.GsonBuilder;
 
 public class Globals {
 
-    public static final Gson GSON = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
+    public static final Gson GSON = new GsonBuilder().serializeNulls().create();
 }

@@ -1,5 +1,6 @@
 package com.mnnit.tutorspoint.server;
 
+import com.mnnit.tutorspoint.core.Globals;
 import com.mnnit.tutorspoint.core.todo.Todo;
 import com.mnnit.tutorspoint.core.video.Video;
 import com.mnnit.tutorspoint.server.database.SQLUtils;
@@ -30,6 +31,7 @@ public class GetVideosByUserTodosServlet extends HttpServlet {
                     }
                 }
             });
+            response.getWriter().print(Globals.GSON.toJson(result));
         } catch (SQLException e) {
             e.printStackTrace(response.getWriter());
         }
