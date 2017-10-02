@@ -21,6 +21,8 @@ public class SearchVideoTabLayoutController {
     public TextField tagName;
     public TextField uploaderName;
     public Button searchByUploader;
+    public TextField categoryName;
+    public Button searchByCategory;
     private SimpleObjectProperty<VideoRetriever> retriever = new SimpleObjectProperty<>(this, "retriever");
     private SimpleListProperty<AnchorPane> anchorPanes = new SimpleListProperty<>(this, "anchorPanes");
 
@@ -51,14 +53,26 @@ public class SearchVideoTabLayoutController {
                 alert.showAndWait().filter(response -> response == ButtonType.OK);
                 return false;
             }
-            if (!uploaderName.getText().isEmpty()) {
+            if (!uploaderName.getText().isEmpty() || !categoryName.getText().isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Only one field required");
                 alert.showAndWait().filter(response -> response == ButtonType.OK);
                 return false;
             }
             return true;
+        } else if (searchType == SearchType.SEARCH_BY_CATEGORY) {
+            if (categoryName.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Please enter a valid category!");
+                alert.showAndWait().filter(response -> response == ButtonType.OK);
+                return false;
+            }
+            if (!tagName.getText().isEmpty() || !uploaderName.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Only one field required!");
+                alert.showAndWait().filter(response -> response == ButtonType.OK);
+                return false;
+            }
+            return true;
         } else {
-            if (!tagName.getText().isEmpty()) {
+            if (!tagName.getText().isEmpty() || !categoryName.getText().isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Only one field required!");
                 alert.showAndWait().filter(response -> response == ButtonType.OK);
                 return false;
@@ -96,7 +110,28 @@ public class SearchVideoTabLayoutController {
                 .setItems(FXCollections.observableArrayList(VideoUtils.getAnchorPanesForVideos(Arrays.asList(videos))));
     }
 
+    public void searchByCategoryOnAction(ActionEvent actionEvent) throws Throwable {
+        if (!isValid(SearchType.SEARCH_BY_CATEGORY)) {
+            return;
+        }
+
+        String categoryName = this.categoryName.getText();
+        final GenericResponsiveTask<Video[]> getVideosByCategory = new GenericResponsiveTask<>(
+                new URL(System.getProperty("com.mnnit.tutorspoint.server.url") + "/getVideosByCategory?category=" +
+                        categoryName), Video[].class);
+
+        new Thread(getVideosByCategory).start();
+        while (getVideosByCategory.isRunning()) {
+            wait();
+            LOGGER.info("Waiting for server to respond");
+        }
+
+        Video[] videos = getVideosByCategory.get();
+        videoList
+                .setItems(FXCollections.observableArrayList(VideoUtils.getAnchorPanesForVideos(Arrays.asList(videos))));
+    }
+
     private enum SearchType {
-        SEARCH_BY_TAG, SEARCH_BY_UPLOADER
+        SEARCH_BY_TAG, SEARCH_BY_UPLOADER, SEARCH_BY_CATEGORY
     }
 }

@@ -2,10 +2,9 @@
 
 <?import com.mnnit.tutorspoint.control.VideoCategoryView?>
 <?import javafx.scene.layout.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
-            xmlns="http://javafx.com/javafx"
-            fx:controller="com.mnnit.tutorspoint.CategoriesTabLayoutController"
-            prefHeight="400.0" prefWidth="600.0">
-    <VideoCategoryView fx:id="categoriesListView" prefHeight="400" prefWidth="600"/>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="605.0"
+            xmlns="http://javafx.com/javafx/8.0.112"
+            fx:controller="com.mnnit.tutorspoint.CategoriesTabLayoutController">
+    <VideoCategoryView fx:id="categoriesListView" prefHeight="400" prefWidth="600.0"/>
 
 </AnchorPane>

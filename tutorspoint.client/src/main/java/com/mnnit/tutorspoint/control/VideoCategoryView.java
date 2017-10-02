@@ -16,6 +16,9 @@ public class VideoCategoryView extends TableView<VideoCategory> {
         parentNameColumn.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getParentName()));
         ratingColumn
                 .setCellValueFactory(param -> new SimpleStringProperty(String.valueOf(param.getValue().getRating())));
+        nameColumn.setPrefWidth(200.0);
+        parentNameColumn.setPrefWidth(200.0);
+        ratingColumn.setPrefWidth(200.0);
     }
 
     public VideoCategoryView(final ObservableList<VideoCategory> videoCategories) {
