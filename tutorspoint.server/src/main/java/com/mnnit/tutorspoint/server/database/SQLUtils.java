@@ -327,6 +327,15 @@ public class SQLUtils {
         return result;
     }
 
+    public static VideoCategory getVideoCategoryByName(final String name) throws SQLException {
+        final PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT * FROM MAIN.CATEGORIES WHERE NAME=?");
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+
+        }
+    }
+
     public static List<Subscription> getSubscriptionsForTeacher(final String teacherName) throws SQLException {
         Vector<Subscription> result = new Vector<>();
         final PreparedStatement preparedStatement = connection
