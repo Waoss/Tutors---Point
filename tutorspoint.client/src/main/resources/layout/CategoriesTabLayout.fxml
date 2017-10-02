@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import com.mnnit.tutorspoint.control.VideoCategoryView?>
 <?import javafx.scene.layout.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             xmlns="http://javafx.com/javafx"
             fx:controller="com.mnnit.tutorspoint.CategoriesTabLayoutController"
             prefHeight="400.0" prefWidth="600.0">
-    <ListView fx:id="categoriesListView"/>
+    <VideoCategoryView fx:id="categoriesListView" prefHeight="400" prefWidth="600"/>
 
 </AnchorPane>

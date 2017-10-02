@@ -183,10 +183,11 @@ public class SQLUtils {
         preparedStatement.setString(1, parentName);
         final ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            String category = resultSet.getString("name");
-            int rating = resultSet.getInt("rating");
-            result.add(new VideoCategory(category, rating));
-            List<VideoCategory> children = getCategoriesByParent(category);
+            final VideoCategory videoCategory = new VideoCategory(resultSet.getString("name"),
+                    resultSet.getInt("rating"));
+            videoCategory.setParentName(resultSet.getString("PARENT"));
+            result.add(videoCategory);
+            List<VideoCategory> children = getCategoriesByParent(videoCategory.getName());
             if (!children.isEmpty()) {
                 result.addAll(children);
             }

@@ -2,8 +2,9 @@ package com.mnnit.tutorspoint.core.video;
 
 public class VideoCategory {
 
-    String name;
-    int rating;
+    private String name;
+    private int rating;
+    private String parentName;
 
     public VideoCategory(final String name, final int rating) {
         this.name = name;
@@ -27,7 +28,11 @@ public class VideoCategory {
 
     @Override
     public String toString() {
-        return name;
+        return "VideoCategory{" +
+                "name='" + name + '\'' +
+                ", rating=" + rating +
+                ", parentName='" + parentName + '\'' +
+                '}';
     }
 
     public int getRating() {
@@ -36,5 +41,13 @@ public class VideoCategory {
 
     public void setRating(final int rating) {
         this.rating = rating;
+    }
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(final String parentName) {
+        this.parentName = parentName;
     }
 }
