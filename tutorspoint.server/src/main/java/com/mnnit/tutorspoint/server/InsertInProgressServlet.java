@@ -16,7 +16,8 @@ public class InsertInProgressServlet extends HttpServlet {
     protected void service(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
         InProgress inProgress = new InProgress();
-        inProgress.setCategory(new VideoCategory(request.getParameter("category")));
+        inProgress.setCategory(
+                new VideoCategory(request.getParameter("category"), Integer.parseInt(request.getParameter("rating"))));
         inProgress.setStudent(request.getParameter("student"));
         try {
             SQLUtils.insertInProgress(inProgress);

@@ -166,7 +166,7 @@ public class SQLUtils {
         }
         getCategoriesByParent(category).forEach(e -> {
             try {
-                result.addAll(getVideosByCategory(e));
+                result.addAll(getVideosByCategory(e.getName()));
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
@@ -174,18 +174,19 @@ public class SQLUtils {
         return result;
     }
 
-    public static List<String> getCategoriesByParent(final String parent) throws SQLException {
-        if (parent == null) {
+    public static List<VideoCategory> getCategoriesByParent(final String parentName) throws SQLException {
+        if (parentName == null) {
             return Collections.emptyList();
         }
-        Vector<String> result = new Vector<>();
+        Vector<VideoCategory> result = new Vector<>();
         final PreparedStatement preparedStatement = connection.prepareStatement(GET_CATEGORIES_BY_PARENT);
-        preparedStatement.setString(1, parent);
+        preparedStatement.setString(1, parentName);
         final ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             String category = resultSet.getString("name");
-            result.add(category);
-            List<String> children = getCategoriesByParent(category);
+            int rating = resultSet.getInt("rating");
+            result.add(new VideoCategory(category, rating));
+            List<VideoCategory> children = getCategoriesByParent(category);
             if (!children.isEmpty()) {
                 result.addAll(children);
             }

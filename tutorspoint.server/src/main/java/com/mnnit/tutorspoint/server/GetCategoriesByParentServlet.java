@@ -1,6 +1,7 @@
 package com.mnnit.tutorspoint.server;
 
 import com.mnnit.tutorspoint.core.Globals;
+import com.mnnit.tutorspoint.core.video.VideoCategory;
 import com.mnnit.tutorspoint.server.database.SQLUtils;
 
 import javax.servlet.ServletException;
@@ -16,7 +17,7 @@ public class GetCategoriesByParentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            List<String> parent = SQLUtils.getCategoriesByParent(request.getParameter("parent"));
+            List<VideoCategory> parent = SQLUtils.getCategoriesByParent(request.getParameter("parent"));
             response.getWriter()
                     .print(Globals.GSON.toJson(parent));
 
