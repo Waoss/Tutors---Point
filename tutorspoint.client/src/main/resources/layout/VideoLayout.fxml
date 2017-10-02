@@ -32,4 +32,6 @@
             onAction="#commentButtonOnAction" text="Comment"/>
     <Button fx:id="showComments" layoutX="600.0" layoutY="480.0" mnemonicParsing="false"
             onAction="#showCommentsOnAction" text="Show Comments"/>
+    <Button fx:id="showTags" layoutX="729.0" layoutY="480.0" mnemonicParsing="false" onAction="#showTagsOnAction"
+            text="Show Tags"/>
 </AnchorPane>

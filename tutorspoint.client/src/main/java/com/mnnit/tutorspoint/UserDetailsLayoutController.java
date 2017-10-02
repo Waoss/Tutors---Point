@@ -98,6 +98,7 @@ public class UserDetailsLayoutController implements Initializable {
     List<Video> getVideos(final String url) {
         try {
             final URLConnection urlConnection = getURLConnection(url);
+            urlConnection.connect();
             final List<Video> videos = Arrays.asList(
                     Globals.GSON.fromJson(new InputStreamReader(urlConnection.getInputStream()), Video[].class));
             return videos;

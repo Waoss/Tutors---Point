@@ -10,12 +10,13 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 @FXMLController
 public class SearchVideoTabLayoutController {
     public static final Logger LOGGER = Logger.getLogger(SearchVideoTabLayoutController.class.getName());
-    public ListView videoList;
+    public ListView<AnchorPane> videoList;
     public Button searchByTag;
     public TextField tagName;
     public TextField uploaderName;
@@ -39,18 +40,19 @@ public class SearchVideoTabLayoutController {
         }
 
         Video[] videos = getVideosByTagTask.get();
-        videoList.setItems(FXCollections.observableArrayList(videos));
+        videoList
+                .setItems(FXCollections.observableArrayList(VideoUtils.getAnchorPanesForVideos(Arrays.asList(videos))));
     }
 
     private boolean isValid(SearchType searchType) {
         if (searchType == SearchType.SEARCH_BY_TAG) {
-            if (!tagName.getText().isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Only one field required!");
+            if (tagName.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Please enter a valid tag!");
                 alert.showAndWait().filter(response -> response == ButtonType.OK);
                 return false;
             }
-            if (uploaderName.getText().isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Please enter a valid tag!");
+            if (!uploaderName.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Only one field required");
                 alert.showAndWait().filter(response -> response == ButtonType.OK);
                 return false;
             }
@@ -90,7 +92,8 @@ public class SearchVideoTabLayoutController {
         }
 
         Video[] videos = getVideosByUploader.get();
-        videoList.setItems(FXCollections.observableArrayList(videos));
+        videoList
+                .setItems(FXCollections.observableArrayList(VideoUtils.getAnchorPanesForVideos(Arrays.asList(videos))));
     }
 
     private enum SearchType {

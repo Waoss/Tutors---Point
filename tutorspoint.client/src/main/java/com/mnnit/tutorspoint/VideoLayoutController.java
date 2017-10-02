@@ -42,6 +42,7 @@ public class VideoLayoutController implements Initializable {
     public Button like;
     public Button commentButton;
     public Button showComments;
+    public Button showTags;
     /**
      * Represents the url of the server from where the video can be retrieved.
      * For example, "http://localhost:8000/",so that + 33(assumed video ID) would give "http://localhost:8000/33.vid".
@@ -309,6 +310,34 @@ public class VideoLayoutController implements Initializable {
         node.setVisible(true);
         dialog.setHeight(commentTableView.getHeight());
         dialog.setWidth(commentTableView.getWidth());
+        dialog.setResizable(true);
+        dialog.show();
+    }
+
+    public void showTagsOnAction(ActionEvent actionEvent) throws Throwable {
+        ShowTagsTask showTagsTask = new ShowTagsTask(video.get().getVideoId());
+        new Thread(showTagsTask).start();
+
+        while (showTagsTask.isRunning()) {
+            wait();
+            LOGGER.info("Waiting for server to respond");
+        }
+
+        Tag[] tags = showTagsTask.get();
+        Dialog dialog = new Dialog();
+        dialog.setTitle("Tags for video - " + video.get().getName());
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < tags.length; i++) {
+            Tag tag = tags[i];
+            stringBuilder.append("#");
+            stringBuilder.append(tag.getName());
+            stringBuilder.append("\n");
+        }
+        dialog.setContentText(stringBuilder.toString());
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+        Node node = dialog.getDialogPane().lookupButton(ButtonType.CLOSE);
+        node.managedProperty().bind(node.visibleProperty());
+        node.setVisible(true);
         dialog.setResizable(true);
         dialog.show();
     }
