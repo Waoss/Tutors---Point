@@ -47,7 +47,7 @@ public class UserDetailsLayoutController implements Initializable {
             searchVideoTab.setContent(getSearchVideoTabLayout());
             categoriesTab.setContent(getCategoriesTabLayout());
             inProgressCourseViewTab.setContent(getInProgressTabLayout());
-
+            toWatchTab.setContent(getToWatchTabLayout());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -107,6 +107,9 @@ public class UserDetailsLayoutController implements Initializable {
         return FXMLLoader.load(getClass().getResource("/layout/InProgressTabLayout.fxml"));
     }
 
+    private AnchorPane getToWatchTabLayout() throws IOException {
+        return FXMLLoader.load(getClass().getResource("/layout/ToWatchTabLayout.fxml"));
+    }
     List<Video> getVideos(final String url) {
         try {
             final URLConnection urlConnection = getURLConnection(url);

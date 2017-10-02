@@ -1,17 +1,18 @@
 package com.mnnit.tutorspoint;
 
 import com.mnnit.tutorspoint.core.video.Video;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.*;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Vector;
 
 public class VideoUtils {
-    public static List<AnchorPane> getAnchorPanesForVideos(
+    public static ObservableList<AnchorPane> getAnchorPanesForVideos(
             List<Video> videos) {
-        final Vector<AnchorPane> result = new Vector<>();
+        final ObservableList<AnchorPane> result = FXCollections.observableArrayList();
         videos.forEach(video -> {
             try {
                 final FXMLLoader fxmlLoader = new FXMLLoader(
