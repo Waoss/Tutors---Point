@@ -64,6 +64,8 @@ public final class LoginLayoutController implements Initializable {
         User user = new UserBuilder().setUsername(usernameTextField.getText()).setPassword(
                 passwordTextField.getText()).setUserType(getUserType()).createUser();
         System.setProperty("com.mnnit.tutorspoint.client.username", user.getUsername());
+        System.setProperty("com.mnnit.tutorspoint.client.usertype", user.getUserType().toString());
+        System.setProperty("com.mnnit.tutorspoint.client.password", user.getPassword());
         try {
             Stage stage = (Stage) loginButton.getParent().getScene().getWindow();
             Scene scene = new Scene(loadUserDetailsLayout(user));
