@@ -329,11 +329,16 @@ public class SQLUtils {
 
     public static VideoCategory getVideoCategoryByName(final String name) throws SQLException {
         final PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT * FROM MAIN.CATEGORIES WHERE NAME=?");
+                "SELECT * FROM MAIN.CATEGORIES WHERE NAME = ?");
+        preparedStatement.setString(1, name);
         final ResultSet resultSet = preparedStatement.executeQuery();
+        final VideoCategory videoCategory = new VideoCategory();
         while (resultSet.next()) {
-
+            videoCategory.setName(name);
+            videoCategory.setParentName(resultSet.getString("parent"));
+            videoCategory.setRating(resultSet.getInt("rating"));
         }
+        return videoCategory;
     }
 
     public static List<Subscription> getSubscriptionsForTeacher(final String teacherName) throws SQLException {
