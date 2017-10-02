@@ -388,7 +388,8 @@ public class SQLUtils {
 
     public static double getAverageRating() throws Throwable {
         final PreparedStatement preparedStatement = connection
-                .prepareStatement("SELECT CATEGORIES.RATING FROM CATEGORIES");
+                .prepareStatement(
+                        "SELECT CATEGORIES.RATING FROM CATEGORIES WHERE MAIN.CATEGORIES.NAME != 'Hyper Category'");
         final ResultSet resultSet = preparedStatement.executeQuery();
         double result = 0.0;
         int cnt = 0;
