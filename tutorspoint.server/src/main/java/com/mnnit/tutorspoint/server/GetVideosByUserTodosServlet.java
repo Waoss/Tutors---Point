@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
 
-@WebServlet(name = "GetVideosByUserTodosServlet")
+@WebServlet(name = "GetVideosByUserTodosServlet", urlPatterns = "/getVideosByUserTodos")
 public class GetVideosByUserTodosServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, final HttpServletResponse response)
