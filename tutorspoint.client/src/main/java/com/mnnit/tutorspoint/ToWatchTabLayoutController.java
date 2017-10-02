@@ -16,7 +16,7 @@ public class ToWatchTabLayoutController implements Initializable {
     public void initialize(final URL location, final ResourceBundle resources) {
         try {
             GenericResponsiveTask<Video[]> task = new GenericResponsiveTask<>(
-                    new URL(System.getProperty("com.mnnit.tutorspoint.server.url") + "/getTodosByUser?user=" +
+                    new URL(System.getProperty("com.mnnit.tutorspoint.server.url") + "/getVideosByUserTodos?user=" +
                             System.getProperty("com.mnnit.tutorspoint.client.username")),
                     Video[].class
             );

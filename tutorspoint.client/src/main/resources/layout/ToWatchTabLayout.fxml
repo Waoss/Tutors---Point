@@ -5,7 +5,8 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             xmlns="http://javafx.com/javafx"
             fx:controller="com.mnnit.tutorspoint.ToWatchTabLayoutController"
-            prefHeight="400.0" prefWidth="600.0">
-    <ListView fx:id="toWatchVideosView"/>
+            prefHeight="800.0" prefWidth="1000.0">
+    <ListView fx:id="toWatchVideosView"
+              prefHeight="800.0" prefWidth="1000.0"/>
 
 </AnchorPane>
