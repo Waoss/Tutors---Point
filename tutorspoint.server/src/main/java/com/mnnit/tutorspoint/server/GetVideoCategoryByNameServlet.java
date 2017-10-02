@@ -16,7 +16,7 @@ public class GetVideoCategoryByNameServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             response.getWriter()
-                    .print(Globals.GSON.toJson(SQLUtils.getVideoCategoryByName(request.getParameter("name"))));
+                    .print(Globals.GSON.toJson(SQLUtils.getCategoryByName(request.getParameter("name"))));
         } catch (SQLException e) {
             e.printStackTrace(response.getWriter());
         }

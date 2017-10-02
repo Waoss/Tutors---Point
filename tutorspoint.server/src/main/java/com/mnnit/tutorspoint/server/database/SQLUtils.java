@@ -321,13 +321,12 @@ public class SQLUtils {
         Vector<InProgress> result = new Vector<>();
         while (resultSet.next()) {
             result.add(
-                    new InProgress(new VideoCategory(resultSet.getString("category")), resultSet.getString("student")));
+                    new InProgress(getCategoryByName(resultSet.getString("category")), resultSet.getString("student")));
         }
-
         return result;
     }
 
-    public static VideoCategory getVideoCategoryByName(final String name) throws SQLException {
+    public static VideoCategory getCategoryByName(final String name) throws SQLException {
         final PreparedStatement preparedStatement = connection.prepareStatement(
                 "SELECT * FROM MAIN.CATEGORIES WHERE NAME = ?");
         preparedStatement.setString(1, name);
