@@ -6,6 +6,12 @@ public class VideoCategory {
     private int rating;
     private String parentName;
 
+    public VideoCategory(final String name, final int rating, final String parentName) {
+        this.name = name;
+        this.rating = rating;
+        this.parentName = parentName;
+    }
+
     public VideoCategory(final String name, final int rating) {
         this.name = name;
         this.rating = rating;

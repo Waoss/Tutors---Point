@@ -401,4 +401,25 @@ public class SQLUtils {
         result /= cnt;
         return result;
     }
+
+    public static List<VideoCategory> getSortedCategories() throws Throwable {
+        Vector<VideoCategory> result = new Vector<>();
+        final PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT *\n" +
+                        "FROM MAIN.CATEGORIES\n" +
+                        "WHERE NAME != 'Hyper Category'\n" +
+                        "ORDER BY RATING");
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            result.add(
+                    new VideoCategory(
+                            resultSet.getString("name"),
+                            resultSet.getInt("rating"),
+                            resultSet.getString("parent")
+                    )
+            );
+        }
+
+        return result;
+    }
 }

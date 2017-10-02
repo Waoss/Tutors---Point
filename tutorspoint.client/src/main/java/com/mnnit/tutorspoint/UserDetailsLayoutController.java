@@ -24,7 +24,7 @@ public class UserDetailsLayoutController implements Initializable {
     public Tab uploadVideoTab;
     public Tab searchVideoTab;
     public Tab categoriesTab;
-    public Tab courseViewTab;
+    public Tab inProgressCourseViewTab;
     public Tab toWatchTab;
     private SimpleObjectProperty<User> user = new SimpleObjectProperty<>(this, "user");
 
@@ -46,6 +46,7 @@ public class UserDetailsLayoutController implements Initializable {
             watchVideosTab.setContent(getWatchVideoLayout());
             searchVideoTab.setContent(getSearchVideoTabLayout());
             categoriesTab.setContent(getCategoriesTabLayout());
+            inProgressCourseViewTab.setContent(getInProgressTabLayout());
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -98,8 +99,12 @@ public class UserDetailsLayoutController implements Initializable {
     }
 
     private AnchorPane getCategoriesTabLayout() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/CategoriesTablayout.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/CategoriesTabLayout.fxml"));
         return fxmlLoader.load();
+    }
+
+    private AnchorPane getInProgressTabLayout() throws IOException {
+        return FXMLLoader.load(getClass().getResource("/layout/InProgressTabLayout.fxml"));
     }
 
     List<Video> getVideos(final String url) {

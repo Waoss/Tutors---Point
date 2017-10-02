@@ -21,10 +21,10 @@
         <Tab fx:id="categoriesTab" text="Categories">
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
         </Tab>
-        <Tab fx:id="courseViewTab" text="View Courses">
+        <Tab fx:id="inProgressCourseViewTab" text="Courses In Progress">
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
         </Tab>
-        <Tab fx:id="toWatchTab" text="To-Watch">
+        <Tab fx:id="toWatchTab" text="To-Watch Videos">
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
         </Tab>
     </TabPane>
