@@ -13,6 +13,12 @@ public class Subscription implements Comparable<Subscription> {
     public Subscription() {
     }
 
+    public Subscription(final String subscriber, final String subscribedTo, final int id) {
+        this.subscriber = subscriber;
+        this.subscribedTo = subscribedTo;
+        this.id = id;
+    }
+
     @Override
     public int compareTo(final Subscription that) {
         return subscriber.compareTo(that.subscriber) + subscribedTo.compareTo(that.subscribedTo);

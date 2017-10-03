@@ -17,4 +17,8 @@ public class SQLConstants {
     public static final String GET_TAGS_BY_VIDEO_ID = "SELECT * FROM Tags WHERE videoId=?";
     public static final String INSERT_TAG = "INSERT INTO Tags (name, videoId) VALUES (?, ?)";
     public static final String INSERT_SUBSCRIPTION = "INSERT INTO Subscriptions (subscriber, subscribedTo) VALUES (?, ?)";
+    public static final String GET_NOTIFICATIONS_FOR_USER = "SELECT *\n" +
+            "FROM NOTIFICATIONS\n" +
+            "  JOIN MAIN.SUBSCRIPTIONS ON NOTIFICATIONS.SUBSCRIPTIONID = SUBSCRIPTIONS.SUBSCRIPTIONID\n" +
+            "WHERE SUBSCRIBER = ?";
 }

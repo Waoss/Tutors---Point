@@ -45,6 +45,7 @@ public class VideoLayoutController implements Initializable {
     public Button showComments;
     public Button showTags;
     public Button subscribeButton;
+    public Label uploaderLabel;
     /**
      * Represents the url of the server from where the video can be retrieved.
      * For example, "http://localhost:8000/",so that + 33(assumed video ID) would give "http://localhost:8000/33.vid".
@@ -67,6 +68,7 @@ public class VideoLayoutController implements Initializable {
             setUrl(url.toString());
             videoNameLabel.setText(newValue.getName());
             likesLabel.setText(String.valueOf(newValue.getLikes().size()));
+            uploaderLabel.setText(newValue.getUsername());
         });
 
 

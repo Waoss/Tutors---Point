@@ -1,13 +1,17 @@
 package com.mnnit.tutorspoint.net;
 
-import javafx.concurrent.Task;
+import com.mnnit.tutorspoint.core.Notification;
+
+import java.io.IOException;
+import java.net.URL;
 
 
-public class NotificationTask extends Task<Void> {
+public class NotificationTask extends GenericResponsiveTask<Notification[]> {
 
-    @Override
-    protected Void call() throws Exception {
-
-        return null;
+    public NotificationTask(final String username) throws IOException {
+        super(new URL(
+                        System.getProperty("com.mnnit.tutorspoint.server.url") +
+                                "/getNotificationsForUser?user=" + username),
+                Notification[].class);
     }
 }

@@ -1,6 +1,7 @@
 package com.mnnit.tutorspoint;
 
 import com.mnnit.tutorspoint.core.*;
+import com.mnnit.tutorspoint.net.NotificationTask;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
@@ -12,6 +13,7 @@ import javafx.stage.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
 
@@ -80,7 +82,26 @@ public final class LoginLayoutController implements Initializable {
         }
         LOGGER.info(String.format("User %s logged in with type %s", user.getUsername(), user.getUserType()));
 
+        try {
+            NotificationTask notificationTask = new NotificationTask(
+                    System.getProperty("com.mnnit.tutorspoint.client.username"));
 
+            new Thread(notificationTask).start();
+
+            while (notificationTask.isRunning()) {
+                wait();
+            }
+
+            Notification[] notifications = notificationTask.get();
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < notifications.length; i++) {
+                Notification notification = notifications[i];
+                stringBuilder.append(notification.getMessage() + "\n");
+            }
+
+        } catch (IOException | InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

@@ -444,4 +444,23 @@ public class SQLUtils {
 
         return result;
     }
+
+    public static List<Notification> getNotificationsForUser(final String username) throws Throwable {
+        Vector<Notification> result = new Vector<>();
+        final PreparedStatement preparedStatement = connection.prepareStatement(GET_NOTIFICATIONS_FOR_USER);
+        preparedStatement.setString(1, username);
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            result.add(new Notification(
+                    new Subscription(
+                            resultSet.getString("subscriber"),
+                            resultSet.getString("subscribedTo"),
+                            resultSet.getInt("subscriptionId")
+                    ),
+                    resultSet.getString("message"),
+                    resultSet.getBoolean("issent")));
+        }
+
+        return result;
+    }
 }

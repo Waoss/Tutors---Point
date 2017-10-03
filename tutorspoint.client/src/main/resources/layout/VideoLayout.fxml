@@ -36,4 +36,5 @@
             text="Show Tags"/>
     <Button fx:id="subscribeButton" layoutX="828.0" layoutY="480.0" mnemonicParsing="false"
             onAction="#subscribeOnAction" text="Subscribe to Uploader"/>
+    <Label fx:id="uploaderLabel" layoutX="729.0" layoutY="420.0" text="\\${uploader}"/>
 </AnchorPane>
