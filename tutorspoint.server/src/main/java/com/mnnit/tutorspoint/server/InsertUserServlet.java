@@ -11,8 +11,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
-@WebServlet(name = "AddUserServlet", urlPatterns = "/adduser")
-public class AddUserServlet extends HttpServlet {
+@WebServlet(name = "InsertUserServlet", urlPatterns = "/insertUser")
+public class InsertUserServlet extends HttpServlet {
 
     @Override
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException,

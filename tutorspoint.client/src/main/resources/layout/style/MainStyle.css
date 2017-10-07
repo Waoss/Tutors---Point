@@ -148,3 +148,24 @@
 .video-list-node-name-label {
 	-fx-font-size : 20px;
 }
+
+.menu-item .label {
+	-fx-padding     : 0em 1.333332em 0em 0em;
+	-fx-text-fill   : #212121;
+	-fx-font-family : "Segoe UI", Helvetica, Arial, sans-serif;
+	-fx-font-size   : 11pt;
+}
+
+.menu-item:focused {
+	-fx-background       : -fx-accent;
+	-fx-background-color : #dedede;
+}
+
+.menu-item:pressed {
+	-fx-background-color : #212121;
+	-fx-text-fill        : white;
+}
+
+.menu-item:pressed .label {
+	-fx-text-fill : white;
+}
