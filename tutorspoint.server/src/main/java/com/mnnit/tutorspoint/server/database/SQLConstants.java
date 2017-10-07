@@ -21,4 +21,5 @@ public class SQLConstants {
             "FROM NOTIFICATIONS\n" +
             "  JOIN MAIN.SUBSCRIPTIONS ON NOTIFICATIONS.SUBSCRIPTIONID = SUBSCRIPTIONS.SUBSCRIPTIONID\n" +
             "WHERE SUBSCRIBER = ?";
+    public static final String UPDATE_IS_SENT = "UPDATE MAIN.NOTIFICATIONS ";
 }

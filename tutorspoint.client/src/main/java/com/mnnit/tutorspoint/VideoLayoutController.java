@@ -71,7 +71,6 @@ public class VideoLayoutController implements Initializable {
             uploaderLabel.setText(newValue.getUsername());
         });
 
-
     }
 
     public String getUrl() {

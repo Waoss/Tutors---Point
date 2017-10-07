@@ -2,6 +2,7 @@ package com.mnnit.tutorspoint;
 
 import com.mnnit.tutorspoint.core.video.Video;
 import com.mnnit.tutorspoint.net.GenericResponsiveTask;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -14,6 +15,10 @@ public class ToWatchTabLayoutController implements Initializable {
 
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
+        fetchVideos();
+    }
+
+    private void fetchVideos() {
         try {
             GenericResponsiveTask<Video[]> task = new GenericResponsiveTask<>(
                     new URL(System.getProperty("com.mnnit.tutorspoint.server.url") + "/getVideosByUserTodos?user=" +
@@ -25,5 +30,9 @@ public class ToWatchTabLayoutController implements Initializable {
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
+    }
+
+    public void reloadOnAction(ActionEvent actionEvent) {
+        fetchVideos();
     }
 }

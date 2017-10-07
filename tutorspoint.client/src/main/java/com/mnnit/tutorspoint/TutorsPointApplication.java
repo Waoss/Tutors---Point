@@ -24,7 +24,7 @@ public class TutorsPointApplication extends Application {
     public void start(Stage primaryStage) throws Exception {
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/layout/MainLayout.fxml")));
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Login Portal");
+        primaryStage.setTitle("Tutors Point");
         primaryStage.show();
     }
 }

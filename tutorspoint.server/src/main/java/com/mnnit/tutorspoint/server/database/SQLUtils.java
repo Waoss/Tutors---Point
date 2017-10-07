@@ -463,4 +463,34 @@ public class SQLUtils {
 
         return result;
     }
+
+    public static void updateIsSentForUser(final String username) throws Throwable {
+
+        Vector<Integer> result = getSubscriptionIdsBySubscriber(username);
+        result.forEach(id -> {
+            try {
+                final PreparedStatement preparedStatement = connection.prepareStatement("" +
+                        "UPDATE MAIN.NOTIFICATIONS SET ISSENT=? WHERE SUBSCRIPTIONID=?");
+                preparedStatement.setBoolean(1, true);
+                preparedStatement.setInt(2, id);
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public static Vector<Integer> getSubscriptionIdsBySubscriber(final String subscriber) throws Throwable {
+        Vector<Integer> result = new Vector<>();
+        final PreparedStatement preparedStatement = connection.prepareStatement("" +
+                "SELECT MAIN.SUBSCRIPTIONS.SUBSCRIPTIONID FROM MAIN.SUBSCRIPTIONS WHERE SUBSCRIBER=?");
+        preparedStatement.setString(1, subscriber);
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            result.add(resultSet.getInt("subscriptionid"));
+        }
+
+        return result;
+    }
+
 }

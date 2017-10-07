@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
@@ -95,7 +96,7 @@ public class SearchVideoTabLayoutController {
         final GenericResponsiveTask<Video[]> getVideosByUploader = new GenericResponsiveTask<>(
                 new URL(System.getProperty("com.mnnit.tutorspoint.server.url") +
                         "/getVideosByUploader?uploader=" +
-                        uploaderName), Video[].class
+                        URLEncoder.encode(uploaderName, "utf-8")), Video[].class
         );
 
         new Thread(getVideosByUploader).start();

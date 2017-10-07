@@ -2,6 +2,7 @@ package com.mnnit.tutorspoint;
 
 import com.mnnit.tutorspoint.core.*;
 import com.mnnit.tutorspoint.net.NotificationTask;
+import com.mnnit.tutorspoint.net.UpdateIsSentTask;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
@@ -96,7 +97,29 @@ public final class LoginLayoutController implements Initializable {
             StringBuilder stringBuilder = new StringBuilder();
             for (int i = 0; i < notifications.length; i++) {
                 Notification notification = notifications[i];
-                stringBuilder.append(notification.getMessage() + "\n");
+                if (!notification.isSent()) {
+                    stringBuilder.append(notification.getMessage()).append("\n");
+                    notification.setSent(true);
+                }
+            }
+
+            if (!stringBuilder.toString().isEmpty()) {
+                new Alert(Alert.AlertType.INFORMATION, stringBuilder.toString()).showAndWait();
+            }
+
+            UpdateIsSentTask updateIsSentTask = new UpdateIsSentTask(
+                    System.getProperty("com.mnnit.tutorspoint.client.username"));
+
+            new Thread(updateIsSentTask).start();
+
+            while (updateIsSentTask.isRunning()) {
+                wait();
+            }
+
+            if (updateIsSentTask.get()) {
+                LOGGER.info("Everything went well!");
+            } else {
+                LOGGER.info("Something went wrong!");
             }
 
         } catch (IOException | InterruptedException | ExecutionException e) {

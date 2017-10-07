@@ -6,7 +6,9 @@ import com.mnnit.tutorspoint.core.video.VideoCategory;
 import com.mnnit.tutorspoint.net.GenericResponsiveTask;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -15,6 +17,7 @@ import java.util.concurrent.ExecutionException;
 
 public class InProgressTabLayoutController implements Initializable {
     public VideoCategoryView inProgressView;
+    public Button reloadButton;
 
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
@@ -45,5 +48,9 @@ public class InProgressTabLayoutController implements Initializable {
             e.printStackTrace();
         }
         return FXCollections.emptyObservableList();
+    }
+
+    public void reloadOnAction(ActionEvent actionEvent) {
+        inProgressView.setItems(getInProgressVideos(System.getProperty("com.mnnit.tutorspoint.client.username")));
     }
 }
