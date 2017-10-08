@@ -19,8 +19,13 @@ public class SignUpLayoutController {
     private ToggleGroup toggleGroup;
     private String type = "STUDENT";
     private Stage signUpStage;
+    private boolean isTypeSelected = false;
 
     public void signUpButtonOnAction(ActionEvent actionEvent) {
+        if (!isTypeSelected) {
+            new Alert(Alert.AlertType.ERROR, "Please select at least one type").showAndWait();
+            return;
+        }
         UserType userType;
         if (type.equals("STUDENT")) {
             userType = UserType.STUDENT;
@@ -56,6 +61,7 @@ public class SignUpLayoutController {
 
     public void lateInitialize() {
         toggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            isTypeSelected = true;
             RadioButton radioButton = (RadioButton) newValue.getToggleGroup().getSelectedToggle();
             type = radioButton.getText();
         });
