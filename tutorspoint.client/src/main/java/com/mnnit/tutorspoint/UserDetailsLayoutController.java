@@ -66,9 +66,8 @@ public class UserDetailsLayoutController implements Initializable {
         AnchorPane anchorPane = fxmlLoader.load();
         UploadVideoLayoutController controller = fxmlLoader.getController();
         if (userType == UserType.STUDENT) {
-            controller.getMessageLabel().setText(
-                    "Sorry! As a student, you cannot upload videos!\n" +
-                            "However you can watch some cool videos under the \n'watch videos' tab!");
+            controller.getMessageLabel().setText("NOT ALLOWED AS A STUDENT");
+
         } else {
             controller.getMessageLabel().setText("Here you can upload videos");
             controller.uploadFileButton.setVisible(true);
@@ -110,6 +109,7 @@ public class UserDetailsLayoutController implements Initializable {
     private AnchorPane getToWatchTabLayout() throws IOException {
         return FXMLLoader.load(getClass().getResource("/layout/ToWatchTabLayout.fxml"));
     }
+
     List<Video> getVideos(final String url) {
         try {
             final URLConnection urlConnection = getURLConnection(url);

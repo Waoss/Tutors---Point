@@ -6,7 +6,8 @@
             stylesheets="@style/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.121"
             fx:controller="com.mnnit.tutorspoint.UploadVideoLayoutController">
     <children>
-        <Label fx:id="messageLabel" layoutX="35.0" layoutY="128.0" prefHeight="94.0" prefWidth="519.0" text="Label"/>
+        <Label fx:id="messageLabel" styleClass="label" stylesheets="@style/MainStyle.css" layoutX="35.0" layoutY="128.0"
+               prefHeight="94.0" prefWidth="519.0" text="Label"/>
         <Button fx:id="uploadFileButton" defaultButton="true" layoutX="450.0" layoutY="76.0" mnemonicParsing="false"
                 onAction="#uploadFileButtonOnAction" text="Upload File" visible="false"/>
         <TextField fx:id="videoCategoryTextField" layoutX="392.0" layoutY="163.0" promptText="Enter Video Category"
