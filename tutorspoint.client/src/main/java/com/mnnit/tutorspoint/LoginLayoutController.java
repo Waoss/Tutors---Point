@@ -3,6 +3,7 @@ package com.mnnit.tutorspoint;
 import com.mnnit.tutorspoint.core.*;
 import com.mnnit.tutorspoint.net.NotificationTask;
 import com.mnnit.tutorspoint.net.UpdateIsSentTask;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
@@ -14,7 +15,6 @@ import javafx.stage.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
 
@@ -64,8 +64,14 @@ public final class LoginLayoutController implements Initializable {
      */
     @FXML
     public void loginButtonOnAction(ActionEvent actionEvent) {
-        User user = new UserBuilder().setUsername(usernameTextField.getText()).setPassword(
-                passwordTextField.getText()).setUserType(getUserType()).createUser();
+        User user = new UserBuilder()
+                .setUsername(usernameTextField.getText())
+                .setPassword(passwordTextField.getText())
+                .setUserType(getUserType())
+                .createUser();
+        System.setProperty("com.mnnit.tutorspoint.client.username", user.getUsername());
+        System.setProperty("com.mnnit.tutorspoint.client.usertype", user.getUserType().toString());
+        System.setProperty("com.mnnit.tutorspoint.client.password", user.getPassword());
         try {
             Stage stage = (Stage) loginButton.getParent().getScene().getWindow();
             Scene scene = new Scene(loadUserDetailsLayout(user));
@@ -84,45 +90,45 @@ public final class LoginLayoutController implements Initializable {
             NotificationTask notificationTask = new NotificationTask(
                     System.getProperty("com.mnnit.tutorspoint.client.username"));
 
-            new Thread(notificationTask).start();
+            Thread notificationThread = new Thread(notificationTask);
+            notificationThread.setDaemon(true);
+            notificationThread.start();
 
-            while (notificationTask.isRunning()) {
-                wait();
-            }
-
-            Notification[] notifications = notificationTask.get();
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i = 0; i < notifications.length; i++) {
-                Notification notification = notifications[i];
-                if (!notification.isSent()) {
-                    stringBuilder.append(notification.getMessage()).append("\n");
-                    notification.setSent(true);
+            Platform.runLater(() -> {
+                Notification[] notifications = notificationTask.getNotifications();
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int i = 0; i < notifications.length; i++) {
+                    Notification notification = notifications[i];
+                    if (!notification.isSent()) {
+                        stringBuilder.append(notification.getMessage()).append("\n");
+                        notification.setSent(true);
+                    }
                 }
-            }
-
-            if (!stringBuilder.toString().isEmpty()) {
-                new Alert(Alert.AlertType.INFORMATION, stringBuilder.toString()).showAndWait();
-            }
+                if (!stringBuilder.toString().isEmpty()) {
+                    new Alert(Alert.AlertType.INFORMATION, stringBuilder.toString()).showAndWait();
+                }
+            });
 
             UpdateIsSentTask updateIsSentTask = new UpdateIsSentTask(
                     System.getProperty("com.mnnit.tutorspoint.client.username"));
 
-            new Thread(updateIsSentTask).start();
+            Thread updateIsSentThread = new Thread(updateIsSentTask);
+            updateIsSentThread.setDaemon(true);
+            updateIsSentThread.start();
 
-            while (updateIsSentTask.isRunning()) {
-                wait();
-            }
+            Platform.runLater(() -> {
+                if (updateIsSentTask.isSent()) {
+                    LOGGER.info("Everything went well!");
+                } else {
+                    LOGGER.info("Something went wrong!");
+                }
+            });
 
-            if (updateIsSentTask.get()) {
-                LOGGER.info("Everything went well!");
-            } else {
-                LOGGER.info("Something went wrong!");
-            }
-
-        } catch (IOException | InterruptedException | ExecutionException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     /**
      * Returns the user type of the login layout

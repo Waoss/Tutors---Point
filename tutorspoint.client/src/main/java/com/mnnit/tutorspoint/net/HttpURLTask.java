@@ -34,5 +34,4 @@ public abstract class HttpURLTask<T> extends Task<T> {
     public void setRequestMethod(final String method) throws ProtocolException {
         httpURLConnection.setRequestMethod(method);
     }
-
 }

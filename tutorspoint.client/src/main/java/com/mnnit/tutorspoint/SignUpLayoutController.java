@@ -37,10 +37,6 @@ public class SignUpLayoutController {
                 .setPassword(passwordTextField.getText())
                 .setUserType(userType)
                 .createUser();
-        System.setProperty("com.mnnit.tutorspoint.client.username", user.getUsername());
-        System.setProperty("com.mnnit.tutorspoint.client.usertype", user.getUserType().toString());
-        System.setProperty("com.mnnit.tutorspoint.client.password", user.getPassword());
-
         try {
             InsertUserTask insertUserTask = new InsertUserTask(user);
             new Thread(insertUserTask).start();
