@@ -385,16 +385,11 @@ public class VideoLayoutController implements Initializable {
     public void deleteLikeOnAction(ActionEvent actionEvent) throws Throwable {
         DeleteLikeTask deleteLikeTask = new DeleteLikeTask(video.get().getVideoId());
         Thread deleteLikeThread = new Thread(deleteLikeTask);
+        deleteLikeThread.setDaemon(true);
         deleteLikeThread.start();
-
-        boolean isDeleted = deleteLikeTask.get();
-        if (isDeleted) {
-            new Alert(Alert.AlertType.INFORMATION, "Your like(s) have been deleted")
-                    .showAndWait();
-        } else {
-            new Alert(Alert.AlertType.ERROR, "Some error occurred").showAndWait();
-        }
-
+        
+        Platform.runLater(() -> new Alert(Alert.AlertType.INFORMATION, "Your like(s) have been deleted")
+                .showAndWait());
     }
 
     public void deleteCommentOnAction(ActionEvent actionEvent) throws Throwable {
