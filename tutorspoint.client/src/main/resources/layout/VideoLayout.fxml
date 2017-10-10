@@ -10,10 +10,10 @@
     <Label fx:id="videoNameLabel" layoutX="14.0" layoutY="399.0" prefHeight="59.0" prefWidth="219.0"
            text="\${videoName}"/>
     <Label fx:id="likesLabel" layoutX="497.0" layoutY="420.0" text="\${likes}"/>
-    <Button fx:id="playButton" layoutX="134.0" layoutY="480.0" mnemonicParsing="false" onAction="#playButtonOnAction"
+    <Button fx:id="playButton" layoutX="25.0" layoutY="480.0" mnemonicParsing="false" onAction="#playButtonOnAction"
             text="&gt;"/>
-    <Button fx:id="pauseButton" layoutX="194.0" layoutY="480.0" mnemonicParsing="false"
-            onAction="#pauseButtonOnAction"/>
+    <Button fx:id="pauseButton" layoutX="140.0" layoutY="480.0" mnemonicParsing="false" onAction="#pauseButtonOnAction"
+            text="| |"/>
     <Button fx:id="stopButton" layoutX="80.0" layoutY="480.0" mnemonicParsing="false" onAction="#stopButtonOnAction">
         <graphic>
             <Rectangle fill="white" height="10" width="10"/>
@@ -21,20 +21,24 @@
     </Button>
     <Label fx:id="timeLabel" layoutX="49.0" layoutY="396.0"/>
     <Slider fx:id="slider" layoutX="8.0" layoutY="382.0" prefHeight="14.0" prefWidth="950.0"/>
-    <Button fx:id="toWatch" layoutX="248.0" layoutY="480.0" mnemonicParsing="false" onAction="#toWatchOnAction"
+    <Button fx:id="toWatch" layoutX="25.0" layoutY="526.0" mnemonicParsing="false" onAction="#toWatchOnAction"
             text="To-Watch"/>
-    <Button fx:id="addTag" layoutX="328.0" layoutY="480.0" mnemonicParsing="false" onAction="#addTagOnAction"
+    <Button fx:id="addTag" layoutX="124.0" layoutY="526.0" mnemonicParsing="false" onAction="#addTagOnAction"
             text="Add tag"/>
-    <Button fx:id="deleteVideo" layoutX="404.0" layoutY="480.0" mnemonicParsing="false" onAction="#deleteVideoOnAction"
+    <Button fx:id="deleteVideo" layoutX="208.0" layoutY="480.0" mnemonicParsing="false" onAction="#deleteVideoOnAction"
             text="Delete"/>
-    <Button fx:id="like" layoutX="471.0" layoutY="480.0" mnemonicParsing="false" onAction="#likeOnAction" text="Like"/>
-    <Button fx:id="commentButton" layoutX="516.0" layoutY="480.0" mnemonicParsing="false"
+    <Button fx:id="like" layoutX="300.0" layoutY="480.0" mnemonicParsing="false" onAction="#likeOnAction" text="Like"/>
+    <Button fx:id="commentButton" layoutX="383.0" layoutY="480.0" mnemonicParsing="false"
             onAction="#commentButtonOnAction" text="Comment"/>
-    <Button fx:id="showComments" layoutX="600.0" layoutY="480.0" mnemonicParsing="false"
+    <Button fx:id="showComments" layoutX="497.0" layoutY="480.0" mnemonicParsing="false"
             onAction="#showCommentsOnAction" text="Show Comments"/>
-    <Button fx:id="showTags" layoutX="729.0" layoutY="480.0" mnemonicParsing="false" onAction="#showTagsOnAction"
+    <Button fx:id="showTags" layoutX="498.0" layoutY="526.0" mnemonicParsing="false" onAction="#showTagsOnAction"
             text="Show Tags"/>
-    <Button fx:id="subscribeButton" layoutX="828.0" layoutY="480.0" mnemonicParsing="false"
+    <Button fx:id="subscribeButton" layoutX="661.0" layoutY="480.0" mnemonicParsing="false"
             onAction="#subscribeOnAction" text="Subscribe to Uploader"/>
     <Label fx:id="uploaderLabel" layoutX="729.0" layoutY="420.0" text="\\${uploader}"/>
+    <Button fx:id="deleteLikeButton" layoutX="233.0" layoutY="526.0" mnemonicParsing="false"
+            onAction="#deleteLikeOnAction" text="Delete Like"/>
+    <Button fx:id="deleteCommentButton" layoutX="346.0" layoutY="526.0" mnemonicParsing="false"
+            onAction="#deleteCommentOnAction" text="Delete Comment"/>
 </AnchorPane>

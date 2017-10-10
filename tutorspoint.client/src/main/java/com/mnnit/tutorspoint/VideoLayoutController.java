@@ -5,6 +5,7 @@ import com.mnnit.tutorspoint.core.todo.Todo;
 import com.mnnit.tutorspoint.core.video.*;
 import com.mnnit.tutorspoint.net.*;
 import com.mnnit.tutorspoint.util.ExceptionDialog;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -46,6 +47,8 @@ public class VideoLayoutController implements Initializable {
     public Button showTags;
     public Button subscribeButton;
     public Label uploaderLabel;
+    public Button deleteLikeButton;
+    public Button deleteCommentButton;
     /**
      * Represents the url of the server from where the video can be retrieved.
      * For example, "http://localhost:8000/",so that + 33(assumed video ID) would give "http://localhost:8000/33.vid".
@@ -217,19 +220,13 @@ public class VideoLayoutController implements Initializable {
                         new Alert(Alert.AlertType.INFORMATION, "Deleting " + getVideo().getName()).showAndWait();
                         try {
                             final DeleteVideoTask deleteVideoTask = new DeleteVideoTask(getVideo().getVideoId());
-                            new Thread(deleteVideoTask).start();
-                            while (deleteVideoTask.isRunning()) {
-                                LOGGER.info("Waiting for deletion.");
-                                LOGGER.warning(
-                                        "Execution reaching here means that it is taking too much time for the other thread to send request to server." +
-                                                "This might be due to a bad internet connection");
-                            }
-                            if (deleteVideoTask.get()) {
-                                new Alert(Alert.AlertType.INFORMATION, "Video deleted successfully").showAndWait();
-                            } else {
-                                new Alert(Alert.AlertType.ERROR, "Internal server error").showAndWait();
-                            }
-                        } catch (IOException | InterruptedException | ExecutionException e) {
+                            Thread deleteVideoThread = new Thread(deleteVideoTask);
+                            deleteVideoThread.setDaemon(true);
+                            deleteVideoThread.start();
+
+                            Platform.runLater(() -> new Alert(Alert.AlertType.INFORMATION, "Video deleted successfully")
+                                    .showAndWait());
+                        } catch (IOException e) {
                             LOGGER.log(Level.SEVERE, "Some error occured", e);
                             new ExceptionDialog(e).showAndWait();
                         }
@@ -383,5 +380,30 @@ public class VideoLayoutController implements Initializable {
         label.setOnMouseReleased(mouseEvent -> popup.hide());
         popup.getContent().add(label);
         return popup;
+    }
+
+    public void deleteLikeOnAction(ActionEvent actionEvent) throws Throwable {
+        DeleteLikeTask deleteLikeTask = new DeleteLikeTask(video.get().getVideoId());
+        Thread deleteLikeThread = new Thread(deleteLikeTask);
+        deleteLikeThread.start();
+
+        boolean isDeleted = deleteLikeTask.get();
+        if (isDeleted) {
+            new Alert(Alert.AlertType.INFORMATION, "Your like(s) have been deleted")
+                    .showAndWait();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Some error occurred").showAndWait();
+        }
+
+    }
+
+    public void deleteCommentOnAction(ActionEvent actionEvent) throws Throwable {
+        DeleteCommentTask deleteCommentTask = new DeleteCommentTask(video.get().getVideoId(),
+                System.getProperty("com.mnnit.tutorspoint.client.username"));
+        Thread deleteCommentThread = new Thread(deleteCommentTask);
+        deleteCommentThread.setDaemon(true);
+        deleteCommentThread.start();
+
+        Platform.runLater(() -> new Alert(Alert.AlertType.INFORMATION, "Comment(s) deleted").showAndWait());
     }
 }

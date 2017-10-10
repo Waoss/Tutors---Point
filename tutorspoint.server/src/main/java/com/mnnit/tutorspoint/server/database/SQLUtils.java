@@ -493,4 +493,19 @@ public class SQLUtils {
         return result;
     }
 
+    public static void deleteLike(final int videoId, final String username) throws Throwable {
+        final PreparedStatement preparedStatement = connection.prepareStatement("" +
+                "DELETE FROM MAIN.LIKES WHERE VIDEOID=? AND USERNAME=?");
+        preparedStatement.setInt(1, videoId);
+        preparedStatement.setString(2, username);
+        preparedStatement.executeUpdate();
+    }
+
+    public static void deleteComment(final int videoId, final String username) throws Throwable {
+        final PreparedStatement preparedStatement = connection
+                .prepareStatement("DELETE FROM MAIN.COMMENTS WHERE VIDEOID=? AND COMMENTER=?");
+        preparedStatement.setInt(1, videoId);
+        preparedStatement.setString(2, username);
+        preparedStatement.executeUpdate();
+    }
 }
