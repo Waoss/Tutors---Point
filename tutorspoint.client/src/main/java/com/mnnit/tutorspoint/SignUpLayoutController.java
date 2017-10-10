@@ -2,12 +2,12 @@ package com.mnnit.tutorspoint;
 
 import com.mnnit.tutorspoint.core.*;
 import com.mnnit.tutorspoint.net.InsertUserTask;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.stage.*;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutionException;
 
 public class SignUpLayoutController {
 
@@ -39,17 +39,16 @@ public class SignUpLayoutController {
                 .createUser();
         try {
             InsertUserTask insertUserTask = new InsertUserTask(user);
-            new Thread(insertUserTask).start();
-            while (insertUserTask.isRunning()) {
-                wait();
-            }
-            if (insertUserTask.get()) {
+            Thread insertUserThread = new Thread(insertUserTask);
+            insertUserThread.setDaemon(true);
+            insertUserThread.start();
+
+            Platform.runLater(() -> {
                 new Alert(Alert.AlertType.INFORMATION, "User successfully signed up!").showAndWait();
                 signUpStage.close();
-            } else {
-                new Alert(Alert.AlertType.ERROR, "Something went wrong!").showAndWait();
-            }
-        } catch (IOException | InterruptedException | ExecutionException e) {
+            });
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

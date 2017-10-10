@@ -508,4 +508,24 @@ public class SQLUtils {
         preparedStatement.setString(2, username);
         preparedStatement.executeUpdate();
     }
+
+    public static List<User> getUsersByUsername(final String username) throws Throwable {
+        final Vector<User> result = new Vector<>();
+        final PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT * FROM MAIN.USERS WHERE USERNAME=?");
+        preparedStatement.setString(1, username);
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            String type = resultSet.getString("userype");
+            UserType userType;
+            if (type.equals("STUDENT")) {
+                userType = UserType.STUDENT;
+            } else {
+                userType = UserType.TEACHER;
+            }
+            result.add(new User(resultSet.getString("username"),
+                    resultSet.getString("password"), userType));
+        }
+        return result;
+    }
 }

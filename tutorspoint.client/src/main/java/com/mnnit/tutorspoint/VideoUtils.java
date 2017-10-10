@@ -15,14 +15,19 @@ public class VideoUtils {
         final ObservableList<AnchorPane> result = FXCollections.observableArrayList();
         videos.forEach(video -> {
             try {
-                final FXMLLoader fxmlLoader = new FXMLLoader(
-                        WatchVideosLayoutController.class.getResource("/layout/VideoLayout.fxml"));
-                final AnchorPane anchorPane = fxmlLoader.load();
-                result.add(anchorPane);
-                final VideoLayoutController controller = fxmlLoader.getController();
-                //Fixme:Generic Server URL
-                controller.setUrl(System.getProperty("com.mnnit.tutorspoint.server.url") + "/");
-                controller.setVideo(video);
+                if (video != null) {
+                    final FXMLLoader fxmlLoader = new FXMLLoader(
+                            WatchVideosLayoutController.class.getResource("/layout/VideoLayout.fxml"));
+                    final AnchorPane anchorPane = fxmlLoader.load();
+
+                    final VideoLayoutController controller = fxmlLoader.getController();
+                    //Fixme:Generic Server URL
+                    controller.setUrl(System.getProperty("com.mnnit.tutorspoint.server.url") + "/");
+                    controller.setVideo(video);
+                    if (video.getUsername() != null) {
+                        result.add(anchorPane);
+                    }
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }

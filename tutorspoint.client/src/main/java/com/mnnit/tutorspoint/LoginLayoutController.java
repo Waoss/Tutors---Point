@@ -1,8 +1,7 @@
 package com.mnnit.tutorspoint;
 
 import com.mnnit.tutorspoint.core.*;
-import com.mnnit.tutorspoint.net.NotificationTask;
-import com.mnnit.tutorspoint.net.UpdateIsSentTask;
+import com.mnnit.tutorspoint.net.*;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
@@ -14,7 +13,8 @@ import javafx.stage.*;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
 
@@ -69,6 +69,24 @@ public final class LoginLayoutController implements Initializable {
                 .setPassword(passwordTextField.getText())
                 .setUserType(getUserType())
                 .createUser();
+
+        try {
+            GetUserTask getUserTask = new GetUserTask(user.getUsername());
+            Thread getUserThread = new Thread(getUserTask);
+            getUserThread.setDaemon(true);
+            getUserThread.start();
+
+            User[] users = getUserTask.get();
+            List<User> list = Arrays.asList(users);
+            if (list.isEmpty()) {
+                new Alert(Alert.AlertType.ERROR, "You don't have an account. Please make sure" +
+                        " you have an account before logging on Tutors Point.").showAndWait();
+                return;
+            }
+        } catch (IOException | InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+
         System.setProperty("com.mnnit.tutorspoint.client.username", user.getUsername());
         System.setProperty("com.mnnit.tutorspoint.client.usertype", user.getUserType().toString());
         System.setProperty("com.mnnit.tutorspoint.client.password", user.getPassword());
