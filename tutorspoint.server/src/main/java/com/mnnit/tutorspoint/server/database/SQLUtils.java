@@ -528,4 +528,58 @@ public class SQLUtils {
         }
         return result;
     }
+
+    public static void updateRating(final int rating, final String category) throws Throwable {
+        final PreparedStatement preparedStatement = connection
+                .prepareStatement("UPDATE MAIN.CATEGORIES SET RATING=?,NUMBER=? WHERE NAME=?");
+
+        VideoCategory videoCategory = getCategoryByName(category);
+        int number = getNumberByCategory(category);
+        if (number == 0) {
+            //not rated yet.
+            preparedStatement.setInt(1, rating);
+        } else {
+            //already rated at least once.
+            int newRating = ((videoCategory.getRating() * number) + rating) / (number + 1);
+            preparedStatement.setInt(1, newRating);
+        }
+        preparedStatement.setInt(2, number + 1);
+        preparedStatement.setString(3, category);
+        preparedStatement.executeUpdate();
+    }
+
+    public static Integer getNumberByCategory(final String category) throws Throwable {
+        final PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT MAIN.CATEGORIES.NUMBER FROM MAIN.CATEGORIES WHERE NAME=?");
+        preparedStatement.setString(1, category);
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            return resultSet.getInt("number");
+        }
+        return 0;
+    }
+
+    public static List<VideoCategory> getCategoriesByName(final String name) throws Throwable {
+        Vector<VideoCategory> vector = new Vector<>();
+        final PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT * FROM MAIN.CATEGORIES WHERE NAME=?");
+        preparedStatement.setString(1, name);
+        final ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            vector.add(new VideoCategory(name,
+                    resultSet.getInt("rating"),
+                    resultSet.getString("parent")));
+        }
+
+        return vector;
+    }
+
+    public static void insertCategory(final String name, final String parent) throws Throwable {
+        final PreparedStatement preparedStatement = connection
+                .prepareStatement("INSERT INTO MAIN.CATEGORIES (NAME, PARENT) VALUES (?,?)");
+        preparedStatement.setString(1, name);
+        preparedStatement.setString(2, parent);
+        preparedStatement.executeUpdate();
+    }
+
 }

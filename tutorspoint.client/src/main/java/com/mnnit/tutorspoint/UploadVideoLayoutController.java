@@ -1,6 +1,9 @@
 package com.mnnit.tutorspoint;
 
 import com.mnnit.tutorspoint.core.video.Video;
+import com.mnnit.tutorspoint.core.video.VideoCategory;
+import com.mnnit.tutorspoint.net.FetchCategoryTask;
+import com.mnnit.tutorspoint.net.InsertCategoryTask;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -8,8 +11,9 @@ import javafx.scene.control.*;
 import javafx.stage.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.ZonedDateTime;
-import java.util.Collections;
+import java.util.*;
 import java.util.logging.Logger;
 
 @FXMLController
@@ -19,6 +23,7 @@ public class UploadVideoLayoutController {
     public Label messageLabel;
     public Button uploadFileButton;
     public TextField videoCategoryTextField;
+    public TextField parentCategoryTextField;
     private FileChooser fileChooser = new FileChooser();
 
     public Label getMessageLabel() {
@@ -58,6 +63,8 @@ public class UploadVideoLayoutController {
             LOGGER.info("The video is uploading.");
         }
         LOGGER.info("Video uploaded");*/
+
+
         Task<Void> uploadTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
@@ -73,5 +80,29 @@ public class UploadVideoLayoutController {
         Platform.runLater(
                 () -> new Alert(Alert.AlertType.INFORMATION, "The video was uploaded successfully").showAndWait());
 
+
+        FetchCategoryTask fetchCategoryTask = new FetchCategoryTask(video.getCategory());
+        Thread fetchCategoryThread = new Thread(fetchCategoryTask);
+        fetchCategoryThread.setDaemon(true);
+        fetchCategoryThread.start();
+
+        Platform.runLater(() -> {
+            VideoCategory[] videoCategories = fetchCategoryTask.getVideoCategories();
+            List<VideoCategory> list = Arrays.asList(videoCategories);
+            if (list.isEmpty()) {
+                String parent = parentCategoryTextField.getText();
+                try {
+                    InsertCategoryTask insertCategoryTask = new InsertCategoryTask(video.getCategory(), parent);
+                    Thread insertCategoryThread = new Thread(insertCategoryTask);
+                    insertCategoryThread.setDaemon(true);
+                    insertCategoryThread.start();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
+
+
 }

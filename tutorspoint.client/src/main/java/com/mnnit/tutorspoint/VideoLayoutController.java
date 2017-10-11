@@ -49,6 +49,8 @@ public class VideoLayoutController implements Initializable {
     public Label uploaderLabel;
     public Button deleteLikeButton;
     public Button deleteCommentButton;
+    public Label showCategoryLabel;
+    public Button rateCourseButton;
     /**
      * Represents the url of the server from where the video can be retrieved.
      * For example, "http://localhost:8000/",so that + 33(assumed video ID) would give "http://localhost:8000/33.vid".
@@ -72,6 +74,7 @@ public class VideoLayoutController implements Initializable {
             videoNameLabel.setText(newValue.getName());
             likesLabel.setText(String.valueOf(newValue.getLikes().size()));
             uploaderLabel.setText(newValue.getUsername());
+            showCategoryLabel.setText(newValue.getCategory());
         });
 
     }
@@ -214,6 +217,14 @@ public class VideoLayoutController implements Initializable {
     }
 
     public void deleteVideoOnAction(ActionEvent actionEvent) {
+        String USERNAME = System.getProperty("com.mnnit.tutorspoint.client.username");
+        if (!USERNAME.equals("admin")) {
+            if (!USERNAME.equals(video.get().getUsername())) {
+                new Alert(Alert.AlertType.ERROR,
+                        "You don't have permissions for this action").showAndWait();
+                return;
+            }
+        }
         new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this video?").showAndWait()
                 .ifPresent(buttonType -> {
                     if (buttonType == ButtonType.OK) {
@@ -383,16 +394,32 @@ public class VideoLayoutController implements Initializable {
     }
 
     public void deleteLikeOnAction(ActionEvent actionEvent) throws Throwable {
+        String USERNAME = System.getProperty("com.mnnit.tutorspoint.client.username");
+        if (!USERNAME.equals("admin")) {
+            if (!USERNAME.equals(video.get().getUsername())) {
+                new Alert(Alert.AlertType.ERROR,
+                        "You don't have permissions for this action").showAndWait();
+                return;
+            }
+        }
         DeleteLikeTask deleteLikeTask = new DeleteLikeTask(video.get().getVideoId());
         Thread deleteLikeThread = new Thread(deleteLikeTask);
         deleteLikeThread.setDaemon(true);
         deleteLikeThread.start();
-        
+
         Platform.runLater(() -> new Alert(Alert.AlertType.INFORMATION, "Your like(s) have been deleted")
                 .showAndWait());
     }
 
     public void deleteCommentOnAction(ActionEvent actionEvent) throws Throwable {
+        String USERNAME = System.getProperty("com.mnnit.tutorspoint.client.username");
+        if (!USERNAME.equals("admin")) {
+            if (!USERNAME.equals(video.get().getUsername())) {
+                new Alert(Alert.AlertType.ERROR,
+                        "You don't have permissions for this action").showAndWait();
+                return;
+            }
+        }
         DeleteCommentTask deleteCommentTask = new DeleteCommentTask(video.get().getVideoId(),
                 System.getProperty("com.mnnit.tutorspoint.client.username"));
         Thread deleteCommentThread = new Thread(deleteCommentTask);
@@ -400,5 +427,28 @@ public class VideoLayoutController implements Initializable {
         deleteCommentThread.start();
 
         Platform.runLater(() -> new Alert(Alert.AlertType.INFORMATION, "Comment(s) deleted").showAndWait());
+    }
+
+    public void rateCourseOnAction(ActionEvent actionEvent) throws Throwable {
+        TextInputDialog textInputDialog = new TextInputDialog();
+        textInputDialog.setTitle("Rate Course");
+        textInputDialog.setContentText("Enter a rating for the course (1 - 5)");
+        final String[] rating = new String[1];
+        textInputDialog.showAndWait().ifPresent(s -> {
+            rating[0] = s;
+            int r = Integer.parseInt(rating[0]);
+            if ((r < 1) || (r > 5)) {
+                new Alert(Alert.AlertType.ERROR, "Enter a value between 1 and 5").showAndWait();
+            }
+        });
+        int rate = Integer.parseInt(rating[0]);
+        UpdateRatingTask updateRatingTask = new UpdateRatingTask(rate, video.get().getCategory());
+        Thread updateRatingThread = new Thread(updateRatingTask);
+        updateRatingThread.setDaemon(true);
+        updateRatingThread.start();
+
+        Platform.runLater(() ->
+                new Alert(Alert.AlertType.INFORMATION,
+                        "Rating updated for the course").showAndWait());
     }
 }

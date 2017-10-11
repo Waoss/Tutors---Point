@@ -9,6 +9,8 @@ import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.media.*;
+import javafx.scene.paint.*;
 import javafx.stage.*;
 
 import java.io.IOException;
@@ -26,6 +28,7 @@ import java.util.logging.Logger;
 public final class LoginLayoutController implements Initializable {
 
     public static final Logger LOGGER = Logger.getLogger(LoginLayoutController.class.getName());
+    public Button youtubeButton;
     /**
      * The login button
      */
@@ -231,5 +234,30 @@ public final class LoginLayoutController implements Initializable {
         controller.lateInitialize();
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void youtubeOnAction(ActionEvent actionEvent) {
+        TextInputDialog textInputDialog = new TextInputDialog();
+        textInputDialog.setContentText("Enter url of video!");
+        textInputDialog.setTitle("Youtube streaming!");
+        final String[] url = {"https://www.youtube.com/watch?v=wJnBTPUQS5A"};
+        textInputDialog.showAndWait().ifPresent(s -> url[0] = s);
+
+        Group group = new Group();
+        Media media = new Media(url[0]);
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+
+
+        MediaView mediaView = new MediaView(mediaPlayer);
+        AnchorPane anchorPane = new AnchorPane();
+        anchorPane.getChildren().add(mediaView);
+        mediaPlayer.setAutoPlay(true);
+        group.getChildren().add(anchorPane);
+        Scene scene = SceneBuilder.create().width(500).height(500).root(group).fill(Color.WHITE).build();
+
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+
     }
 }
