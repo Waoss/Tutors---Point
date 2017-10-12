@@ -9,8 +9,7 @@ import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.media.*;
-import javafx.scene.paint.*;
+import javafx.scene.web.*;
 import javafx.stage.*;
 
 import java.io.IOException;
@@ -240,23 +239,14 @@ public final class LoginLayoutController implements Initializable {
         TextInputDialog textInputDialog = new TextInputDialog();
         textInputDialog.setContentText("Enter url of video!");
         textInputDialog.setTitle("Youtube streaming!");
-        final String[] url = {"https://www.youtube.com/watch?v=wJnBTPUQS5A"};
+        final String[] url = {"https://www.youtube.com/embed?v=wJnBTPUQS5A"};
         textInputDialog.showAndWait().ifPresent(s -> url[0] = s);
 
-        Group group = new Group();
-        Media media = new Media(url[0]);
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-
-
-        MediaView mediaView = new MediaView(mediaPlayer);
-        AnchorPane anchorPane = new AnchorPane();
-        anchorPane.getChildren().add(mediaView);
-        mediaPlayer.setAutoPlay(true);
-        group.getChildren().add(anchorPane);
-        Scene scene = SceneBuilder.create().width(500).height(500).root(group).fill(Color.WHITE).build();
-
+        WebView webView = new WebView();
+        webView.getEngine().load("http://www.youtube.com/embed/utUPth77L_o?autoplay=1");
+        webView.setPrefSize(640, 390);
         Stage stage = new Stage();
-        stage.setScene(scene);
+        stage.setScene(new Scene(webView));
         stage.show();
 
     }

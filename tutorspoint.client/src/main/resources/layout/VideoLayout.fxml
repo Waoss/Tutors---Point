@@ -34,15 +34,15 @@
             onAction="#showCommentsOnAction" text="Show Comments"/>
     <Button fx:id="showTags" layoutX="498.0" layoutY="526.0" mnemonicParsing="false" onAction="#showTagsOnAction"
             text="Show Tags"/>
-    <Button fx:id="subscribeButton" layoutX="689.0" layoutY="480.0" mnemonicParsing="false"
+    <Button fx:id="subscribeButton" layoutX="641.0" layoutY="480.0" mnemonicParsing="false"
             onAction="#subscribeOnAction" text="Subscribe to Uploader"/>
     <Label fx:id="uploaderLabel" layoutX="729.0" layoutY="420.0" text="\\${uploader}"/>
     <Button fx:id="deleteLikeButton" layoutX="233.0" layoutY="526.0" mnemonicParsing="false"
             onAction="#deleteLikeOnAction" text="Delete Like"/>
     <Button fx:id="deleteCommentButton" layoutX="346.0" layoutY="526.0" mnemonicParsing="false"
             onAction="#deleteCommentOnAction" text="Delete Comment"/>
-    <Label fx:id="showCategoryLabel" layoutX="609.0" layoutY="527.0" prefHeight="24.0" prefWidth="97.0"
+    <Label fx:id="showCategoryLabel" layoutX="659.0" layoutY="527.0" prefHeight="24.0" prefWidth="97.0"
            text="\${category}"/>
-    <Button fx:id="rateCourseButton" layoutX="762.0" layoutY="526.0" mnemonicParsing="false"
+    <Button fx:id="rateCourseButton" layoutX="814.0" layoutY="480.0" mnemonicParsing="false"
             onAction="#rateCourseOnAction" text="Rate Course"/>
 </AnchorPane>

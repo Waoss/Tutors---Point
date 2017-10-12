@@ -5,6 +5,7 @@ import com.mnnit.tutorspoint.core.video.VideoCategory;
 import com.mnnit.tutorspoint.net.GetCategoriesTask;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
@@ -32,5 +33,9 @@ public class CategoriesTabLayoutController implements Initializable {
             wait();
         }
         return FXCollections.observableArrayList(getCategoriesTask.get());
+    }
+
+    public void reloadOnAction(ActionEvent actionEvent) throws Throwable {
+        categoriesListView.setItems(FXCollections.observableArrayList(getVideoCategoryList()));
     }
 }

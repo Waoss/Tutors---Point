@@ -72,6 +72,7 @@ public class UserDetailsLayoutController implements Initializable {
             controller.getMessageLabel().setText("Here you can upload videos");
             controller.uploadFileButton.setVisible(true);
             controller.videoCategoryTextField.setVisible(true);
+            controller.parentCategoryTextField.setVisible(true);
         }
         return anchorPane;
     }
