@@ -10,12 +10,12 @@
         <TextField fx:id="usernameTextField" layoutX="142.0" layoutY="94.0"/>
         <Label layoutX="46.0" layoutY="166.0" text="Password"/>
         <PasswordField fx:id="passwordTextField" layoutX="142.0" layoutY="162.0"/>
-        <Button fx:id="loginButton" layoutX="46.0" layoutY="210.0" mnemonicParsing="false"
+        <Button fx:id="loginButton" layoutX="175.0" layoutY="210.0" mnemonicParsing="false"
                 onAction="#loginButtonOnAction" text="Login"/>
         <Label layoutX="142.0" layoutY="35.0" styleClass="tutors-label" text="Tutors Login"/>
         <Hyperlink fx:id="signUpHyperlink" layoutX="149.0" layoutY="248.0" onAction="#hyperlinkOnAction"
                    text="Already a user! Sign Up!"/>
         <Button fx:id="youtubeButton" layoutX="149.0" layoutY="210.0" mnemonicParsing="false"
-                onAction="#youtubeOnAction" text="Watch Youtube Video"/>
+                onAction="#youtubeOnAction" text="Watch Youtube Video" visible="false"/>
     </children>
 </AnchorPane>
