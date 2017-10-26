@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://D:\Tutorspoint\tutorspoint.database\src\main\main.iml" filepath="D:\Tutorspoint\tutorspoint.database\src\main\main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/softablitz.iml" filepath="$PROJECT_DIR$/.idea/modules/softablitz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/softablitz_main.iml" filepath="$PROJECT_DIR$/.idea/modules/softablitz_main.iml" group="softablitz" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/softablitz_test.iml" filepath="$PROJECT_DIR$/.idea/modules/softablitz_test.iml" group="softablitz" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tutorspoint.client/tutorspoint.client.iml" filepath="$PROJECT_DIR$/.idea/modules/tutorspoint.client/tutorspoint.client.iml" group="tutorspoint.client" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tutorspoint.client/tutorspoint.client_main.iml" filepath="$PROJECT_DIR$/.idea/modules/tutorspoint.client/tutorspoint.client_main.iml" group="tutorspoint.client" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tutorspoint.client/tutorspoint.client_test.iml" filepath="$PROJECT_DIR$/.idea/modules/tutorspoint.client/tutorspoint.client_test.iml" group="tutorspoint.client" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tutorspoint.server/tutorspoint.server.iml" filepath="$PROJECT_DIR$/.idea/modules/tutorspoint.server/tutorspoint.server.iml" group="tutorspoint.server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tutorspoint.server/tutorspoint.server_main.iml" filepath="$PROJECT_DIR$/.idea/modules/tutorspoint.server/tutorspoint.server_main.iml" group="tutorspoint.server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tutorspoint.server/tutorspoint.server_test.iml" filepath="$PROJECT_DIR$/.idea/modules/tutorspoint.server/tutorspoint.server_test.iml" group="tutorspoint.server" />
+    </modules>
+  </component>
+</project>

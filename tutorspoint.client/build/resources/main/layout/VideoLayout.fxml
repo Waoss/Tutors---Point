@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.shape.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="700.0" prefWidth="1200.0"
+            xmlns="http://javafx.com/javafx/8.0.112" fx:controller="com.mnnit.tutorspoint.VideoLayoutController">
+    <MediaView fx:id="mediaView" fitHeight="400.0" fitWidth="600.0" layoutY="7.0"/>
+    <Label fx:id="videoNameLabel" layoutX="14.0" layoutY="399.0" prefHeight="59.0" prefWidth="219.0"
+           text="\${videoName}"/>
+    <Label fx:id="likesLabel" layoutX="497.0" layoutY="420.0" text="\${likes}"/>
+    <Button fx:id="playButton" layoutX="25.0" layoutY="480.0" mnemonicParsing="false" onAction="#playButtonOnAction"
+            text="&gt;"/>
+    <Button fx:id="pauseButton" layoutX="140.0" layoutY="480.0" mnemonicParsing="false" onAction="#pauseButtonOnAction"
+            text="| |"/>
+    <Button fx:id="stopButton" layoutX="80.0" layoutY="480.0" mnemonicParsing="false" onAction="#stopButtonOnAction">
+        <graphic>
+            <Rectangle fill="white" height="10" width="10"/>
+        </graphic>
+    </Button>
+    <Label fx:id="timeLabel" layoutX="49.0" layoutY="396.0"/>
+    <Slider fx:id="slider" layoutX="8.0" layoutY="382.0" prefHeight="14.0" prefWidth="950.0"/>
+    <Button fx:id="toWatch" layoutX="25.0" layoutY="526.0" mnemonicParsing="false" onAction="#toWatchOnAction"
+            text="To-Watch"/>
+    <Button fx:id="addTag" layoutX="124.0" layoutY="526.0" mnemonicParsing="false" onAction="#addTagOnAction"
+            text="Add tag"/>
+    <Button fx:id="deleteVideo" layoutX="208.0" layoutY="480.0" mnemonicParsing="false" onAction="#deleteVideoOnAction"
+            text="Delete"/>
+    <Button fx:id="like" layoutX="300.0" layoutY="480.0" mnemonicParsing="false" onAction="#likeOnAction" text="Like"/>
+    <Button fx:id="commentButton" layoutX="383.0" layoutY="480.0" mnemonicParsing="false"
+            onAction="#commentButtonOnAction" text="Comment"/>
+    <Button fx:id="showComments" layoutX="497.0" layoutY="480.0" mnemonicParsing="false"
+            onAction="#showCommentsOnAction" text="Show Comments"/>
+    <Button fx:id="showTags" layoutX="498.0" layoutY="526.0" mnemonicParsing="false" onAction="#showTagsOnAction"
+            text="Show Tags"/>
+    <Button fx:id="subscribeButton" layoutX="641.0" layoutY="480.0" mnemonicParsing="false"
+            onAction="#subscribeOnAction" text="Subscribe to Uploader"/>
+    <Label fx:id="uploaderLabel" layoutX="729.0" layoutY="420.0" text="\\${uploader}"/>
+    <Button fx:id="deleteLikeButton" layoutX="233.0" layoutY="526.0" mnemonicParsing="false"
+            onAction="#deleteLikeOnAction" text="Delete Like"/>
+    <Button fx:id="deleteCommentButton" layoutX="346.0" layoutY="526.0" mnemonicParsing="false"
+            onAction="#deleteCommentOnAction" text="Delete Comment"/>
+    <Label fx:id="showCategoryLabel" layoutX="659.0" layoutY="527.0" prefHeight="24.0" prefWidth="97.0"
+           text="\${category}"/>
+    <Button fx:id="rateCourseButton" layoutX="814.0" layoutY="480.0" mnemonicParsing="false"
+            onAction="#rateCourseOnAction" text="Rate Course"/>
+</AnchorPane>

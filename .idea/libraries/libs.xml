@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="libs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/gson-2.8.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/sqlite-jdbc-3.20.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/settings.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ideaLibSources/gson-2.8.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

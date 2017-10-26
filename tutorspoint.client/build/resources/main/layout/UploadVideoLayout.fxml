@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="700.0" prefWidth="1200.0" stylesheets="@style/MainStyle.css"
+            xmlns="http://javafx.com/javafx/8.0.112" fx:controller="com.mnnit.tutorspoint.UploadVideoLayoutController">
+    <children>
+        <Label fx:id="messageLabel" layoutX="35.0" layoutY="128.0" prefHeight="94.0" prefWidth="361.0"
+               styleClass="label" stylesheets="@style/MainStyle.css" text="Label"/>
+        <Button fx:id="uploadFileButton" defaultButton="true" layoutX="450.0" layoutY="76.0" mnemonicParsing="false"
+                onAction="#uploadFileButtonOnAction" text="Upload File" visible="false"/>
+        <TextField fx:id="videoCategoryTextField" layoutX="392.0" layoutY="163.0" promptText="Enter Video Category"
+                   visible="false"/>
+        <TextField fx:id="parentCategoryTextField" layoutX="392.0" layoutY="277.0" promptText="Enter parent Category"
+                   visible="false"/>
+    </children>
+</AnchorPane>

@@ -394,14 +394,6 @@ public class VideoLayoutController implements Initializable {
     }
 
     public void deleteLikeOnAction(ActionEvent actionEvent) throws Throwable {
-        String USERNAME = System.getProperty("com.mnnit.tutorspoint.client.username");
-        if (!USERNAME.equals("admin")) {
-            if (!USERNAME.equals(video.get().getUsername())) {
-                new Alert(Alert.AlertType.ERROR,
-                        "You don't have permissions for this action").showAndWait();
-                return;
-            }
-        }
         DeleteLikeTask deleteLikeTask = new DeleteLikeTask(video.get().getVideoId());
         Thread deleteLikeThread = new Thread(deleteLikeTask);
         deleteLikeThread.setDaemon(true);
@@ -412,14 +404,6 @@ public class VideoLayoutController implements Initializable {
     }
 
     public void deleteCommentOnAction(ActionEvent actionEvent) throws Throwable {
-        String USERNAME = System.getProperty("com.mnnit.tutorspoint.client.username");
-        if (!USERNAME.equals("admin")) {
-            if (!USERNAME.equals(video.get().getUsername())) {
-                new Alert(Alert.AlertType.ERROR,
-                        "You don't have permissions for this action").showAndWait();
-                return;
-            }
-        }
         DeleteCommentTask deleteCommentTask = new DeleteCommentTask(video.get().getVideoId(),
                 System.getProperty("com.mnnit.tutorspoint.client.username"));
         Thread deleteCommentThread = new Thread(deleteCommentTask);

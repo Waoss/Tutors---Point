@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="350.0" prefWidth="360.0"
+            xmlns="http://javafx.com/javafx/8.0.112" fx:controller="com.mnnit.tutorspoint.MainLayoutController"
+            stylesheets="@style/MainStyle.css">
+    <children>
+        <TabPane prefHeight="349.0" prefWidth="356.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab fx:id="studentLoginTab" text="Student Login"/>
+                <Tab fx:id="teacherLoginTab" text="Teacher Login"/>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>

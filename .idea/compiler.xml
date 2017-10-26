@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="softablitz_main" target="1.8" />
+      <module name="softablitz_test" target="1.8" />
+      <module name="tutorspoint.client_main" target="1.8" />
+      <module name="tutorspoint.client_test" target="1.8" />
+      <module name="tutorspoint.database_main" target="1.8" />
+      <module name="tutorspoint.database_test" target="1.8" />
+      <module name="tutorspoint.server_main" target="1.8" />
+      <module name="tutorspoint.server_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
+            fx:controller="com.mnnit.tutorspoint.ToWatchTabLayoutController"
+            prefHeight="700.0" prefWidth="1200.0">
+
+    <Button fx:id="reloadButton" AnchorPane.topAnchor="5.0" layoutX="14.0" layoutY="51.0" onAction="#reloadOnAction"
+            prefHeight="31.0"
+            prefWidth="108.0" text="Reload"/>
+    <ListView fx:id="toWatchVideosView" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0"
+              AnchorPane.bottomAnchor="0.0"
+              prefHeight="600.0" prefWidth="1100.0"/>
+
+</AnchorPane>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="tutorspoint.db">
+  <database-model serializer="dbm" rdbms="SQLITE" format-version="4.2">
+    <root id="1"/>
+    <schema id="2" parent="1" name="main">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <table id="3" parent="2" name="Categories"/>
+    <table id="4" parent="2" name="Comments"/>
+    <table id="5" parent="2" name="InProgress"/>
+    <table id="6" parent="2" name="Likes"/>
+    <table id="7" parent="2" name="Notifications"/>
+    <table id="8" parent="2" name="Subscriptions"/>
+    <table id="9" parent="2" name="Tags"/>
+    <table id="10" parent="2" name="Todos"/>
+    <table id="11" parent="2" name="Users"/>
+    <table id="12" parent="2" name="Videos"/>
+    <table id="13" parent="2" name="sqlite_master"/>
+    <table id="14" parent="2" name="sqlite_sequence"/>
+    <column id="15" parent="3" name="name">
+      <DataType>VARCHAR|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="16" parent="3" name="parent">
+      <Position>1</Position>
+      <DataType>VARCHAR|0</DataType>
+    </column>
+    <column id="17" parent="4" name="videoId">
+      <DataType>INTEGER|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="18" parent="4" name="message">
+      <Position>1</Position>
+      <DataType>VARCHAR|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="19" parent="4" name="commenter">
+      <Position>2</Position>
+      <DataType>VARCHAR|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="20" parent="4" name="dateTime">
+      <Position>3</Position>
+      <DataType>VARCHAR|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="21" parent="5" name="student">
+      <DataType>VARCHAR|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="22" parent="5" name="category">
+      <Position>1</Position>
+      <DataType>VARCHAR|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="23" parent="6" name="username">
+      <DataType>VARCHAR|0</DataType>
+    </column>
+    <column id="24" parent="6" name="videoId">
+      <Position>1</Position>
+      <DataType>INTEGER|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="25" parent="6" name="dateTime">
+      <Position>2</Position>
+      <DataType>VARCHAR|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="26" parent="7" name="subscriptionId">
+      <DataType>INTEGER|0</DataType>
+    </column>
+    <column id="27" parent="7" name="message">
+      <Position>1</Position>
+      <DataType>VARCHAR|0</DataType>
+    </column>
+    <column id="28" parent="7" name="isSent">
+      <Position>2</Position>
+      <DataType>BOOLEAN|0</DataType>
+      <DefaultExpression>FALSE</DefaultExpression>
+    </column>
+    <index id="29" parent="7" name="Notifications_subscriptionId_index">
+      <ColNames>subscriptionId</ColNames>
+    </index>
+    <foreign-key id="30" parent="7" name="Notifications_Subscriptions_subscriptionId_fk">
+      <ColNames>subscriptionId</ColNames>
+      <RefTableName>Subscriptions</RefTableName>
+      <RefColNames>subscriptionId</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="31" parent="8" name="subscriber">
+      <DataType>VARCHAR|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="32" parent="8" name="subscribedTo">
+      <Position>1</Position>
+      <DataType>VARCHAR|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="33" parent="8" name="subscriptionId">
+      <Position>2</Position>
+      <DataType>INTEGER|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <key id="34" parent="8">
+      <ColNames>subscriptionId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="35" parent="9" name="name">
+      <DataType>VARCHAR|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="36" parent="9" name="videoId">
+      <Position>1</Position>
+      <DataType>INTEGER|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="37" parent="10" name="student">
+      <DataType>VARCHAR|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="38" parent="10" name="message">
+      <Position>1</Position>
+      <DataType>VARCHAR|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="39" parent="11" name="username">
+      <DataType>VARCHAR|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="40" parent="11" name="password">
+      <Position>1</Position>
+      <DataType>VARCHAR|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="41" parent="11" name="userype">
+      <Position>2</Position>
+      <DataType>VARCHAR|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="42" parent="12" name="videoId">
+      <DataType>INTEGER|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="43" parent="12" name="name">
+      <Position>1</Position>
+      <DataType>VARCHAR|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="44" parent="12" name="uploader">
+      <Position>2</Position>
+      <DataType>VARCHAR|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="45" parent="12" name="category">
+      <Position>3</Position>
+      <DataType>VARCHAR|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="46" parent="12" name="uploadTime">
+      <Position>4</Position>
+      <DataType>VARCHAR|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="47" parent="12" name="likes">
+      <Position>5</Position>
+      <DataType>INTEGER|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="48" parent="12" name="format">
+      <Position>6</Position>
+      <DataType>VARCHAR|0</DataType>
+      <DefaultExpression>&quot;mp4&quot;</DefaultExpression>
+    </column>
+    <key id="49" parent="12">
+      <ColNames>videoId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="50" parent="13" name="type">
+      <DataType>text|0</DataType>
+    </column>
+    <column id="51" parent="13" name="name">
+      <Position>1</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="52" parent="13" name="tbl_name">
+      <Position>2</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="53" parent="13" name="rootpage">
+      <Position>3</Position>
+      <DataType>integer|0</DataType>
+    </column>
+    <column id="54" parent="13" name="sql">
+      <Position>4</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="55" parent="14" name="name">
+      <DataType>|0</DataType>
+    </column>
+    <column id="56" parent="14" name="seq">
+      <Position>1</Position>
+      <DataType>|0</DataType>
+    </column>
+  </database-model>
+</dataSource>

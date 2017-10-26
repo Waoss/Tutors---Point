@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="tutorspoint@localhost">
+  <database-model serializer="dbm" rdbms="DERBY" format-version="4.2">
+    <root id="1"/>
+    <schema id="2" parent="1" name="MAIN">
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="NULLID"/>
+    <schema id="4" parent="1" name="SQLJ"/>
+    <schema id="5" parent="1" name="SYS"/>
+    <schema id="6" parent="1" name="SYSCAT"/>
+    <schema id="7" parent="1" name="SYSCS_DIAG"/>
+    <schema id="8" parent="1" name="SYSCS_UTIL"/>
+    <schema id="9" parent="1" name="SYSFUN"/>
+    <schema id="10" parent="1" name="SYSIBM"/>
+    <schema id="11" parent="1" name="SYSPROC"/>
+    <schema id="12" parent="1" name="SYSSTAT"/>
+    <table id="13" parent="2" name="CATEGORIES"/>
+    <table id="14" parent="2" name="COMMENTS"/>
+    <table id="15" parent="2" name="INPROGRESS"/>
+    <table id="16" parent="2" name="LIKES"/>
+    <table id="17" parent="2" name="NOTIFICATIONS"/>
+    <table id="18" parent="2" name="SUBSCRIPTIONS"/>
+    <table id="19" parent="2" name="TAGS"/>
+    <table id="20" parent="2" name="TODOS"/>
+    <table id="21" parent="2" name="USERS"/>
+    <table id="22" parent="2" name="VIDEOS"/>
+    <column id="23" parent="13" name="NAME">
+      <Position>1</Position>
+      <DataType>VARCHAR(32500)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="24" parent="13" name="PARENT">
+      <Position>2</Position>
+      <DataType>VARCHAR(32500)|12</DataType>
+    </column>
+    <column id="25" parent="13" name="RATING">
+      <Position>3</Position>
+      <DataType>INTEGER(10)|4</DataType>
+    </column>
+    <column id="26" parent="13" name="NUMBER">
+      <Position>4</Position>
+      <DataType>INTEGER(10)|4</DataType>
+    </column>
+    <column id="27" parent="14" name="VIDEOID">
+      <Position>1</Position>
+      <DataType>INTEGER(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="28" parent="14" name="MESSAGE">
+      <Position>2</Position>
+      <DataType>VARCHAR(32500)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="29" parent="14" name="COMMENTER">
+      <Position>3</Position>
+      <DataType>VARCHAR(32500)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="30" parent="14" name="DATETIME">
+      <Position>4</Position>
+      <DataType>VARCHAR(32500)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="31" parent="15" name="STUDENT">
+      <Position>1</Position>
+      <DataType>VARCHAR(32500)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="32" parent="15" name="CATEGORY">
+      <Position>2</Position>
+      <DataType>VARCHAR(32500)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="33" parent="16" name="USERNAME">
+      <Position>1</Position>
+      <DataType>VARCHAR(32500)|12</DataType>
+    </column>
+    <column id="34" parent="16" name="VIDEOID">
+      <Position>2</Position>
+      <DataType>INTEGER(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="16" name="DATETIME">
+      <Position>3</Position>
+      <DataType>VARCHAR(32500)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="36" parent="17" name="SUBSCRIPTIONID">
+      <Position>1</Position>
+      <DataType>INTEGER(10)|4</DataType>
+    </column>
+    <column id="37" parent="17" name="MESSAGE">
+      <Position>2</Position>
+      <DataType>VARCHAR(32500)|12</DataType>
+    </column>
+    <column id="38" parent="17" name="ISSENT">
+      <Position>3</Position>
+      <DataType>BOOLEAN(1)|16</DataType>
+      <DefaultExpression>FALSE</DefaultExpression>
+    </column>
+    <foreign-key id="39" parent="17" name="NOTIFICATIONS_SUBSCRIPTIONS_SUBSCRIPTIONID_FK">
+      <ColNames>SUBSCRIPTIONID</ColNames>
+      <RefSchemaName>MAIN</RefSchemaName>
+      <RefTableName>SUBSCRIPTIONS</RefTableName>
+      <RefKeyName>SQL171001003338870</RefKeyName>
+      <RefColNames>SUBSCRIPTIONID</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="40" parent="18" name="SUBSCRIBER">
+      <Position>1</Position>
+      <DataType>VARCHAR(32500)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="41" parent="18" name="SUBSCRIBEDTO">
+      <Position>2</Position>
+      <DataType>VARCHAR(32500)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="42" parent="18" name="SUBSCRIPTIONID">
+      <Position>3</Position>
+      <DataType>INTEGER(10)|4</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DefaultExpression>AUTOINCREMENT: start 1 increment 1</DefaultExpression>
+    </column>
+    <key id="43" parent="18" name="SQL171001003338870">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>SUBSCRIPTIONID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="44" parent="19" name="NAME">
+      <Position>1</Position>
+      <DataType>VARCHAR(32500)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="45" parent="19" name="VIDEOID">
+      <Position>2</Position>
+      <DataType>INTEGER(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="46" parent="20" name="STUDENT">
+      <Position>1</Position>
+      <DataType>VARCHAR(32500)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="47" parent="20" name="MESSAGE">
+      <Position>2</Position>
+      <DataType>VARCHAR(32500)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="48" parent="21" name="USERNAME">
+      <Position>1</Position>
+      <DataType>VARCHAR(32500)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="49" parent="21" name="PASSWORD">
+      <Position>2</Position>
+      <DataType>VARCHAR(32500)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="50" parent="21" name="USERYPE">
+      <Position>3</Position>
+      <DataType>VARCHAR(32500)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="51" parent="22" name="VIDEOID">
+      <Position>1</Position>
+      <DataType>INTEGER(10)|4</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DefaultExpression>AUTOINCREMENT: start 1 increment 1</DefaultExpression>
+    </column>
+    <column id="52" parent="22" name="NAME">
+      <Position>2</Position>
+      <DataType>VARCHAR(32500)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="53" parent="22" name="UPLOADER">
+      <Position>3</Position>
+      <DataType>VARCHAR(32500)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="54" parent="22" name="CATEGORY">
+      <Position>4</Position>
+      <DataType>VARCHAR(32500)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="55" parent="22" name="UPLOADTIME">
+      <Position>5</Position>
+      <DataType>VARCHAR(32500)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="56" parent="22" name="LIKES">
+      <Position>6</Position>
+      <DataType>INTEGER(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="57" parent="22" name="FORMAT">
+      <Position>7</Position>
+      <DataType>VARCHAR(32500)|12</DataType>
+    </column>
+    <key id="58" parent="22" name="SQL171001003339290">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>VIDEOID</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
